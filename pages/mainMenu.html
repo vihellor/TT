@@ -25,9 +25,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Bienvenido, <strong>Mike</strong></span><br>    <!--Agregar JS para obtener el nombre del usuario-->
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+      <a href="" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="/pages/configuracion" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
     </div>
   </div>
   <hr>
@@ -36,12 +36,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Configuración </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Unirse a juego </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> Nuevo Juego </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notificaciones </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i> Juego aleatorio </a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a>
+    <a href="/pages/configuracion" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Configuración </a>
+    <a href="/pages/buscarPartida.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida </a>
+    <a href="/pages/nuevoJuego.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> Nuevo Juego </a>
+    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notificaciones </a>
+    <a href="/pages/tutorial.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i> Tutorial </a>
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
   </div>
 </nav>
@@ -58,10 +58,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <div class="w3-row-padding" >
       <div class="w3-twothird" >
         <br><br>
-        <input type="button" name="nuevoJuego" value="Nuevo juego"><br><br><br>
-        <input type="button" name="juegoAleatorio" value="Juego aleatorio">
+        <a href="/pages/nuevoJuego.html"><input type="button" name="nuevoJuego" value="Nuevo juego"></a><br><br><br>
+        <a href="/pages/tutorial.html"><input type="button" name="tutorial" value="Tutorial"></a>
         <br><br><br>
-        <input type="button" name="unirseJuego"  value="Unirse a partida" >
+        <a href="/pages/buscarPartida.html"><input type="button" name="buscarPartida"  value="Buscar partida" ></a>
         
       </div>
     </div>

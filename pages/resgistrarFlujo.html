@@ -30,16 +30,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-panel" style="text-align: center;">
     <div class="w3-row-padding" >
       <div class="w3-twothird" >
-        <h5><b><i></i>Registro</b></h5>
-        <input type="text" name="username" placeholder="Nickname" style="text-align: center;" required="true"><br><br>
-        <input type="text" name="nombre" placeholder="Nombre" style="text-align: center;" required="true"><br><br>
-        <input type="text" name="apellidos" placeholder="Apellidos" style="text-align: center;" required="true"><br><br>
-        <input type="text" name="ocupacion" placeholder="Ocupación" style="text-align: center;" required="true"><br><br>
-        <input type="email" name="email" placeholder="Correo electrónico" style="text-align: center;" required="true"><br><br>
-        <input type="password" name="pasword" placeholder="Contraseña" style="text-align: center;" required="true"><br>
-        <input type="password" name="pasword" placeholder="Contraseña" style="text-align: center;" required="true">
+        <h5><b><i></i>Tegistrar Ingresos/Egresos</b></h5>
+        <input type="radio" name="tipo" value="ingreso" checked>Ingreso<br>
+        <input type="radio" name="tipo" value="egreso">Egreso<br><br>
+        <input type="date" name="fechaCorte" placeholder="Fecha de corte" style="text-align: center;" required="true"><br>
+        <input type="number" name="monto" placeholder="Monto" style="text-align: center;" required="true"><br>
+        <input type="text" name="username" placeholder="Nombre" style="text-align: center;" required="true"><br>
         <br><br>
-        <a href="/pages/resgistrarFlujo.html"><input type="button" name="registro" placeholder="registro" value="registrar ingresos y egresos" style="text-align: center;"></a>
+        <a href=""><input type="button" name="agregar" value="Agregar" style="text-align: center;"></a>
         <br><br>
         <a href="/pages/mainMenu.html"><input type="button" name="continuar" value="Continuar" style="text-align: center;"></a>
       </div>
