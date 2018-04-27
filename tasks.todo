@@ -2,16 +2,34 @@ Created by Victor Amador Muñoz
 Email: vihellor@gmail.com
 Date: 
 @created(10-04-17 12:17)
-@toggle(18-04-17 12:16)
+@toggle(18-04-27 06:41)
 Tareas:
- ☐ Ordenar por carpetas
+   ✔ Ordenar por carpetas @done (18-04-27 06:40)
    ✔ ordenar estilos (CSSs) @done (18-04-17 06:59)
    ✔ ordenar imagenes @done (18-04-17 07:00)
-   ☐ descargar estilos 
+   ☐ Hacer pantallas
+     ✔ index @done (18-04-27 06:39)
+     ✔ bolsaValores @done (18-04-27 06:39)
+     ✔ buscarPartida @done (18-04-27 06:39)
+     ✔ juego @done (18-04-27 06:39)
+     ✔ login @done (18-04-27 06:39)
+     ✔ mainMenu @done (18-04-27 06:39)
+     ✔ nuevoJuego @done (18-04-27 06:39)
+     ✔ registro @done (18-04-27 06:39)
+     ✔ registrarFlujo @done (18-04-27 06:39)
+     ✔ tutorial @done (18-04-27 06:39)
+     ☐ configuracion
+     ☐ esperaJugadores
+   ✔ descargar estilos @done (18-04-27 06:40)
+   ☐ fontawesome local
+   ☐ diseño botones
+   ☐ onboarding... tutorial
+   ☐ ventana chat
    ☐ agregar js
    ☐ descargar js 
-   ☐ hacer funcionales links de direccionamiento
+   ✔ hacer funcionales links de direccionamiento @done (18-04-27 06:39)
    ☐ agregar control de base de datos
+   ☐ empezar back
 Nivel de funcionamiento:
   Toda la plataforma funciona sin problemas
 
