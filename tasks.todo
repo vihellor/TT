@@ -31,7 +31,8 @@ Tareas:
    ☐ agregar control de base de datos
    ☐ empezar back
 Nivel de funcionamiento:
-  Toda la plataforma funciona sin problemas
+  Todas las conexiones entre pantallas funcionan
+  sin funcionalidad por parte de backend
 
 Comentarios:
-  Toda la plataforma funciona sin embargo aún no cuenta con conexión entre pantallas
+  Mayor movimiento entre pantallas para muestra en TT1
