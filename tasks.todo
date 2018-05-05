@@ -2,7 +2,7 @@ Created by Victor Amador Muñoz
 Email: vihellor@gmail.com
 Date: 
 @created(10-04-17 12:17)
-@toggle(18-04-27 06:41)
+@toggle(18-05-05 17:22)
 Tareas:
    ✔ Ordenar por carpetas @done (18-04-27 06:40)
    ✔ ordenar estilos (CSSs) @done (18-04-17 06:59)
@@ -20,19 +20,20 @@ Tareas:
      ✔ tutorial @done (18-04-27 06:39)
      ☐ configuracion
      ☐ esperaJugadores
+     ☐ menuTutorial
    ✔ descargar estilos @done (18-04-27 06:40)
-   ☐ fontawesome local
-   ☐ diseño botones
+   ✔ fontawesome local @done (18-05-05 17:21)
+   ✔ diseño botones @done (18-05-05 17:22)
    ☐ onboarding... tutorial
    ☐ ventana chat
    ☐ agregar js
    ☐ descargar js 
    ✔ hacer funcionales links de direccionamiento @done (18-04-27 06:39)
-   ☐ agregar control de base de datos
+   ✔ agregar control de base de datos @done (18-05-05 17:22)
    ☐ empezar back
 Nivel de funcionamiento:
   Todas las conexiones entre pantallas funcionan
   sin funcionalidad por parte de backend
 
 Comentarios:
-  Mayor movimiento entre pantallas para muestra en TT1
+  ya casi queda la versión 3 sin embargo falta la creación de las otras branches y quedará en espera
