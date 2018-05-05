@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/style/w3.css">
 <link rel="stylesheet" href="/style/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -13,7 +13,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-bar-item w3-right">TTI 1.0</span>
 </div>
 
@@ -30,10 +29,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-panel" style="text-align: center;">
     <div class="w3-row-padding" >
       <div class="w3-twothird" >
-        <h5><b><i></i>Sistema de educación financiera, orientado a la inversión</b></h5>
-        <a href="/pages/login.html"><input type="button" name="iniciarSesion" value="Iniciar sesion" style="text-align: center;"></a>
         <br>
-        <a href="/pages/registro.html"><input type="button" name="registrarse" value="Registrarse" style="text-align: center;"></a>
+        <h1><b><i></i>Sistema de educación financiera, orientado a la inversión</b></h1>
+        <a href="/pages/login.html"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="iniciarSesion" value="Iniciar sesion" style="text-align: center;"></a>
+        <br>
+        <a href="/pages/registro.html"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="registrarse" value="Registrarse" style="text-align: center;"></a>
         <br>
       </div>
     </div>
@@ -45,31 +45,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- End page content -->
 </div>
-
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
 
 </body>
 </html>
