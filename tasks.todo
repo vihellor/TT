@@ -1,8 +1,9 @@
 Created by Victor Amador Muñoz
 Email: vihellor@gmail.com
-Date: 
-@created(10-04-17 12:17)
-@toggle(18-05-05 17:22)
+Name:
+  Frontend TT1
+Done:
+  22/27 done (81%) ■■■■■■■■□□ Last task @done (18-05-06 00:10)
 Tareas:
    ✔ Ordenar por carpetas @done (18-04-27 06:40)
    ✔ ordenar estilos (CSSs) @done (18-04-17 06:59)
@@ -18,19 +19,20 @@ Tareas:
      ✔ registro @done (18-04-27 06:39)
      ✔ registrarFlujo @done (18-04-27 06:39)
      ✔ tutorial @done (18-04-27 06:39)
-     ☐ configuracion
-     ☐ esperaJugadores
+     ✔ configuracion @done (18-05-06 00:10)
+     ✔ esperaJugadores @done (18-05-07 16:55)
      ☐ menuTutorial
    ✔ descargar estilos @done (18-04-27 06:40)
    ✔ fontawesome local @done (18-05-05 17:21)
    ✔ diseño botones @done (18-05-05 17:22)
    ☐ onboarding... tutorial
    ☐ ventana chat
-   ☐ agregar js
-   ☐ descargar js 
+   ☐ cambiar nombres en instruementos para tener ejemplos definidos
+   ✔ agregar js @done (18-05-05 20:32)
+   ✔ descargar js @done (18-05-05 20:32)
    ✔ hacer funcionales links de direccionamiento @done (18-04-27 06:39)
    ✔ agregar control de base de datos @done (18-05-05 17:22)
-   ☐ empezar back
+   ✔ empezar back @done (18-05-05 19:14)
 Nivel de funcionamiento:
   Todas las conexiones entre pantallas funcionan
   sin funcionalidad por parte de backend
