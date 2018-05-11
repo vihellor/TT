@@ -1,14 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
-<title>TTI</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/style/w3.css">
-<link rel="stylesheet" href="/style/css?family=Raleway">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
+<head>
+  <title>TTI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/style/w3.css">
+  <link rel="stylesheet" href="/style/css?family=Raleway">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!-- <style>
+  html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  </style> -->
+</head>
 <body class="w3-light-grey">
 
 <!-- Top container -->
@@ -22,25 +24,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
-
+<div class="w3-main" style="margin-top:43px">
 
   <div class="w3-panel" style="text-align: center;">
     <div class="w3-row-padding" >
       <div class="w3-twothird" >
-<<<<<<< HEAD
-        <h5><b><i></i>Login</b></h5><br><br>
-        <input type="text" name="username" placeholder="Usuario" style="text-align: center;" required="true"><br><br><br>
-        <input type="password" name="pasword" placeholder="Contraseña" style="text-align: center;" required="true">
-=======
-        <br>
-        <h2><b><i></i>Iniciar sesion</b></h2><br>
-        <input type="text" name="username" class="w3-input w3-xlarge" placeholder="Usuario" style="text-align: center;" required="true"><br><br>
-        <input type="password" name="pasword" class="w3-input w3-xlarge" placeholder="Contraseña" style="text-align: center;" required="true">
->>>>>>> 5b6146e609093f2f866f1b6d2232ed1f2cccbf81
-        <br><br><br>
-        <a href="mainMenu"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="inicio" value="Entrar" style="text-align: center;"></a>
+        <form action="/controladores/login.jsp" method="post">
+          <input type="text" name="username" class="w3-input w3-xlarge" placeholder="Usuario" style="text-align: center;" required="true"><br><br>
+          <input type="password" name="pasword" class="w3-input w3-xlarge" placeholder="Contraseña" style="text-align: center;" required="true">
+          <br><br><br><input type="submit" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="inicio" value="Entrar" style="text-align: center;">
+        </form>
         
       </div>
     </div>
