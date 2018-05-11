@@ -31,14 +31,35 @@
     <div class="w3-row-padding" >
       <div class="w3-twothird" >
         <h5><b><i></i>Tegistrar Ingresos/Egresos</b></h5>
-        <input type="radio" class="w3-input w3-xlarge" name="tipo" value="ingreso" checked>Ingreso<br>
-        <input type="radio" class="w3-input w3-xlarge" name="tipo" value="egreso">Egreso<br><br>
-        <input type="date" class="w3-input w3-xlarge" name="fechaCorte" placeholder="Fecha de corte" style="text-align: center;" required="true"><br>
-        <input type="number" class="w3-input w3-xlarge" name="monto" placeholder="Monto" style="text-align: center;" required="true"><br>
-        <input type="text" class="w3-input w3-xlarge" name="username" placeholder="Nombre" style="text-align: center;" required="true"><br>
-        <br><br>
-        <a href=""><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="agregar" value="Agregar" style="text-align: center;"></a>
-        <br><br>
+        <form action="/controladores/registrarFlujo.html" method="post">
+          <div class="w3-third">
+            <table class="w3-table">
+              <thead>
+                <tr>
+                  <th>
+                    <p style="color: green;">Ingreso</p>
+                  </th>
+                  <th><label class="switch">
+                      <input type="checkbox" name="flujo">
+                      <span class="slider round"></span>
+                    </label>
+                  </th>
+                  <th><p style="color: red;">Egreso</p></th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          
+          
+          
+          <br>
+          <input type="date" class="w3-input w3-xlarge" name="fechaCorte" placeholder="Fecha de corte" style="text-align: center;" required="true"><br>
+          <input type="number" class="w3-input w3-xlarge" name="monto" placeholder="Monto" style="text-align: center;" required="true"><br>
+          <input type="text" class="w3-input w3-xlarge" name="username" placeholder="Nombre" style="text-align: center;" required="true"><br>
+          <br><br>
+          <input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="agregar" value="Agregar" style="text-align: center;">
+          <br><br>
+        </form>
         <a href="/pages/mainMenu.html"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="continuar" value="Continuar" style="text-align: center;"></a>
       </div>
     </div>

@@ -31,10 +31,12 @@
       <div class="w3-twothird" >
         <br>
         <h2><b><i></i>Iniciar sesion</b></h2><br>
-        <input type="text" name="username" class="w3-input w3-xlarge" placeholder="Usuario" style="text-align: center;" required="true"><br><br>
-        <input type="password" name="pasword" class="w3-input w3-xlarge" placeholder="Contraseña" style="text-align: center;" required="true">
-        <br><br><br>
-        <a href="mainMenu"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="inicio" value="Entrar" style="text-align: center;"></a>
+        <form action="/controladores/login.jsp" method="post">
+          <input type="text" name="username" class="w3-input w3-xlarge" placeholder="Usuario" style="text-align: center;" required="true"><br><br>
+          <input type="password" name="pasword" class="w3-input w3-xlarge" placeholder="Contraseña" style="text-align: center;" required="true">
+          <br><br><br><input type="submit" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="inicio" value="Entrar" style="text-align: center;">
+        </form>
+        
         
       </div>
     </div>
