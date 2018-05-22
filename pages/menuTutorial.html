@@ -8,9 +8,9 @@
   <title>TTI</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/style/w3.css">
-  <link rel="stylesheet" href="/style/css?family=Raleway">
-  <link rel="stylesheet" href="/style/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="./../style/w3.css">
+  <link rel="stylesheet" href="./../style/css?family=Raleway">
+  <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -27,12 +27,12 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
-      <img src="/imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+      <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Bienvenido, <strong>Mike</strong></span><br>    <!--Agregar JS para obtener el nombre del usuario-->
       <a href="" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-      <a href="/pages/configuracion" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+      <a href="./configuracion.html" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
     </div>
   </div>
   <hr>
@@ -41,12 +41,12 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
-    <a href="/pages/mainMenu.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-th-list fa-fw"></i>  Menú principal</a>
-    <a href="/pages/configuracion.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Configuración </a>
-    <a href="/pages/buscarPartida.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida </a>
-    <a href="/pages/nuevoJuego.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gamepad fa-fw"></i> Nuevo Juego </a>
+    <a href="./mainMenu.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-th-list fa-fw"></i>  Menú principal</a>
+    <a href="./configuracion.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Configuración </a>
+    <a href="./buscarPartida.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida </a>
+    <a href="./nuevoJuego.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gamepad fa-fw"></i> Nuevo Juego </a>
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notificaciones </a>
-    <a href="/pages/tutorial.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial </a>
+    <a href="./tutorial.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial </a>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
   </div>
@@ -64,27 +64,63 @@
     <div class="w3-row-padding" >
       <br>
       <br>
-        <button onclick="acordeon('Demo1')" class="w3-button">
-        Mi balance general</button>
-        <div id="Demo1" class="w3-hide w3-animate-zoom">
-          <a href="#" class="w3-button w3-block w3-left-align">Mis inversiones</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Mis bonos gubernamentales</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Mis propiedades</a>
+        <button onclick="acordeon('Demo1')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo1k" class="fa fa-chevron-circle-right"></i> Mi balance general</button>
+        <div id="Demo1" class="w3-third w3-hide w3-animate-zoom "> 
+          <a href="#" class="w3-button w3-block w3-left-align">Ingresos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Gastos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Ahorro</a>
         </div> 
-        <button onclick="acordeon('Demo2')" class="w3-button">
-        Bonos gubernamentales</button>
-        <div id="Demo2" class="w3-hide w3-animate-zoom">
+        <button onclick="acordeon('Demo2')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo2k" class="fa fa-chevron-circle-right"></i> Conceptos básicos</button>
+        <div id="Demo2" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Riesgos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Inflación</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Diversificación</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Perfil de inversión</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Rendimiento</a>
+        </div> 
+        <button onclick="acordeon('Demo3')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo3k" class="fa fa-chevron-circle-right"></i> Deuda gubernamental</button>
+        <div id="Demo3" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Precio nominal</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Plazo</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Tasas de interés</a>
           <a href="#" class="w3-button w3-block w3-left-align">CETES</a>
           <a href="#" class="w3-button w3-block w3-left-align">BONDES</a>
           <a href="#" class="w3-button w3-block w3-left-align">UDIBONOS</a>
         </div> 
-        <button onclick="acordeon('Demo3')" class="w3-button">
-        La bolsa de valores</button>
-        <div id="Demo3" class="w3-hide w3-animate-zoom">
-          <a href="#" class="w3-button w3-block w3-left-align">Acciones bajamente vólatiles</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Acciones medianamente vólatiles</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Acciones altamente vólatiles</a>
+        <button onclick="acordeon('Demo4')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo4k" class="fa fa-chevron-circle-right"></i> Mercado de capitales</button>
+        <div id="Demo4" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Bolsa de valores</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Acciones</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Tipos de acciones</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Calificaciones crediticias</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Dividendos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Ganancia de capital</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Minusvalía</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Ganancia de capital</a>
         </div> 
+        <button onclick="acordeon('Demo5')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo5k" class="fa fa-chevron-circle-right"></i> Casas de bolsa</button>
+        <div id="Demo5" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Comisión</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Institucíones reguladoras</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Comisión por manejo de cuenta</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Comisión por compra/venta</a>
+        </div> 
+        <button onclick="acordeon('Demo6')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo6k" class="fa fa-chevron-circle-right"></i> Analisis fundamental</button>
+        <div id="Demo6" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Descripción de la empresa</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Noticias</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Prospecto de inversión</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Ingresos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Ingresos netos</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Margen de utilidad neta</a>
+        </div> 
+        <button onclick="acordeon('Demo7')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo7k" class="fa fa-chevron-circle-right"></i> Otros</button>
+        <div id="Demo7" class="w3-third w3-hide w3-animate-zoom ">
+          <a href="#" class="w3-button w3-block w3-left-align">Descripción de la empresa</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Noticias</a>
+          <a href="#" class="w3-button w3-block w3-left-align">Prospecto de inversión</a>
+          <a href="#" class="w3-button w3-block w3-left-align"></a>
+        </div>
     </div>
   </div>
   <hr>
@@ -121,6 +157,12 @@ function w3_close() {
 </script>
 <script>
 function acordeon(id) {
+    var y = document.getElementById(id+"k");
+    if (y.className == "fa fa-chevron-circle-right") {
+        y.className = y.className.replace("fa fa-chevron-circle-right","fa fa-chevron-circle-down");
+    } else {
+        y.className = y.className.replace("fa fa-chevron-circle-down", "fa fa-chevron-circle-right");
+    }
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";

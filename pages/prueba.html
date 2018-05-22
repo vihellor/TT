@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/style/w3.css">
+  <style type="text/css">
+  .commenttext {
+    position:absolute;
+    margin: 0px 7.5px;
+    max-width: 50rem;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+  .commenttext-right::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 100%;
+    margin-top: -7.5px;
+    border-width: 7.5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #4CAF50;
+  }
+  .commenttext-left::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 100%;
+    margin-top: -7.5px;
+    border-width: 7.5px;
+    border-style: solid;
+    border-color: transparent #4CAF50 transparent transparent;
+  }
+  </style>
+	<title>prueba</title>
+</head>
+<body>
+  <div class="commenttext commenttext-right w3-green" style="top: 10px; left:200px">Tooltip text y cualquier texto que se le quiera poner aquí deberá estar indicado como se dice</div>
+  <div class="commenttext commenttext-left w3-green" style="top: 50px; left:200px">Tooltip text y cualquier texto que se le quiera poner aquí deberá estar indicado como se dice</div>
+</body>
+    
+</html>
