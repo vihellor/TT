@@ -1,3 +1,3 @@
 <?php 
-	header('Location: /pages/mainMenu.html')
+	header('Location: /pages/menu.html')
  ?>
