@@ -24,7 +24,7 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
-      <img src="/imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+      <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
       <span>Bienvenido, <strong>Mike</strong></span><br>    <!--Agregar JS para obtener el nombre del usuario-->
@@ -39,12 +39,12 @@
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
     <a href="./juego.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-table fa-fw"></i>  Mi Balance general</a>
-    <a href="./bolsavalores.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-chart-line fa-fw"></i>  La bolsa de valores</a>
+    <a href="./bolsavalores.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-chart-line fa-fw"></i>  Mercado de capitales</a>
+    <a href="./deudaGubernamental.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-fw"></i>Instrumentos gubernamentales</a>
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper fa-fw"></i>  Hoja de noticias</a>
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Mis amigos </a>
   </div>
 </nav>
-
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -53,64 +53,93 @@
 <div class="w3-main" style="margin-left:300px; margin-top:43px">
 
   <!-- Header -->
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i></i> #Incompleta</b></h5>
-  </header>
 
 
   <div class="w3-panel">
     <div class="w3-row-padding">
-      <h5>La bolsa de valores</h5> 
+      <br>
+      <h2><b>Mercado de capitles</b></h2>
       <div class="w3-responsive">
         <table class="w3-table w3-striped w3-white">
           <tr>
-            <td>Instrumentos</td>
-            <td>Rendimiento</td>
-            <td>Comprar</td>
-            <td>Vender</td>
-            <td>Valor invertido</td>
+            <th>Clave</th>
+            <th>Emisora</th>
+            <th>Rendimiento (1S)</th>
+            <th>Comprar</th>
+            <th>Vender</th>
+            <th>Valor invertido</th>
+            <th>Valor actual</th>
+            <th>Número de titulos</th>
           </tr>
           <tr>
-            <td>Instrumento 1</td>
+            <td>PETROIL</td>
+            <td>PETROLEOS Y ENERGIA S.A.B. de C.V.</td>
             <td><font color="red">-6.3%</font></td>
             <td><i>$15 </i></td>
             <td><i>$14 </i></td>
-            <td><i>$0 </i></td>
+            <td><i>$310 </i></td>
+            <td><font color="red">$280 </font></td>
+            <td><i>20 </i></td>
           </tr>
           <tr>
-            <td>Instrumento 2</td>
+            <td>GAEM</td>
+            <td>Grupo Aéreo Mexicano S.A.B. de C.V.</td>
+            <td><font color="red">-4.2%</font></td>
+            <td><i>$153 </i></td>
+            <td><i>$148 </i></td>
+            <td><i>$1530 </i></td>
+            <td><font color="red">$1480 </font></td>
+            <td><i>10 </i></td>
+          </tr>
+          <tr>
+            <td>PANM</td>
+            <td>Panificadora Nacional S.A.B. de C.V.</td>
+            <td><font color="green">3.5%</font></td>
+            <td><i>$8 </i></td>
+            <td><i>$7.5 </i></td>
+            <td><i>$0 </i></td>
+            <td><i>$0 </i></td>
+            <td><i>0 </i></td>
+          </tr>
+          <tr>
+            <td>GIM</td>
+            <td>Grupo Industrial Mexicano S.A.B. de C.V.</td>
+            <td><font color="green">1.54%</font></td>
+            <td><i>$78 </i></td>
+            <td><i>$69</i></td>
+            <td><i>$0 </i></td>
+            <td><i>$0 </i></td>
+            <td><i>0 </i></td>
+          </tr>
+          <tr>
+            <td>RAQUIM</td>
+            <td>Radio Quim S.A.B de C.V.</td>
             <td><font color="red">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
-            <td><i>$0 </i></td>
+            <td><i>$4 </i></td>
+            <td><i>$2.5 </i></td>
+            <td><i>$100 </i></td>
+            <td><font color="green">$250 </font></td>
+            <td><i>50 </i></td>
           </tr>
           <tr>
-            <td>Instrumento 3</td>
-            <td><font color="green">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
+            <td>GFINMA</td>
+            <td>Grupo Financiero Mancol S.A.B. de C.V.</td>
+            <td><font color="green">3.3%</font></td>
+            <td><i>$104 </i></td>
+            <td><i>$101.4 </i></td>
             <td><i>$0 </i></td>
+            <td><i>$0 </i></td>
+            <td><i>0 </i></td>
           </tr>
           <tr>
-            <td>Instrumento 4</td>
-            <td><font color="green">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
+            <td>GICR</td>
+            <td>Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.</td>
+            <td><font color="green">9.3%</font></td>
+            <td><i>$54 </i></td>
+            <td><i>$46 </i></td>
             <td><i>$0 </i></td>
-          </tr>
-          <tr>
-            <td>Instrumento 5</td>
-            <td><font color="red">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
             <td><i>$0 </i></td>
-          </tr>
-          <tr>
-            <td>Instrumento 6</td>
-            <td><font color="green">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
-            <td><i>$0 </i></td>
+            <td><i>0 </i></td>
           </tr>
         </table>
       </div>

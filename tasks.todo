@@ -27,7 +27,10 @@ Tareas:
    ✔ diseño botones @done (18-05-05 17:22)
    ☐ onboarding... tutorial
    ☐ ventana chat
-   ☐ cambiar nombres en instruementos para tener ejemplos definidos
+   ☐ menuTutorial
+     ☐ poner el siguiente en el hover
+     ☐ poner explicación sobre cómo usarlo
+   ✔ cambiar nombres en instruementos para tener ejemplos definidos @done (18-05-23 23:27)
    ✔ agregar js @done (18-05-05 20:32)
    ✔ descargar js @done (18-05-05 20:32)
    ✔ hacer funcionales links de direccionamiento @done (18-04-27 06:39)

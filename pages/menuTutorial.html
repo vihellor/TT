@@ -41,12 +41,12 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
-    <a href="./mainMenu.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-th-list fa-fw"></i>  Menú principal</a>
+    <a href="./mainMenu.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-list fa-fw"></i>  Menú principal</a>
     <a href="./configuracion.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Configuración </a>
     <a href="./buscarPartida.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida </a>
     <a href="./nuevoJuego.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gamepad fa-fw"></i> Nuevo Juego </a>
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> Notificaciones </a>
-    <a href="./tutorial.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial </a>
+    <a href="./tutorial.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial </a>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
   </div>
@@ -64,63 +64,65 @@
     <div class="w3-row-padding" >
       <br>
       <br>
-        <button onclick="acordeon('Demo1')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo1k" class="fa fa-chevron-circle-right"></i> Mi balance general</button>
-        <div id="Demo1" class="w3-third w3-hide w3-animate-zoom "> 
-          <a href="#" class="w3-button w3-block w3-left-align">Ingresos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Gastos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Ahorro</a>
-        </div> 
-        <button onclick="acordeon('Demo2')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo2k" class="fa fa-chevron-circle-right"></i> Conceptos básicos</button>
-        <div id="Demo2" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Riesgos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Inflación</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Diversificación</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Perfil de inversión</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Rendimiento</a>
-        </div> 
-        <button onclick="acordeon('Demo3')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo3k" class="fa fa-chevron-circle-right"></i> Deuda gubernamental</button>
-        <div id="Demo3" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Precio nominal</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Plazo</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Tasas de interés</a>
-          <a href="#" class="w3-button w3-block w3-left-align">CETES</a>
-          <a href="#" class="w3-button w3-block w3-left-align">BONDES</a>
-          <a href="#" class="w3-button w3-block w3-left-align">UDIBONOS</a>
-        </div> 
-        <button onclick="acordeon('Demo4')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo4k" class="fa fa-chevron-circle-right"></i> Mercado de capitales</button>
-        <div id="Demo4" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Bolsa de valores</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Acciones</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Tipos de acciones</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Calificaciones crediticias</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Dividendos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Ganancia de capital</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Minusvalía</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Ganancia de capital</a>
-        </div> 
-        <button onclick="acordeon('Demo5')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo5k" class="fa fa-chevron-circle-right"></i> Casas de bolsa</button>
-        <div id="Demo5" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Comisión</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Institucíones reguladoras</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Comisión por manejo de cuenta</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Comisión por compra/venta</a>
-        </div> 
-        <button onclick="acordeon('Demo6')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo6k" class="fa fa-chevron-circle-right"></i> Analisis fundamental</button>
-        <div id="Demo6" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Descripción de la empresa</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Noticias</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Prospecto de inversión</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Ingresos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Ingresos netos</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Margen de utilidad neta</a>
-        </div> 
-        <button onclick="acordeon('Demo7')" class="w3-button w3-border-bottom w3-border-green"><i id="Demo7k" class="fa fa-chevron-circle-right"></i> Otros</button>
-        <div id="Demo7" class="w3-third w3-hide w3-animate-zoom ">
-          <a href="#" class="w3-button w3-block w3-left-align">Descripción de la empresa</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Noticias</a>
-          <a href="#" class="w3-button w3-block w3-left-align">Prospecto de inversión</a>
-          <a href="#" class="w3-button w3-block w3-left-align"></a>
+      <div class="flexContainer">
+         <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Mi balance general <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Ingresos, gastos, ahorro</p>
+          </div>
         </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Conceptos básicos <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Riesgo, inflación, diversificación, perfil de inversión, rendimiento</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Deuda gubernamental <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p> Precio nominal, Plazo, Tasas de interés, CETES, BONDES, UDIBONOS</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Mercado de capitales <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Bolsa de valores, acción, tipos de acciones, calificaciones crediticias, dividendos, ganancia de capital, minusvalía, ganancia de capital</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Casas de bolsa <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Comisión, instituciones reguladoras, comisión por manejo de cuenta, comisión por compra/venta</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Análisis fundamental <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Descripción de la empresa, noticias, prospecto de inversión, ingresos, ingresos netos, margen de utilidad neta</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Otros <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>..., ..., ..., ..., ...</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
   <hr>
@@ -171,6 +173,5 @@ function acordeon(id) {
     }
 }
 </script>
-
 </body>
 </html>
