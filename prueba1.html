@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prueba</title>
+</head>
+<body>
+	<div class="network-fake">
+    <label><input type="checkbox"> Fake network delay</label>
+</div>
+	<button type="button"
+onclick="myFunction()">Change Content
+</button>
+<script src="./scripts/ajax.js"></script>
+
+<script type="text/javascript">
+	function myFunction() {
+		var text = '{ "employees" : [' +
+	'{ "firstName":"John" , "lastName":"Doe" },' +
+	'{ "firstName":"Anna" , "lastName":"Smith" },' +
+	'{ "firstName":"Peter" , "lastName":"Jones" } ]}'; 
+		var obj = text; 
+		getJson('./prueba1.php',text).then(function(story) {
+		  return getJSON(story.chapterUrls[0]);
+		}).then(function(chapter1) {
+		  addHtmlToPage(chapter1.html);
+		}).catch(function() {
+		  addTextToPage("Failed to show chapter");
+		}).then(function() {
+		  document.querySelector('.spinner').style.display = 'none';
+		})
+	}
+	
+
+
+</script>
+</body>
+</html>

@@ -5,5 +5,5 @@ $DB = new DBPDO();
 
 
 
-$DB->execute("call createUsuario('Josimar','Gutierrez Avina', 'josigtz', 'estudiante', 'correo', '123456')");
+$DB->execute("call createUsuario(Victor,'Gutierrez Avina', 'josigtz', 'estudiante', 'correo', '123456')");
 ?>
