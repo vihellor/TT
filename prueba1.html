@@ -29,18 +29,69 @@
 <div class="w3-main" style="margin-top:43px">
 
   <div class="w3-panel" style="text-align: center;">
-    <div class="w3-row-padding" >
-      <div class="w3-twothird" >
-        <br>
-        <h1><b>Login</b></h1><br>
-        <form id="myForm"  onsubmit="event.preventDefault(); handleFormSubmit(this,'login');">
-          <input type="text" name="username" class="w3-input w3-xlarge" placeholder="Usuario" style="text-align: center;" required="true"><br><br>
-          <input type="password" name="pasword" class="w3-input w3-xlarge" placeholder="Contraseña" style="text-align: center;" required="true">
-          <br><br><br><button type="submit">Send It!</button>
-        </form>
-        
-      </div>
-    </div>
+  	<div>
+      <br>
+      <br>
+      <div class="flexContainer">
+	  	<div class="w3-card-4">
+	      <header class="w3-cell-row">
+	      	<div class="w3-half w3-container w3-light-gray w3-cell">
+	      		<button class="w3-button" onclick="openLink(event, 'Inicio')"><h2>Login</h2></button>
+			  
+			</div>
+
+			<div class="w3-half w3-container w3-green w3-cell" onclick="openLink(event, 'registro')">
+				<button class="w3-button" onclick="openLink(event, 'Inicio')"><h2>Registro</h2></button>
+			</div>
+	      </header>
+	      <div class="w3-container">
+	      	<div class="flexContainer" style="display:none;">
+		        <form id="login"  onsubmit="event.preventDefault(); handleFormSubmit(this,'login');">
+		        	<p>
+		        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
+		        	<input type="text" name="nickname" class="w3-input w3-border" required="true">
+					<label class="w3-text-green w3-large"><b>Contraseña</b></label>
+		        	<input type="password" name="password" class="w3-input w3-border" required="true"></p>
+					
+
+					<input type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
+		        </form>
+	      	</div>
+	      	<div class="flexContainer">
+	      		<form id="registro" onsubmit="event.preventDefault(); handleFormSubmit(this,'registro');">
+	      			<p>
+		        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
+		        	<input type="text" name="username" class="w3-input w3-border" required="true">
+		        	</p><p>
+		        	<label class="w3-text-green w3-large"><b>Nombre(s)</b></label>
+		        	<input type="text" name="username" class="w3-input w3-border" required="true">
+					</p><p>
+		        	<label class="w3-text-green w3-large"><b>Apellido Paterno</b></label>
+		        	<input type="text" name="app" class="w3-input w3-border">
+		        	</p><p>
+		        	<label class="w3-text-green w3-large"><b>Apellido materno</b></label>
+		        	<input type="text" name="apm" class="w3-input w3-border">
+		        	</p><p>
+		        	<label class="w3-text-green w3-large"><b>Ocupación</b></label>
+		        	<input type="text" name="ocupacion" class="w3-input w3-border" required="true">
+		        	</p><p>
+		        	<label class="w3-text-green w3-large"><b>Email</b></label>
+		        	<input type="email" name="email" class="w3-input w3-border" required="true">
+		        	</p><p>
+					<label class="w3-text-green w3-large"><b>Contraseña</b></label>
+		        	<input type="password" name="password" class="w3-input w3-border" required="true">
+		        	</p><p>
+		        	<label class="w3-text-green w3-large"><b>Confirmación Contraseña</b></label>
+		        	<input type="password" name="password" class="w3-input w3-border" required="true">
+		        	</p>
+
+		        	<input type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
+		        </form>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   </div>
   <hr>
   
@@ -49,5 +100,27 @@
 
   <!-- End page content -->
 </div>
+<script>
+// Get the Sidebar
+var login = document.getElementById("login");
+// Get the DIV with overlay effect
+var registro = document.getElementById("registro");
+
+// Show the content
+function openLink(evt, animName) {
+  if ("login".localeCompare(animName)) {}
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menuItem");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-green";
+}
+</script>
 </body>
 </html>
