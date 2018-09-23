@@ -9,17 +9,27 @@ if( !isset($_SESSION["bd"]) ){
     $_SESSION["bd"] = new DBPDO();
 }
 
-$peticion = json_decode(file_get_contents('php://input'), false);
+$peticion = json_decode(file_get_contents('php://input'), true);
 
 switch ($peticion['funcion']) {
 	case "registro":
 		$DAO = new usuarioDAO();
-		$usuario = new usuario("",$peticion['usuario'],$peticion['nombre'],$peticion['apellidoPaterno'],$peticion['apellidoMaterno'],$peticion['ocupacion'],$peticion['correo'],$peticion['contrasena']);
+		$usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
 		$DAO->createUsuario($usuario);
+		break;
 	case "login":
 		$DAO = new usuarioDAO();
-		$usuario = new usuario("",$peticion['usuario'],"","","","","",$peticion['contrasena']);
-		var_dump($DAO->readUsuario($usuario));
+		$usuario = new usuario("",$peticion['nickname'],"","","","","",$peticion['contrasena']);
+		$usuario = $DAO->readUsuario($usuario);
+		if(strlen($usuario->nombre)!=0){
+			$_SESSION["validation"] = "true";
+			echo("login");
+		}
+		else{
+			$_SESSION["validation"] = "false";
+			echo ("false");
+		}
+		
 	break;
 }
 
