@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
+  <style type="text/css">a { cursor: pointer; }</style>
   <script src="./scripts/ajax.js"></script>
   
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -35,18 +36,19 @@
       <div class="flexContainer">
 	  	<div class="w3-card-4">
 	      <header class="w3-cell-row">
-	      	<div class="w3-half w3-container w3-light-gray w3-cell">
-	      		<button class="w3-button" onclick="openLink(event, 'Inicio')"><h2>Login</h2></button>
+	      	<div id="l1" class="w3-half w3-container w3-light-gray w3-cell">
+	      		<a onclick="openLink(event, 'login')"><h2>Login</h2></a>
 			  
 			</div>
-
-			<div class="w3-half w3-container w3-green w3-cell" onclick="openLink(event, 'registro')">
-				<button class="w3-button" onclick="openLink(event, 'Inicio')"><h2>Registro</h2></button>
+			
+			<div id="l2" class="w3-half w3-container w3-green w3-cell">
+				<a style="height: 100%; width: 100%; hover {cursor:pointer;}" onclick="openLink(event, 'registro')"><h2>Registro</h2></a>
 			</div>
+			
 	      </header>
 	      <div class="w3-container">
-	      	<div class="flexContainer" style="display:none;">
-		        <form id="login"  onsubmit="event.preventDefault(); handleFormSubmit(this,'login');">
+	      	<div id="login" class="flexContainer w3-animate-right">
+		        <form onsubmit="event.preventDefault(); handleFormSubmit(this,'login');">
 		        	<p>
 		        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
 		        	<input type="text" name="nickname" class="w3-input w3-border" required="true">
@@ -57,33 +59,62 @@
 					<input type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
 		        </form>
 	      	</div>
-	      	<div class="flexContainer">
-	      		<form id="registro" onsubmit="event.preventDefault(); handleFormSubmit(this,'registro');">
-	      			<p>
-		        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
-		        	<input type="text" name="username" class="w3-input w3-border" required="true">
-		        	</p><p>
-		        	<label class="w3-text-green w3-large"><b>Nombre(s)</b></label>
-		        	<input type="text" name="username" class="w3-input w3-border" required="true">
-					</p><p>
-		        	<label class="w3-text-green w3-large"><b>Apellido Paterno</b></label>
-		        	<input type="text" name="app" class="w3-input w3-border">
-		        	</p><p>
-		        	<label class="w3-text-green w3-large"><b>Apellido materno</b></label>
-		        	<input type="text" name="apm" class="w3-input w3-border">
-		        	</p><p>
-		        	<label class="w3-text-green w3-large"><b>Ocupación</b></label>
-		        	<input type="text" name="ocupacion" class="w3-input w3-border" required="true">
-		        	</p><p>
-		        	<label class="w3-text-green w3-large"><b>Email</b></label>
-		        	<input type="email" name="email" class="w3-input w3-border" required="true">
-		        	</p><p>
-					<label class="w3-text-green w3-large"><b>Contraseña</b></label>
-		        	<input type="password" name="password" class="w3-input w3-border" required="true">
-		        	</p><p>
-		        	<label class="w3-text-green w3-large"><b>Confirmación Contraseña</b></label>
-		        	<input type="password" name="password" class="w3-input w3-border" required="true">
-		        	</p>
+	      	<div id="registro" class="flexContainer w3-animate-left" style="display:none;">
+	      		<form onsubmit="event.preventDefault(); handleFormSubmit(this,'registro');">
+	      			<div class="w3-cell-row">
+		      			<p>
+				        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
+				        	
+				        	<input type="text" name="nickname" class="w3-input w3-border" required="true">
+			        	</p>
+		        	</div>
+					<div class="w3-cell-row">
+					  <div class="w3-container w3-cell w3-mobile">
+					    <p>
+				        	<label class="w3-text-green w3-large"><b>Nombre(s)</b></label>
+				        	<input type="text" name="name" class="w3-input w3-border" required="true">
+						</p>
+					  </div>
+					  <div class="w3-container w3-cell w3-mobile">
+					    <p>
+				        	<label class="w3-text-green w3-large"><b>Apellido Paterno</b></label>
+				        	<input type="text" name="app" class="w3-input w3-border">
+			        	</p>
+					  </div>
+					  <div class="w3-container w3-cell w3-mobile">
+					    <p>
+					    	<label class="w3-text-green w3-large"><b>Apellido materno</b></label>
+		        			<input type="text" name="apm" class="w3-input w3-border">
+					    </p>
+					  </div>
+					</div>
+					<div class="w3-cell-row">
+						<p>
+				        	<label class="w3-text-green w3-large"><b>Ocupación</b></label>
+				        	<input type="text" name="ocupacion" class="w3-input w3-border" required="true">
+			        	</p>
+					</div>
+		        	<div class="w3-cell-row">
+		        		<p>
+				        	<label class="w3-text-green w3-large"><b>Email</b></label>
+				        	<input type="email" name="email" class="w3-input w3-border" required="true">
+			        	</p>
+		        	</div>
+		        	
+		        	<div class="w3-cell-row">
+					  <div class="w3-container w3-cell w3-mobile">
+					    <p>
+				        	<label class="w3-text-green w3-large"><b>Contraseña</b></label>
+		        			<input type="password" name="password" class="w3-input w3-border" required="true">
+						</p>
+					  </div>
+					  <div class="w3-container w3-cell w3-mobile">
+					    <p>
+				        	<label class="w3-text-green w3-large"><b>Confirmación Contraseña</b></label>
+		        			<input type="password" name="password" class="w3-input w3-border" required="true">
+			        	</p>
+					  </div>
+					</div>
 
 		        	<input type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
 		        </form>
@@ -105,11 +136,25 @@
 var login = document.getElementById("login");
 // Get the DIV with overlay effect
 var registro = document.getElementById("registro");
+var l1 = document.getElementById("l1");
+var l2 = document.getElementById("l2");
 
 // Show the content
 function openLink(evt, animName) {
-  if ("login".localeCompare(animName)) {}
-  var i, x, tablinks;
+	console.log(animName);
+  if ("login".localeCompare(animName)) {
+  	login.style.display = "none";
+  	registro.style.display = "block";
+  	l1.className=l1.className.replace("w3-light-gray","w3-green");
+  	l2.className=l2.className.replace("w3-green", "w3-light-gray");
+
+  }else{
+  	registro.style.display = "none";	
+  	login.style.display = "block";
+  	l2.className=l2.className.replace("w3-light-gray","w3-green");
+  	l1.className=l1.className.replace("w3-green", "w3-light-gray");
+  }
+  /*var i, x, tablinks;
   x = document.getElementsByClassName("menuItem");
   for (i = 0; i < x.length; i++) {
      x[i].style.display = "none";
@@ -119,7 +164,7 @@ function openLink(evt, animName) {
      tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
   }
   document.getElementById(animName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
+  evt.currentTarget.className += " w3-green";*/
 }
 </script>
 </body>
