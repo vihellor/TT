@@ -30,8 +30,8 @@ function post(url,objSend) {
   });
 
   return requestPromise.then(function(results) {
-    console.log("llegamos a este punto mi capitan");
-    console.log(results);
+    //console.log("llegamos a este punto mi capitan");
+    //console.log(results);
     return results;
   });
 }
@@ -41,7 +41,7 @@ function post(url,objSend) {
 
 function getJson(url,objSend) {
   //var json = toJSONString( this );
-  console.log("pues algo intenta correrse");
+  //console.log("pues algo intenta correrse");
   return post(url,objSend).then();
 }
 
@@ -183,7 +183,17 @@ function handleFormSubmit (form,accion) {
   data.funcion = accion;
   
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-    getJson('/ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+    getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+        if (respuesta.localeCompare("login")) {
+          console.log("ejecutando login...");
+          //window.location = "./../pages/menu.html";
+        }else if(respuesta.localeCompare("registro")){
+          console.log("ejecutando registro...");
+          //window.location = "./../pages/registrarFlujo.html";
+        }
+        else{
+          console.log("Fallo entonces no haré nada perro");
+        }
         console.log("llegamos a la historia"+respuesta);
       }).catch(function() {
         addTextToPage("Failed to show chapter");
