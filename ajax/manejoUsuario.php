@@ -15,18 +15,24 @@ switch ($peticion['funcion']) {
 	case "registro":
 		$DAO = new usuarioDAO();
 		$usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
-		$DAO->createUsuario($usuario);
+		$resultado = $DAO->createUsuario($usuario);
+		if($resultado['_result']==1){
+			echo("registro");
+		}
+		else{
+			echo ("false");
+		}
+		#echo ();
 		break;
 	case "login":
 		$DAO = new usuarioDAO();
 		$usuario = new usuario("",$peticion['nickname'],"","","","","",$peticion['contrasena']);
 		$usuario = $DAO->readUsuario($usuario);
 		if(strlen($usuario->nombre)!=0){
-			$_SESSION["validation"] = "true";
+			$_SESSION["idUsuario"] = $usuario->idUsuario;
 			echo("login");
 		}
 		else{
-			$_SESSION["validation"] = "false";
 			echo ("false");
 		}
 		

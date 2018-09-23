@@ -8,7 +8,7 @@ class usuarioDAO {
 		$BD = $_SESSION["bd"];
 		$sql = 'CALL createUsuario(?,?,?,?,?,?,?)';
 		$array = array($user->nombre,$user->apellidoPaterno,$user->apellidoMaterno,$user->nickname,$user->ocupacion,$user->correo,$user->contrasena);
-		$BD->execute($sql,$array);
+		return $BD->fetch($sql,$array);
 	}
 
 	function readUsuario(usuario $user){
