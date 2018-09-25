@@ -292,6 +292,9 @@ input:checked + .slider:before {
 .flexContainer {
 	display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
 }
+.flexContainer2 {
+	display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end;
+}
 
 .cardTam {
 	width: 22rem; margin: 3rem;

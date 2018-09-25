@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TTI</title>
-  <meta charset="UTF-8">
+	<title></title>
+	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./../style/w3.css">
+  <link rel="stylesheet" href="./../style/bubles.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <style type="text/css">a { cursor: pointer; }</style>
   <script src="./scripts/ajax.js"></script>
-  
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <!-- <style>
-  html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-  </style> -->
 </head>
-<body class="w3-light-grey">
+<body class="wrapper">
+<div>
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
 
-<!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <span class="w3-bar-item w3-right">TTI 1.0</span>
 </div>
 
@@ -27,13 +35,13 @@
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-top:43px">
+<div class="w3-main" style="margin-top:43px;">
 
   <div class="w3-panel" style="text-align: center;">
   	<div>
       <br>
       <br>
-      <div class="flexContainer">
+      <div class="flexContainer2">
 	  	<div class="w3-card-4">
 	      <header class="w3-cell-row">
 	      	<div id="l1" class="w3-half w3-container w3-light-gray w3-cell">
@@ -46,8 +54,8 @@
 			</div>
 			
 	      </header>
-	      <div class="w3-container">
-	      	<div id="login" class="flexContainer w3-animate-right">
+	      <div class="w3-container w3-light-gray">
+	      	<div id="login" class="w3-animate-right flexContainer2 ">
 		        <form onsubmit="event.preventDefault(); handleFormSubmit(this,'login');">
 		        	<p>
 		        	<label class="w3-text-green w3-large"><b>Nickname</b></label>
@@ -59,7 +67,7 @@
 					<input type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
 		        </form>
 	      	</div>
-	      	<div id="registro" class="flexContainer w3-animate-left" style="display:none;">
+	      	<div id="registro" class="w3-animate-left flexContainer2 " style="display:none;">
 	      		<form onsubmit="event.preventDefault(); handleFormSubmit(this,'registro');">
 	      			<div class="w3-cell-row">
 		      			<p>
@@ -71,7 +79,7 @@
 					<div class="w3-cell-row">
 					  <div class="w3-container w3-cell w3-mobile">
 					    <p>
-				        	<label class="w3-text-green w3-large"><b>Nombre(s)</b></label>
+				        	<label class="w3-text-green w3-large"><b>Nombre o Nombres</b></label>
 				        	<input type="text" name="name" class="w3-input w3-border" required="true">
 						</p>
 					  </div>
@@ -91,13 +99,14 @@
 					<div class="w3-cell-row">
 						<p>
 				        	<label class="w3-text-green w3-large"><b>Ocupación</b></label>
-				        	b
+				        	<br>
 				        	<input type="text" name="ocupacion" class="w3-input w3-border" required="true">
 			        	</p>
 					</div>
 		        	<div class="w3-cell-row">
 		        		<p>
 				        	<label class="w3-text-green w3-large"><b>Email</b></label>
+				        	<br>
 				        	<input type="email" name="email" class="w3-input w3-border" required="true">
 			        	</p>
 		        	</div>
@@ -125,10 +134,6 @@
 	  </div>
 	</div>
   </div>
-  <hr>
-  
-  <hr>
-  <br>
 
   <!-- End page content -->
 </div>
@@ -168,5 +173,6 @@ function openLink(evt, animName) {
   evt.currentTarget.className += " w3-green";*/
 }
 </script>
+</div>
 </body>
 </html>
