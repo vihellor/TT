@@ -191,42 +191,6 @@ function handleFormSubmit (form,accion) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
-          window.location = "./../pages/registrarFlujo.html";
-        }
-        else{
-          console.log("Fallo entonces no haré nada perro");
-          
-        }
-        console.log("llegamos a la historia"+h);
-      }).catch(function() {
-        addTextToPage("Failed to show chapter");
-      }).then(function() {
-        console.log("saca el spinner");
-        //document.querySelector('.spinner').style.display = 'none';
-      })
-
-
-  
-  // ...this is where we’d actually do something with the form data...
-};
-
-function handleFormLobby (form,accion) {
-  
-  // Call our function to get the form data.
-  var data = formToJSON(form.elements);
-  console.log(data);
-  
-  data.funcion = accion;
-  
-  // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-    getJson('./../back/lobby.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
-      var h = respuesta.trim();
-      //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login")==0) {
-          //console.log("ejecutando login...");
-          window.location = "./../pages/menu.html";
-        }else if(h.localeCompare("registro")==0){
-          //console.log("ejecutando registro...");
           alert("¡Usuario registrado exitosamente!\nInicia sesión");
           openLink(event, 'login');
         }else if(h.localeCompare("registroFalse")==0){
