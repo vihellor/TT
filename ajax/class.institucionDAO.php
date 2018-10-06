@@ -2,7 +2,7 @@
 include_once('./class.DBPDO.php');
 include_once('./class.institucion.php');
 
-class institucionDAO {
+class institucionDAO xtends institucion{
 	
 	function createInstitucion(institucion $Institucion){
 		$BD = $_SESSION["bd"];

@@ -2,13 +2,13 @@
 
 class usuario {
 	public $idUsuario;
+	public $nickname;
 	public $nombre;
 	public $apellidoPaterno;
 	public $apellidoMaterno;
-	public $nickname;
-	public $contrasena;
-	public $correo;
 	public $ocupacion;
+	public $correo;
+	public $contrasena;
 
 	function __construct($idUsuario, $nickname, $nombre, $apellidoPaterno, $apellidoMaterno, $ocupacion, $correo, $contrasena){
 		$this->idUsuario= $idUsuario;

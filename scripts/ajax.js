@@ -191,7 +191,7 @@ function handleFormSubmit (form,accion) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
-          window.location = "./../pages/registrarFlujo.html";
+          window.location = "./pages/registrarFlujo.html";
         }
         else{
           console.log("Fallo entonces no haré nada perro");

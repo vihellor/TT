@@ -2,7 +2,7 @@
 include_once('./class.DBPDO.php');
 include_once('./class.usuario.php');
 
-class usuarioDAO {
+class usuarioDAO{
 	
 	function createUsuario(usuario $user){
 		$BD = $_SESSION["bd"];
@@ -16,13 +16,20 @@ class usuarioDAO {
 		$sql = 'CALL readUsuario(?,?)';
 		$array = array($user->nickname, $user->contrasena);
 		$resultado = $BD->fetch($sql,$array);
-		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], $resultado['contrasena']);
+		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "");
 	}
 
 	function updateUsuario(usuario $user){
 		$BD = $_SESSION["bd"];
 		$sql = 'CALL updateUsuario(?,?,?,?,?,?,?)';
-		$array = array($user->nombre,$user->apellidoPaterno,$user->apellidoMaterno,$user->nickname,$user->ocupacion,$user->correo,$user->contrasena);
+		$array = array($user->idUsuario,$user->nombre,$user->apellidoPaterno,$user->apellidoMaterno,$user->nickname,$user->ocupacion,$user->correo);
+		$BD->execute($sql,$array);
+	}
+
+	function updateContrasena(usuario $user){
+		$BD = $_SESSION["bd"];
+		$sql = 'CALL updateContrasena(?,?,?)';
+		$array = array($user->idUsuario,$user->contrasena,$user->correo);
 		$BD->execute($sql,$array);
 	}
 

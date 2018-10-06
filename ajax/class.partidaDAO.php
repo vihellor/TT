@@ -11,6 +11,9 @@ class partidaDAO {
 		$array = array($Partida->nombrePartida, $Partida->estado, $Partida->jugadores, $Partida->meta);
 		$BD->execute($sql,$array);
 	}
+	/*
+	IN _idPartida INT
+	*/
 
 	function readPartida(partida $Partida){
 		$BD = $_SESSION["bd"];
