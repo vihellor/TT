@@ -192,7 +192,7 @@ function handleFormSubmit (form,accion) {
           //console.log("0: "+x[0]);
           //console.log("1: "+x[1]);
           //document.cookie = x[1]; 
-          window.location = "./../pages/menu.html";
+          window.location = "./../pages/menu.php";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
           alert("¡Usuario registrado exitosamente! Inicia sesión");
