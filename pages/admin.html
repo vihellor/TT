@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TTI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./../style/w3.css">
+  <link rel="stylesheet" href="./../style/css?family=Raleway">
+  <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  <script src="./../scripts/ajax.js"></script>
+  <style>
+  html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  </style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">TTI 1.0</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <h5>Herramientas</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
+    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i>Administración de usuarios</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i>Casas de bolsa</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tutoriales')"><i class="fa fa-bullseye fa-fw"></i>Tutoriales</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Instituciones')"><i class="fa fa-gamepad fa-fw"></i>Instituciones</button>
+    <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i>Salir</button>
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
+    
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px; margin-top:43px">
+
+
+  <!--adminUs-->
+  <div id="adminUs" class="w3-panel menuItem w3-animate-left" style="text-align: center;">
+    <div class="w3-row-padding" >
+        <br><br>
+        <h1>Administración de usuarios</h1>
+        <div class="w3-animate-right flexContainer2 ">
+          <div class="w3-responsive">
+            <table class="w3-table-all">
+              <tr class="w3-green">
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Nueva contraseña</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Josimar"></td>
+                  <td><input class="w3-input" type="password" name="password"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Victor"></td>
+                  <td><input class="w3-input" type="password" name="password"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+            </table>
+          </div> 
+        </div>
+    </div>
+  </div>
+  <!--  casas de bolsa -->
+  <div id="casasBolsa" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+        <br><br>
+        <h1>Casas de bolsa</h1>
+        <div class="w3-animate-right flexContainer2 ">
+          <div class="w3-responsive">
+            <table class="w3-table-all">
+              <tr class="w3-green">
+                <th>Id</th>
+                <th>Casa de bolsa</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Actinver"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Kuspit"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+            </table>
+            <br>
+            <br>
+            <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+              <label class="w3-text-green w3-large"><b>Nombre de la casa de bolsa</b></label>
+              <br>
+              <input class="w3-input" type="text" name="name">
+              <input class="w3-btn w3-green w3-large" type="submit" name="funcion" value="Agregar">
+            </form>
+          </div> 
+        </div>
+    </div>
+  </div>
+  <!--  Buscar partida -->
+  <div id="Tutoriales" class="w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+      <br>
+      <h2><b><i></i>Partidas disponibles</b></h2>
+      <div class="w3-responsive">
+        <table class="w3-table-all w3-centered">
+          <tr class="w3-green">
+            <th>Nombre</th>
+            <th>Max. Jugadores</th>
+            <th>Jugadores actuales</th>
+            <th>Meta</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>Segunda partida</td>
+            <td>5</td>
+            <td>2</td>
+            <td>10,000</td>
+            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
+          </tr>
+          <tr>
+            <td>La chida</td>
+            <td>3</td>
+            <td>1</td>
+            <td>700,000</td>
+            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
+          </tr>
+          <tr>
+            <td>Los grandes</td>
+            <td>5</td>
+            <td>4</td>
+            <td>35,000</td>
+            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
+          </tr>
+          <tr>
+            <td>Aprendiendo</td>
+            <td>2</td>
+            <td>1</td>
+            <td>5,000</td>
+            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--  Nueva partida -->
+  <div id="Instituciones" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+      <br><br>
+        <h1>Instituciones</h1>
+        <div class="w3-animate-right flexContainer2 ">
+          <div class="w3-responsive">
+            <table class="w3-table-all">
+              <tr class="w3-green">
+                <th>Id</th>
+                <th>Institución</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Bancomer"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+              <tr>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Banamex"></td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                </form>
+                
+              </tr>
+            </table>
+            <br>
+            <br>
+            <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+              <label class="w3-text-green w3-large"><b>Nombre de la institución</b></label>
+              <br>
+              <input class="w3-input" type="text" name="name">
+              <input class="w3-btn w3-green w3-large" type="submit" name="funcion" value="Agregar">
+            </form>
+          </div> 
+        </div>
+    </div>
+  </div>
+  <!--  Tutorial -->
+  <div id="tutorial" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+      <br>
+      <br>
+      <div class="flexContainer">
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Mi balance general <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Ingresos, gastos, ahorro</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Conceptos básicos <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Riesgo, inflación, diversificación, perfil de inversión, rendimiento</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <a href="./tutoriales/deudaGuber.html" style="text-decoration: none">
+            <header class="w3-container w3-green">
+              <h3>Deuda gubernamental <i class="fa fa-chevron-right"></i></h3>
+            </header>
+            <div class="w3-container">
+              <p> Precio nominal, Plazo, Tasas de interés, CETES, BONDES, UDIBONOS</p>
+            </div>
+          </a>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <a href="./tutoriales/mercadoCapitales.html" style="text-decoration: none">
+            <header class="w3-container w3-green">
+              <h3>Mercado de capitales <i class="fa fa-chevron-right"></i></h3>
+            </header>
+            <div class="w3-container">
+              <p>Bolsa de valores, acción, tipos de acciones, calificaciones crediticias, dividendos, ganancia de capital, minusvalía, ganancia de capital</p>
+            </div>
+          </a>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Casas de bolsa <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Comisión, instituciones reguladoras, comisión por manejo de cuenta, comisión por compra/venta</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Análisis fundamental <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>Descripción de la empresa, noticias, prospecto de inversión, ingresos, ingresos netos, margen de utilidad neta</p>
+          </div>
+        </div>
+        <div class="w3-card-4 cardTam">
+          <header class="w3-container w3-green">
+            <h3>Otros <i class="fa fa-chevron-right"></i></h3>
+          </header>
+          <div class="w3-container">
+            <p>..., ..., ..., ..., ...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End page content -->
+</div>
+
+<script>
+
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+// Show the content
+function openLink(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menuItem");
+  w3_close();
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-green";
+}
+function validar(form,accion){
+  var data = formToJSON(form.elements);
+  //console.log(data['newPassword'].localeCompare(data['newPassword2']));
+  if(data['newPassword'].localeCompare(data['newPassword2'])==0)
+    handleFormSubmit(form,accion);
+  else
+    alert('Las contraseñas no coinciden.');
+}
+</script>
+
+<script>
+function acordeon(id) {
+  var x = document.getElementById(id);
+    var y = document.getElementById("disUs");
+    if (y.className == "fa fa-chevron-circle-right") {
+        y.className = y.className.replace("fa fa-chevron-circle-right","fa fa-chevron-circle-down");
+    } else {
+        y.className = y.className.replace("fa fa-chevron-circle-down", "fa fa-chevron-circle-right");
+    }
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+  handleFormSubmit(document.createElement("form"),"getUsuario");
+</script>
+
+</body>
+</html>
