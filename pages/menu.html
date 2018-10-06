@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  <script src="./../scripts/ajax.js"></script>
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -76,34 +77,172 @@
         <br>
         <h2><b>Configuración</b></h2>
         <br><br>-->
+        <br><br>
         <div class="flexContainer">
           <div>
             <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" alt="Profile image" style="width: 400px">
           </div>
           <div>
             <br>
-            <input type="text" class="w3-input w3-xlarge" name="username" value="Mike" placeholder="Nickname" required="true"><br><br>
-            <input type="text" class="w3-input w3-xlarge" name="nombre" value="Miguel" placeholder="Nombre" required="true"><br><br>
-            <input type="text" class="w3-input w3-xlarge" name="apellidos" value="Perez Muñoz" placeholder="Apellidos" required="true"><br><br>
-            <input type="text" class="w3-input w3-xlarge" name="ocupacion" value="Estudiante" placeholder="Ocupación" required="true"><br><br>
-            <input type="email" class="w3-input w3-xlarge" name="email" value="mike@coreo.com" placeholder="Correo electrónico" required="true"><br><br>
-            <input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="cambiarDatos" value="Cambiar">
+            <form onsubmit="event.preventDefault(); handleFormSubmit(this,'updateUsuario');">
+              <input type="text" class="w3-input w3-xlarge" name="nickname" value="Mike" placeholder="Nickname" required="true"><br><br>
+              <input type="text" class="w3-input w3-xlarge" name="name" value="Miguel" placeholder="Nombre" required="true"><br><br>
+              <input type="text" class="w3-input w3-xlarge" name="app" value="Perez" placeholder="Apellidos" required="true"><br><br>
+              <input type="text" class="w3-input w3-xlarge" name="apm" value="Muñoz" placeholder="Apellidos" required="true"><br><br>
+              <input type="text" class="w3-input w3-xlarge" name="ocupacion" value="Estudiante" placeholder="Ocupación" required="true"><br><br>
+              <input type="email" class="w3-input w3-xlarge" name="email" value="mike@coreo.com" placeholder="Correo electrónico" required="true"><br><br>
+              <input type="submit" class="w3-btn w3-green w3-xlarge" value="Cambiar">
+            </form>
 
           </div>
         </div>
-        <br><br>
+        
         <h2 onclick="acordeon('cambioContra')" ><b><i id="disUs" class="fa fa-chevron-circle-right"></i>Cambio Contraseña</b></h2>
         <div id="cambioContra" class="w3-hide w3-animate-zoom flexContainer">
-          <input type="password" class="w3-input w3-xlarge" name="pasword" placeholder="Contraseña anterior" required="true" style="width: 350px; margin: 11px 50px;">
-          <input type="password" class="w3-input w3-xlarge" name="pasword" placeholder="Nueva contraseña" required="true" style="width: 350px; margin: 11px;">
-          <input type="password" class="w3-input w3-xlarge" name="pasword" placeholder="Nueva contraseña" required="true" style="width: 350px; margin: 11px;">
-          <input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="cambiarContrasenia" value="Cambiar" style="width: 150px">
+          <form onsubmit="event.preventDefault(); handleFormSubmit(this,'updateContrasena');">
+            <p>
+              <label class="w3-text-green w3-large"><b>Contraseña anterior</b></label>
+              <input type="password" class="w3-input w3-xlarge" name="OldPasword" required="true">
+            </p>
+            <div class="w3-cell-row">
+              <div class="w3-container w3-cell w3-mobile">
+                <p>
+                  <label class="w3-text-green w3-large"><b>Nueva contraseña</b></label>
+                  <input type="password" class="w3-input w3-xlarge" name="newPassword" required="true">
+                </p>
+              </div>
+              <div class="w3-container w3-cell w3-mobile">
+                <p>
+                  <label class="w3-text-green w3-large"><b>Repetir contraseña</b></label>
+                  <input type="password" class="w3-input w3-xlarge" name="newPassword2" required="true">
+                </p>
+              </div>
+            </div>
+
+            <input type="submit" class="w3-btn w3-green w3-xlarge" value="Cambiar contraseña">
+          </form>
         </div>
     </div>
 
   
 
     <div class="w3-row-padding">
+      <div class="flexContainer2">
+      <div class="w3-card-4">
+        <header class="w3-cell-row">
+          <div id="l1" class="w3-third w3-container w3-light-gray w3-cell">
+            <a onclick="openLink2(event, 'login')"><h4>Login</h4></a>
+        
+          </div>
+          
+          <div id="l2" class="w3-third w3-container w3-green w3-cell">
+            <a style="height: 100%; width: 100%; hover {cursor:pointer;}" onclick="openLink2(event, 'registro')"><h4>Registro</h4></a>
+          </div>
+
+          <div id="l2" class="w3-third w3-container w3-green w3-cell">
+            <a style="height: 100%; width: 100%; hover {cursor:pointer;}" onclick="openLink2(event, 'tarjeta')"><h4>Tarjeta</h4></a>
+          </div>
+      
+        </header>
+        <div class="w3-container w3-light-gray">
+          <div id="ingresos" class="w3-animate-right flexContainer2 ">
+             <div class="w3-responsive">
+              <table class="w3-table-all">
+                <tr class="w3-green">
+                  <th>Nombre</th>
+                  <th>Monto</th>
+                  <th>Fecha</th>
+                  <th>Periodicidad</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                    <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
+                    <td><input type="w3-input" name="sueldo" value="10000"></td>
+                    <td><input type="w3-input" name="fecha" value="1"></td>
+                    <td><input type="w3-input" name="periodicidad" value="2"> semanas</td>
+                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                  </form>
+                  
+                </tr>
+                <tr>
+                  <td>Bono productividad</td>
+                  <td>5,000</td>
+                  <td>01/15/14</td>
+                  <td>4 semanas</td>
+                  <td><a href=""><i class="fa fa-edit fa-fw"></i></a></td>
+                  <td><a href=""><i class="fa fa-times fa-fw"></i></a></td>
+                </tr>
+              </table>
+            </div> 
+          </div>
+          <div id="registro" class="w3-animate-left flexContainer2 " style="display:none;">
+            <form onsubmit="event.preventDefault(); validar(this,'registro');">
+              <div class="w3-cell-row">
+                <p>
+                  <label class="w3-text-green w3-large"><b>Nickname</b></label>
+                  <br>
+                  <input type="text" name="nickname" class="w3-input w3-border" required="true">
+                </p>
+              </div>
+          <div class="w3-cell-row">
+            <div class="w3-container w3-cell w3-mobile">
+              <p>
+                  <label class="w3-text-green w3-large"><b>Nombre o Nombres</b></label>
+                  <input type="text" name="name" class="w3-input w3-border" required="true">
+            </p>
+            </div>
+            <div class="w3-container w3-cell w3-mobile">
+              <p>
+                  <label class="w3-text-green w3-large"><b>Apellido Paterno</b></label>
+                  <input type="text" name="app" class="w3-input w3-border" required="true">
+                </p>
+            </div>
+            <div class="w3-container w3-cell w3-mobile">
+              <p>
+                <label class="w3-text-green w3-large"><b>Apellido materno</b></label>
+                  <input type="text" name="apm" class="w3-input w3-border" required="true">
+              </p>
+            </div>
+          </div>
+          <div class="w3-cell-row">
+            <p>
+                  <label class="w3-text-green w3-large"><b>Ocupación</b></label>
+                  <br>
+                  <input type="text" name="ocupacion" class="w3-input w3-border">
+                </p>
+          </div>
+              <div class="w3-cell-row">
+                <p>
+                  <label class="w3-text-green w3-large"><b>Email</b></label>
+                  <br>
+                  <input type="email" name="email" class="w3-input w3-border" required="true">
+                </p>
+              </div>
+              
+              <div class="w3-cell-row">
+            <div class="w3-container w3-cell w3-mobile">
+              <p>
+                  <label class="w3-text-green w3-large"><b>Contraseña</b></label>
+                  <input type="password" name="password" class="w3-input w3-border" required="true">
+            </p>
+            </div>
+            <div class="w3-container w3-cell w3-mobile">
+              <p>
+                  <label class="w3-text-green w3-large"><b>Confirmación Contraseña</b></label>
+                  <input type="password" name="password2" class="w3-input w3-border" required="true">
+                </p>
+            </div>
+          </div>
+
+              <input id="submitR" type="submit" class="w3-btn w3-green w3-xlarge" value="Continuar">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="flexContainer">
         <div class="w3-margin">
           <h2><b><i></i>Ingresos</b></h2>
@@ -115,19 +254,25 @@
                 <th>Fecha</th>
                 <th>Periodicidad</th>
                 <th></th>
+                <th></th>
               </tr>
               <tr>
-                <td>Sueldo</td>
-                <td>10,000</td>
-                <td>12/12/12</td>
-                <td>2 semanas</td>
-                <td><a href=""><i class="fa fa-times fa-fw"></i></a></td>
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                  <td><input type="text" name="sueldo" value="Sueldo"></td>
+                  <td><input type="number" name="sueldo" value="10000"></td>
+                  <td><input type="number" name="fecha" value="1"></td>
+                  <td><input type="number" name="periodicidad" value="2"> semanas</td>
+                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                </form>
+                
               </tr>
               <tr>
                 <td>Bono productividad</td>
                 <td>5,000</td>
                 <td>01/15/14</td>
                 <td>4 semanas</td>
+                <td><a href=""><i class="fa fa-edit fa-fw"></i></a></td>
                 <td><a href=""><i class="fa fa-times fa-fw"></i></a></td>
               </tr>
             </table>
@@ -226,6 +371,7 @@
         <h2><b><i></i>Nueva partida</b></h2>
         <input type="text" class="w3-input w3-xlarge" name="partida" placeholder="Nombre de la partida" style="text-align: center;" required="true"><br><br>
         <input type="number" class="w3-input w3-xlarge" name="noJugadores" placeholder="Número de jugadores" style="text-align: center;" required="true"><br><br>
+        <input type="number" class="w3-input w3-xlarge" name="montoInicial" placeholder="Monto inicial" style="text-align: center;" required="true"><br><br>
         <input type="number" class="w3-input w3-xlarge" name="meta" placeholder="Meta" style="text-align: center;" required="true"><br>
         <br>
         <br><br>
@@ -340,6 +486,14 @@ function openLink(evt, animName) {
   }
   document.getElementById(animName).style.display = "block";
   evt.currentTarget.className += " w3-green";
+}
+function validar(form,accion){
+  var data = formToJSON(form.elements);
+  //console.log(data['newPassword'].localeCompare(data['newPassword2']));
+  if(data['newPassword'].localeCompare(data['newPassword2'])==0)
+    handleFormSubmit(form,data);
+  else
+    alert('Las contraseñas no coinciden.');
 }
 </script>
 
