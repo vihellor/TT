@@ -1,6 +1,8 @@
  <?php
+session_start();
 include_once('./class.DBPDO.php');
 include_once('./class.usuario.php');
+
 
 class usuarioDAO{
 	

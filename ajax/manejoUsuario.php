@@ -1,49 +1,39 @@
 <?php
+session_start();
 include_once('./class.usuarioDAO.php');
 include_once('./class.usuario.php');
 include_once('./class.DBPDO.php');
+include_once('./pruebaSessions.php');
+include_once('./funcionesManejoUsuario.php');
+
+if(session_id() == "" || !isset($_SESSION)){
+		my_session_start();
+		my_session_regenerate_id();
+}
 
 if( !isset($_SESSION["bd"]) ){
     $_SESSION["bd"] = new DBPDO();
 }
 
+//var_dump(is_writable(session_id()));
+//echo session_save_path();
 $peticion = json_decode(file_get_contents('php://input'), true);
-switch ($peticion['funcion']) {
-	case "registro":
-		$DAO = new usuarioDAO();
-		$usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
-		$resultado = $DAO->createUsuario($usuario);
-		if($resultado['_result']==1){
-			echo("registro");
-		}
-		else{
-			echo ("registroFalse");
-		}
-	break;
-	case "login":
-		$DAO = new usuarioDAO();
-		$usuario = new usuario(" ",$peticion['nickname']," "," "," "," "," ",$peticion['password']);
-		$usuario = $DAO->readUsuario($usuario);
-		if(strlen($usuario->nombre)!=0){
-			$_SESSION["usuario"] = $usuario;
-			echo("login");
-		}
-		else{
-			echo ("loginFalse");
-		}
-	break;
-	case "getUsuario":
-		$usuario = $_SESSION["usuario"] ;
-		$myJSON = json_encode($usuario);
-		echo $myJSON;
-	break;
-	case "updateUsuario":
+if($peticion['funcion'] == "registro"){
+	registro($peticion);
+}
+if($peticion['funcion'] == "login"){
+	login($peticion);
+}
+if($peticion['funcion'] == "getUsuario"){
+	getUsuario();
+}
+if($peticion['funcion'] == "updateUsuario"){
 		$DAO = new usuarioDAO;
 		$usuario = new usuario($peticion['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email']);
 		$DAO->updateusuario($usuario);
 		echo('updateUsuario');
-	break;
-	case "updateContrasena":
+}
+if($peticion['funcion'] == "updateContrasena"){
 		$DAO = new usuarioDAO;
 		$usuario = new usuario($peticion['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['password']);
 		$resultado = $DAO->updateusuario($usuario);
@@ -53,8 +43,8 @@ switch ($peticion['funcion']) {
 		else{
 			echo ("updateContrasenaFalse");
 		}
-	break;
-	case "deleteUsuario":
+}
+if($peticion['funcion'] == "deleteUsuario"){
 		$DAO = new usuarioDAO;
 		$usuario = new usuario($peticion['idUsuario'],"","","","","","","");
 		$resultado = $DAO->deleteUsuario($usuario);
@@ -64,7 +54,5 @@ switch ($peticion['funcion']) {
 		else{
 			echo ("deleteUsuarioFalse");
 		}
-	break;
 }
-
 ?>
