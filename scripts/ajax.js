@@ -186,7 +186,7 @@ function handleFormSubmit (form,accion) {
     getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login")==0) {
+        if (h.localeCompare("login-1")==0) {
           //console.log("ejecutando login...");
           //var x = h.split("-");
           //console.log("0: "+x[0]);
@@ -229,30 +229,7 @@ function handleFormSubmit2 (form,accion) {
   
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/lobby.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
-      var h = respuesta.trim();
-      //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login-1")==0) {
-          //console.log("ejecutando login...");
-          //var x = h.split("-");
-          //console.log("0: "+x[0]);
-          //console.log("1: "+x[1]);
-          //document.cookie = x[1]; 
-          window.location = "./../pages/menu.php";
-        }else if(h.localeCompare("registro")==0){
-          //console.log("ejecutando registro...");
-          alert("¡Usuario registrado exitosamente! Inicia sesión");
-          openLink(event, 'login');
-        }else if(h.localeCompare("registroFalse")==0){
-          //console.log("ejecutando registro...");
-          alert("Ese nombre de usuario ya está registrado");
-        }else if(h.localeCompare("loginFalse")==0){
-          //console.log("ejecutando registro...");
-          alert("Usuario o contraseña incorrectos");
-        }
-        else{
-          console.log("Fallo entonces no haré nada perro");
-          
-        }
+        var h = respuesta.trim();
         console.log("llegamos a la historia"+h);
       }).catch(function() {
         addTextToPage("Failed to show chapter");
