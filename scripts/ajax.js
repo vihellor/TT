@@ -186,7 +186,7 @@ function handleFormSubmit (form,accion) {
     getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login")==true) {
+        if (h.localeCompare("login")==0) {
           //console.log("ejecutando login...");
           //var x = h.split("-");
           //console.log("0: "+x[0]);
