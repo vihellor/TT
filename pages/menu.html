@@ -453,6 +453,7 @@
 </div>
 
 <script>
+  handleFormSubmit("form","getUsuario");
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 // Get the DIV with overlay effect
@@ -491,7 +492,7 @@ function validar(form,accion){
   var data = formToJSON(form.elements);
   //console.log(data['newPassword'].localeCompare(data['newPassword2']));
   if(data['newPassword'].localeCompare(data['newPassword2'])==0)
-    handleFormSubmit(form,data);
+    handleFormSubmit(form,accion);
   else
     alert('Las contraseñas no coinciden.');
 }
