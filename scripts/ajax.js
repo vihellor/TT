@@ -191,7 +191,7 @@ function handleFormSubmit (form,accion) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
-          alert("¡Usuario registrado exitosamente!\nInicia sesión");
+          alert("¡Usuario registrado exitosamente! Inicia sesión");
           openLink(event, 'login');
         }else if(h.localeCompare("registroFalse")==0){
           //console.log("ejecutando registro...");
