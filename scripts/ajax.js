@@ -191,6 +191,7 @@ function handleFormSubmit (form,accion) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
+<<<<<<< HEAD
           window.location = "./pages/registrarFlujo.html";
         }
         else{
@@ -227,6 +228,8 @@ function handleFormLobby (form,accion) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
+=======
+>>>>>>> 4d52c4ca47e744eded4e9e1b0ab34084b7410d32
           alert("¡Usuario registrado exitosamente!\nInicia sesión");
           openLink(event, 'login');
         }else if(h.localeCompare("registroFalse")==0){

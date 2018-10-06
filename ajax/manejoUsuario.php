@@ -10,15 +10,14 @@ if( !isset($_SESSION["bd"]) ){
 $peticion = json_decode(file_get_contents('php://input'), true);
 switch ($peticion['funcion']) {
 	case "registro":
-		$usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
-		var_dump($usuario);
 		$DAO = new usuarioDAO();
+		$usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
 		$resultado = $DAO->createUsuario($usuario);
 		if($resultado['_result']==1){
 			echo("registro");
 		}
 		else{
-			echo ("registroUsuarioFalse");
+			echo ("registroFalse");
 		}
 	break;
 	case "login":
