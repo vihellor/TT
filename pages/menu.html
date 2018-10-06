@@ -131,16 +131,15 @@
       <div class="w3-card-4">
         <header class="w3-cell-row">
           <div id="l1" class="w3-third w3-container w3-light-gray w3-cell">
-            <a onclick="openLink2(event, 'login')"><h4>Login</h4></a>
-        
+            <a onclick="openLink2(event, 'ingresos')"><h4>Ingresos</h4></a>
           </div>
           
           <div id="l2" class="w3-third w3-container w3-green w3-cell">
-            <a style="height: 100%; width: 100%; hover {cursor:pointer;}" onclick="openLink2(event, 'registro')"><h4>Registro</h4></a>
+            <a onclick="openLink2(event, 'egresos')"><h4>Egresos</h4></a>
           </div>
 
-          <div id="l2" class="w3-third w3-container w3-green w3-cell">
-            <a style="height: 100%; width: 100%; hover {cursor:pointer;}" onclick="openLink2(event, 'tarjeta')"><h4>Tarjeta</h4></a>
+          <div id="l3" class="w3-third w3-container w3-green w3-cell">
+            <a onclick="openLink2(event, 'tarjeta')"><h4>Tarjeta</h4></a>
           </div>
       
         </header>
@@ -159,9 +158,9 @@
                 <tr>
                   <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
                     <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
-                    <td><input type="w3-input" name="sueldo" value="10000"></td>
-                    <td><input type="w3-input" name="fecha" value="1"></td>
-                    <td><input type="w3-input" name="periodicidad" value="2"> semanas</td>
+                    <td><input class="w3-input" type="number" name="sueldo" value="10000"></td>
+                    <td><input class="w3-input" type="number" name="fecha" value="1"></td>
+                    <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
                     <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                     <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
                   </form>
@@ -453,7 +452,7 @@
 </div>
 
 <script>
-  handleFormSubmit("form","getUsuario");
+
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 // Get the DIV with overlay effect
@@ -513,6 +512,7 @@ function acordeon(id) {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+  handleFormSubmit("form","getUsuario");
 </script>
 
 </body>
