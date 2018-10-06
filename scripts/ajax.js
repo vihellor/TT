@@ -221,6 +221,51 @@ function handleFormSubmit (form,accion) {
   // ...this is where we’d actually do something with the form data...
 };
 
+function handleFormSubmit2 (form,accion) {
+  
+  // Call our function to get the form data.
+  var data = formToJSON(form.elements);
+  data.funcion = accion;
+  
+  // Use `JSON.stringify()` to make the output valid, human-readable JSON.
+    getJson('./../ajax/lobby.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+      var h = respuesta.trim();
+      //console.log("el resultado es:"+h.localeCompare("login"));
+        if (h.localeCompare("login-1")==0) {
+          //console.log("ejecutando login...");
+          //var x = h.split("-");
+          //console.log("0: "+x[0]);
+          //console.log("1: "+x[1]);
+          //document.cookie = x[1]; 
+          window.location = "./../pages/menu.php";
+        }else if(h.localeCompare("registro")==0){
+          //console.log("ejecutando registro...");
+          alert("¡Usuario registrado exitosamente! Inicia sesión");
+          openLink(event, 'login');
+        }else if(h.localeCompare("registroFalse")==0){
+          //console.log("ejecutando registro...");
+          alert("Ese nombre de usuario ya está registrado");
+        }else if(h.localeCompare("loginFalse")==0){
+          //console.log("ejecutando registro...");
+          alert("Usuario o contraseña incorrectos");
+        }
+        else{
+          console.log("Fallo entonces no haré nada perro");
+          
+        }
+        console.log("llegamos a la historia"+h);
+      }).catch(function() {
+        addTextToPage("Failed to show chapter");
+      }).then(function() {
+        console.log("saca el spinner");
+        //document.querySelector('.spinner').style.display = 'none';
+      })
+
+
+  
+  // ...this is where we’d actually do something with the form data...
+};
+
 /*
  * This is where things actually get started. We find the form element using
  * its class name, then attach the `handleFormSubmit()` function to the 
