@@ -186,9 +186,13 @@ function handleFormSubmit (form,accion) {
     getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login")==0) {
+        if (h.includes("login")==0) {
           //console.log("ejecutando login...");
-          window.location = "./../pages/menu.php";
+          var x = h.split("-");
+          console.log("0: "+x[0]);
+          console.log("1: "+x[1]);
+          //document.cookie = x[]; 
+          //window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
           alert("¡Usuario registrado exitosamente! Inicia sesión");
