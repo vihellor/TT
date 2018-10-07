@@ -4,7 +4,8 @@ define('DATABASE_USER', 'tt');
 define('DATABASE_PASS', 'ElbaNancy');
 define('DATABASE_HOST', 'localhost');
 class DBPDO {
-	public $pdo;
+	private static $instance = null;
+	private $pdo;
 	private $error;
 	function __construct() {
 		$this->connect();
@@ -30,6 +31,19 @@ class DBPDO {
 			return true;
 		}
 	}
+	public static function getInstance()
+	  {
+	    if(!self::$instance)
+	    {
+	      self::$instance = new DBPDO();
+	    }
+	   
+	    return self::$instance;
+	  }
+	public function getConnection()
+	  {
+	    return $this->pdo;
+	  }
 	function table_exists($table_name){
 		$stmt = $this->prep_query('SHOW TABLES LIKE ?');
 		$stmt->execute(array($table_name));

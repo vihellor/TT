@@ -1,31 +1,45 @@
 <?php
 session_start();
-include_once('./class.usuarioDAO.php');
 include_once('./class.usuario.php');
+include_once('./class.usuarioDAO.php');
 include_once('./class.DBPDO.php');
-include_once('./pruebaSessions.php');
-include_once('./funcionesManejoUsuario.php');
 
-if(session_id() == "" || !isset($_SESSION)){
-		my_session_start();
-		my_session_regenerate_id();
-}
 
-if( !isset($_SESSION["bd"]) ){
-    $_SESSION["bd"] = new DBPDO();
-}
 
-//var_dump(is_writable(session_id()));
-//echo session_save_path();
+
+$result = " ";
+
 $peticion = json_decode(file_get_contents('php://input'), true);
 if($peticion['funcion'] == "registro"){
-	registro($peticion);
+		$DAO = new usuarioDAO();
+        $usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
+        $resultado = $DAO->createUsuario($usuario);
+        if($resultado['_result']==1){
+            $result = "registro";
+        }
+        else{
+            $result =  "registroFalse";
+        }
 }
 if($peticion['funcion'] == "login"){
-	login($peticion);
+		$DAO = new usuarioDAO();
+        $usuario = new usuario(" ",$peticion['nickname']," "," "," "," "," ",$peticion['password']);
+        $usuario = $DAO->readUsuario($usuario);
+        if(strlen($usuario->nombre)!=0){
+            $myJSON = json_encode($usuario);
+            $_SESSION["idUsuario"] = 1;
+            $result = ("login");
+        }
+        else{
+            $result = ("loginFalse");
+        }
 }
 if($peticion['funcion'] == "getUsuario"){
-	getUsuario();
+	//echo('entroGetUsuario <br>');
+        $result =  ($_SESSION["idUsuario"]);
+            //$usuario = (object) $_SESSION["usuario"] ;
+            //$myJSON = json_encode($usuario);
+            //echo $myJSON;
 }
 if($peticion['funcion'] == "updateUsuario"){
 		$DAO = new usuarioDAO;
@@ -55,4 +69,7 @@ if($peticion['funcion'] == "deleteUsuario"){
 			echo ("deleteUsuarioFalse");
 		}
 }
+
+echo($result);
+exit();
 ?>
