@@ -76,5 +76,8 @@ class DBPDO {
 	function lastInsertId(){
 		return $this->pdo->lastInsertId();
 	}
+	function close(){
+		$this->pdo=null;
+	}
 }
 ?>
