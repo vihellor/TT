@@ -2,6 +2,8 @@
 session_start();
 include_once('./class.usuario.php');
 include_once('./class.usuarioDAO.php');
+include_once('./class.flujo.php');
+include_once('./class.flujoDAO.php');
 include_once('./class.DBPDO.php');
 
 $peticion = json_decode(file_get_contents('php://input'), true);
@@ -86,12 +88,14 @@ if($peticion['funcion'] == "createTarjeta"){
 }
 if($peticion['funcion'] == "readIngresos"){
 	$DAO = new flujoDAO;
-	$resultado = $DAO->readAllFlujoIngreso($peticion['idUsuario']);
-	echo json_encode($resultado);
+	$usuario = json_decode($_SESSION["usuario"],true);
+	$resultado = $DAO->readAllFlujoIngreso($usuario['idUsuario']);
+	var_dump($resultado);
 }
 if($peticion['funcion'] == "readEgresos"){
 	$DAO = new flujoDAO;
-	$resultado = $DAO->readAllFlujoEgreso($peticion['idUsuario']);
+	$usuario = json_decode($_SESSION["usuario"],true);
+	$resultado = $DAO->readAllFlujoEgreso($usuario['idUsuario']);
 	echo json_encode($resultado);
 }
 if($peticion['funcion'] == "createIngreso"){
