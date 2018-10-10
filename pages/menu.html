@@ -97,7 +97,7 @@
        </div>
        <h2 onclick="acordeon('cambioContra')" ><b><i id="disUs" class="fa fa-chevron-circle-right"></i>Cambio Contraseña</b></h2>
        <div id="cambioContra" class="w3-hide w3-animate-zoom flexContainer">
-         <form onsubmit="event.preventDefault(); handleFormSubmit(this,'updateContrasena');">
+         <form onsubmit="event.preventDefault(); validar(this,'updateContrasena');">
            <p>
              <label class="w3-text-green w3-large"><b>Contraseña anterior</b></label>
              <input type="password" class="w3-input w3-xlarge" name="OldPassword" required="true">
@@ -310,17 +310,6 @@
               </table>
             </div> 
            </div>
-           <div id="registro" class="w3-animate-left flexContainer2 " style="display:none;">
-             <form onsubmit="event.preventDefault(); validar(this,'registro');">
-               <div class="w3-cell-row">
-                  <p>
-                    <label class="w3-text-green w3-large"><b>Nickname</b></label>
-                    <br>
-                    <input type="text" name="nickname" class="w3-input w3-border" required="true">
-                  </p>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
@@ -538,14 +527,6 @@ function openLink3(evt, animName) {
     l2.className=l2.className.replace("w3-light-gray","w3-green");
     l1.className=l1.className.replace("w3-green", "w3-light-gray");
   }
-}
-function validar(form,accion){
-  var data = formToJSON(form.elements);
-  //console.log(data['newPassword'].localeCompare(data['newPassword2']));
-  if(data['newPassword'].localeCompare(data['newPassword2'])==0)
-    handleFormSubmit(form,accion);
-  else
-    alert('Las contraseñas no coinciden.');
 }
 </script>
 
