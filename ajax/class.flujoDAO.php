@@ -2,41 +2,47 @@
 include_once('./class.DBPDO.php');
 include_once('./class.flujo.php');
 
-class glosarioDAO {
+class flujoDAO {
 	
-	function createGlosario(glosario $concepto){
+	function createFlujo(flujo $flujo){
 		$BD = $_SESSION["bd"];
-		$sql = 'CALL createGlosario(?,?)';
-		$array = array($concepto->concepto, $concepto->definicion);
+		$sql = 'CALL createFlujo(?,?,?,?,?,?,?)';
+		$array = array($flujo->nombreFlujo, $flujo->fechaCorte, $flujo->tipoFlujo, $flujo->monto, $flujo->periodicidad, $flujo->idUsuario, $flujo->nickname);
 		$BD->execute($sql,$array);
 	}
 
-	function readGlosario(glosario $concepto){
+	function readFlujo(flujo $flujo){
 		$BD = $_SESSION["bd"];
-		$sql = 'CALL readGlosario(?)';
-		$array = array($concepto->idConcepto);
+		$sql = 'CALL readFlujo(?)';
+		$array = array($flujo->idFlujo);
 		$resultado = $BD->fetch($sql,$array);
-		return new glosario($resultado['idConcepto'], $resultado['concepto'], $resultado['definicion']);
+		return new flujo($resultado['idFlujo'], $resultado['nombreFlujo'], $resultado['fechaCorte'],$resultado['tipoFlujo'],$resultado['monto'],$resultado['periodicidad'],$resultado['idUsuario'],$resultado['nickname']);
 	}
 
-	function readAllGlosario(){
+	function readAllFlujoEgreso($idUsuario){
 		$BD = $_SESSION["bd"];
-		$sql = 'CALL readAllGlosario()';
-		$resultado = $BD->fetchAll($sql);
-		foreach ($resultado as $row){
-		echo implode (', ', $row);
-		echo '<br>';
-		}
+		$sql = 'CALL readAllFlujoEgreso(?)';
+		$array = array($idUsuario);
+		$resultado = $BD->fetchAll($sql,$array);
+		return $resultado;
 	}
 
-	function updateGlosario(glosario $concepto){
+	function readAllFlujoIngreso($idUsuario){
+		$BD = $_SESSION["bd"];
+		$sql = 'CALL readAllFlujoIngreso(?)';
+		$array = array($idUsuario);
+		$resultado = $BD->fetchAll($sql,$array);
+		return $resultado;
+	}
+
+	function updateFlujo(flujo $flujo){
 		$BD = $_SESSION["bd"];
 		$sql = 'CALL updateGlosario(?,?,?)';
 		$array = array($concepto->idConcepto,$concepto->concepto,$concepto->definicion);
 		$BD->execute($sql,$array);
 	}
 
-	function deleteGlosario(glosario $concepto){
+	function deleteFlujo(flujo $flujo){
 		$BD = $_SESSION["bd"];
 		$sql = 'CALL deleteGlosario(?)';
 		$array = array($concepto->concepto);

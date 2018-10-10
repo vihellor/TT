@@ -1,7 +1,6 @@
  <?php
-require_once "class.tarjeta.php";
 
-class TarjetaDeCredito extends tarjeta{
+class TarjetaDeCredito {
 	public $idTarjetaDeCredito;
 	public $limiteCredito;
 	public $tasaInteresAnual;	
