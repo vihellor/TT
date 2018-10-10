@@ -90,7 +90,7 @@ if($peticion['funcion'] == "readIngresos"){
 	$DAO = new flujoDAO;
 	$usuario = json_decode($_SESSION["usuario"],true);
 	$resultado = $DAO->readAllFlujoIngreso($usuario['idUsuario']);
-	var_dump($resultado);
+	echo json_encode($resultado);
 }
 if($peticion['funcion'] == "readEgresos"){
 	$DAO = new flujoDAO;
