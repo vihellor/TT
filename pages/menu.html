@@ -133,17 +133,17 @@
       <div class="flexContainer2">
       <div class="w3-card-4">
         <header class="w3-cell-row">
-          <div id="l1" class="w3-half w3-container w3-light-gray w3-cell">
+          <div id="l1" class="w3-half w3-container w3-light-gray w3-cell tablink2">
             <a onclick="openLink2(event, 'ingresos')"><h4>Ingresos</h4></a>
           </div>
           
-          <div id="l2" class="w3-half w3-container w3-green w3-cell">
+          <div id="l2" class="w3-half w3-container w3-green w3-cell tablink2">
             <a onclick="openLink2(event, 'egresos')"><h4>Egresos</h4></a>
           </div>
       
         </header>
         <div class="w3-container w3-light-gray">
-          <div id="ingresos" class="w3-animate-right flexContainer2 ">
+          <div id="ingresos" class="w3-animate-right flexContainer2 menuItem2">
              <div class="w3-responsive">
               <table class="w3-table-all">
                 <tr class="w3-green">
@@ -178,7 +178,7 @@
               </table>
             </div> 
           </div>
-          <div id="egresos" class="w3-animate-right flexContainer2 " style="display:none;">
+          <div id="egresos" class="w3-animate-right flexContainer2 menuItem2" style="display:none;">
              <div class="w3-responsive">
               <table class="w3-table-all">
                 <tr class="w3-green">
@@ -394,6 +394,34 @@ function openLink(evt, animName) {
      x[i].style.display = "none";
   }
   tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-green";
+}
+function openLink2(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menuItem2");
+  w3_close();
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink2");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-green";
+}
+function openLink3(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menuItem3");
+  w3_close();
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink3");
   for (i = 0; i < x.length; i++) {
      tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
   }
