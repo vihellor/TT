@@ -185,14 +185,18 @@ function handleFormSubmit (form,accion) {
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
-      console.log(accion);
+      //console.log(accion);
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("login")==0) {
-          //console.log("ejecutando login...");
-          //var x = h.split("-");
-          //console.log("0: "+x[0]);
-          //console.log("1: "+x[1]);
-          //document.cookie = x[1]; 
+        if(accion.localeCompare("getUsuario")==0){
+
+        }
+        else if(accion.localeCompare("readIngresos")==0){
+
+        }
+        else if(accion.localeCompare("readEgresos")==0){
+
+        }
+        else if (h.localeCompare("login")==0) {
           window.location = "./../pages/menu.html";
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
@@ -207,9 +211,8 @@ function handleFormSubmit (form,accion) {
         }
         else{
           console.log("Fallo entonces no haré nada perro");
-          
         }
-        console.log("llegamos a la historia"+h);
+        //console.log("llegamos a la historia"+h);
       }).catch(function() {
         addTextToPage("Failed to show chapter");
       }).then(function() {
