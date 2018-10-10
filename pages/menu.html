@@ -122,28 +122,27 @@
     </div>
   </div>
   <!--  Finanzas personales -->
-  <div id="Finanzas" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
-    <div class="w3-row-padding" >
+  <div id="Finanzas" class="menuItem w3-animate-left" style="display:none; text-align: center;">
        <!--
        <br>
        <h2><b>Configuración</b></h2>
        <br><br>-->
        <br><br>
-    <div class="w3-row-padding">
+    <div>
       <div class="flexContainer2">
       <div class="w3-card-4">
         <header class="w3-cell-row">
-          <div id="l1" class="w3-half w3-container w3-light-gray w3-cell tablink2">
+          <div id="l1" class="w3-half w3-container w3-light-gray w3-cell">
             <a onclick="openLink2(event, 'ingresos')"><h4>Ingresos</h4></a>
           </div>
           
-          <div id="l2" class="w3-half w3-container w3-green w3-cell tablink2">
+          <div id="l2" class="w3-half w3-container w3-green w3-cell">
             <a onclick="openLink2(event, 'egresos')"><h4>Egresos</h4></a>
           </div>
       
         </header>
         <div class="w3-container w3-light-gray">
-          <div id="ingresos" class="w3-animate-right flexContainer2 menuItem2">
+          <div id="ingresos" class="w3-animate-left flexContainer2" style="display:none;">
              <div class="w3-responsive">
               <table class="w3-table-all">
                 <tr class="w3-green">
@@ -155,7 +154,7 @@
                   <th></th>
                 </tr>
                 <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'ingresos');">
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'ingresos');">
                     <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
                     <td><input class="w3-input" type="number" name="monto" value="10000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="1"></td>
@@ -166,7 +165,7 @@
                   
                 </tr>
                 <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'ingresos');">
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'ingresos');">
                     <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
                     <td><input class="w3-input" type="number" name="monto" value="5000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="2"></td>
@@ -178,7 +177,7 @@
               </table>
             </div> 
           </div>
-          <div id="egresos" class="w3-animate-right flexContainer2 menuItem2" style="display:none;">
+          <div id="egresos" class="w3-animate-right flexContainer2">
              <div class="w3-responsive">
               <table class="w3-table-all">
                 <tr class="w3-green">
@@ -190,7 +189,7 @@
                   <th></th>
                 </tr>
                 <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'egresos');">
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'egresos');">
                     <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
                     <td><input class="w3-input" type="number" name="monto" value="10000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="1"></td>
@@ -201,7 +200,105 @@
                   
                 </tr>
                 <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'egresos');">
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'egresos');">
+                    <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
+                    <td><input class="w3-input" type="number" name="monto" value="5000"></td>
+                    <td><input class="w3-input" type="number" name="fecha" value="2"></td>
+                    <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
+                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                  </form>
+                </tr>
+              </table>
+            </div> 
+           </div>
+           <div id="registro" class="w3-animate-left flexContainer2 " style="display:none;">
+             <form onsubmit="event.preventDefault(); validar(this,'registro');">
+               <div class="w3-cell-row">
+                  <p>
+                    <label class="w3-text-green w3-large"><b>Nickname</b></label>
+                    <br>
+                    <input type="text" name="nickname" class="w3-input w3-border" required="true">
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+      <div class="flexContainer2">
+      <div class="w3-card-4">
+        <header class="w3-cell-row">
+          <div id="l3" class="w3-half w3-container w3-light-gray w3-cell">
+            <a onclick="openLink3(event, 'debito')"><h4>Débito</h4></a>
+          </div>
+          
+          <div id="l4" class="w3-half w3-container w3-green w3-cell">
+            <a onclick="openLink3(event, 'credito')"><h4>Crédito</h4></a>
+          </div>
+      
+        </header>
+        <div class="w3-container w3-light-gray">
+          <div id="debito" class="w3-animate-right flexContainer2">
+             <div class="w3-responsive">
+              <table class="w3-table-all">
+                <tr class="w3-green">
+                  <th>Nombre</th>
+                  <th>Monto</th>
+                  <th>Fecha</th>
+                  <th>Periodicidad</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
+                    <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
+                    <td><input class="w3-input" type="number" name="monto" value="10000"></td>
+                    <td><input class="w3-input" type="number" name="fecha" value="1"></td>
+                    <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
+                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                  </form>
+                  
+                </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
+                    <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
+                    <td><input class="w3-input" type="number" name="monto" value="5000"></td>
+                    <td><input class="w3-input" type="number" name="fecha" value="2"></td>
+                    <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
+                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                  </form>
+                </tr>
+              </table>
+            </div> 
+          </div>
+          <div id="credito" class="w3-animate-left flexContainer2" style="display:none;">
+             <div class="w3-responsive">
+              <table class="w3-table-all">
+                <tr class="w3-green">
+                  <th>Nombre</th>
+                  <th>Monto</th>
+                  <th>Fecha</th>
+                  <th>Periodicidad</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'credito');">
+                    <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
+                    <td><input class="w3-input" type="number" name="monto" value="10000"></td>
+                    <td><input class="w3-input" type="number" name="fecha" value="1"></td>
+                    <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
+                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                  </form>
+                  
+                </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'credito');">
                     <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
                     <td><input class="w3-input" type="number" name="monto" value="5000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="2"></td>
@@ -371,6 +468,16 @@ var mySidebar = document.getElementById("mySidebar");
 // Get the DIV with overlay effect
 var overlayBg = document.getElementById("myOverlay");
 // Toggle between showing and hiding the sidebar, and add overlay effect
+
+function validar(form,accion){
+  var data = formToJSON(form.elements);
+  //console.log(data['password'].localeCompare(data['password2']));
+  if(data['newPassword'].localeCompare(data['newPassword2'])==0)
+    handleFormSubmit(form,accion);
+  else
+    alert('Las contraseñas no coinciden.');
+}
+
 function w3_open() {
     if (mySidebar.style.display === 'block') {
         mySidebar.style.display = 'none';
@@ -401,32 +508,36 @@ function openLink(evt, animName) {
   evt.currentTarget.className += " w3-green";
 }
 function openLink2(evt, animName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menuItem2");
-  w3_close();
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
+  var l1 =document.getElementById('l1');
+  var l2 =document.getElementById('l2');
+  if ("ingresos".localeCompare(animName)) {
+    document.getElementById('egresos').style.display = "none";
+    document.getElementById('ingresos').style.display = "block";
+    l1.className=l1.className.replace("w3-light-gray","w3-green");
+    l2.className=l2.className.replace("w3-green", "w3-light-gray");
+
+  }else{
+    document.getElementById('ingresos').style.display = "none";  
+    document.getElementById('egresos').style.display = "block";
+    l2.className=l2.className.replace("w3-light-gray","w3-green");
+    l1.className=l1.className.replace("w3-green", "w3-light-gray");
   }
-  tablinks = document.getElementsByClassName("tablink2");
-  for (i = 0; i < x.length; i++) {
-     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
-  }
-  document.getElementById(animName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
 }
 function openLink3(evt, animName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menuItem3");
-  w3_close();
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
+  var l1 =document.getElementById('l3');
+  var l2 =document.getElementById('l4');
+  if ("debito".localeCompare(animName)) {
+    document.getElementById('debito').style.display = "none";
+    document.getElementById('credito').style.display = "block";
+    l1.className=l1.className.replace("w3-light-gray","w3-green");
+    l2.className=l2.className.replace("w3-green", "w3-light-gray");
+
+  }else{
+    document.getElementById('credito').style.display = "none";  
+    document.getElementById('debito').style.display = "block";
+    l2.className=l2.className.replace("w3-light-gray","w3-green");
+    l1.className=l1.className.replace("w3-green", "w3-light-gray");
   }
-  tablinks = document.getElementsByClassName("tablink3");
-  for (i = 0; i < x.length; i++) {
-     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
-  }
-  document.getElementById(animName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
 }
 function validar(form,accion){
   var data = formToJSON(form.elements);

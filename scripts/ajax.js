@@ -185,6 +185,7 @@ function handleFormSubmit (form,accion) {
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
+      console.log(accion);
       //console.log("el resultado es:"+h.localeCompare("login"));
         if (h.localeCompare("login")==0) {
           //console.log("ejecutando login...");
