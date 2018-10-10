@@ -52,7 +52,7 @@ class flujoDAO {
 		$BD = new DBPDO();
 		$sql = 'CALL deleteGlosario(?)';
 		$array = array($concepto->concepto);
-		$resultado = $BD->execute($sql,$array);
+		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
 		return $resultado;
 	}
