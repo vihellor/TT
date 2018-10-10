@@ -188,13 +188,30 @@ function handleFormSubmit (form,accion) {
       //console.log(accion);
       //console.log("el resultado es:"+h.localeCompare("login"));
         if(accion.localeCompare("getUsuario")==0){
-
+          var jj = JSON.parse(respuesta);
+          //console.log(JSON.parse(respuesta));
+          //console.log(jj);
+          document.getElementById("mainName").innerHTML=jj.nombre;
+          document.getElementById("nickname").value=jj.nickname;
+          document.getElementById("name").value=jj.nombre;
+          document.getElementById("app").value=jj.apellidoPaterno;
+          document.getElementById("apm").value=jj.apellidoMaterno;
+          document.getElementById("ocupacion").value=jj.ocupacion;
+          document.getElementById("email").value=jj.correo;
         }
         else if(accion.localeCompare("readIngresos")==0){
-
+          var jj = JSON.parse(respuesta);
+          for (i in jj){
+            console.log(i);
+            document.getElementById("tableIngresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,"ingresos");"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>';
+          }
         }
         else if(accion.localeCompare("readEgresos")==0){
-
+          var jj = JSON.parse(respuesta);
+          for (i in jj){
+            console.log(i);
+            document.getElementById("tableEgresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,"egresos");"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>';
+          }
         }
         else if (h.localeCompare("login")==0) {
           window.location = "./../pages/menu.html";
