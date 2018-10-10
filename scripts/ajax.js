@@ -228,7 +228,7 @@ function handleFormSubmit2 (form,accion) {
   data.funcion = accion;
   
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-    getJson('./../ajax/lobby.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+    getJson('./../ajax/admin.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
         var h = respuesta.trim();
         console.log("llegamos a la historia"+h);
       }).catch(function() {

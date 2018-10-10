@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
   <script src="./../scripts/ajax.js"></script>
+  <script src="./../scripts/tutorial.js"></script>
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -27,11 +28,11 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
-    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i>Administración de usuarios</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i>Casas de bolsa</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tutoriales')"><i class="fa fa-bullseye fa-fw"></i>Tutoriales</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Instituciones')"><i class="fa fa-gamepad fa-fw"></i>Instituciones</button>
-    <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i>Salir</button>
+    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i> Administración de usuarios</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i> Casas de bolsa</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tutoriales')"><i class="fa fa-bullseye fa-fw"></i> Nuevo tutorial</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'manejoTutoriales')"><i class="fa fa-gamepad fa-fw"></i> Admin tutoriales</button>
+    <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i> Salir</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
   </div>
@@ -70,7 +71,7 @@
                 
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'pp');">
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'usr');">
                   <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
                   <td><input class="w3-input" type="text" name="name" value="Victor"></td>
                   <td><input class="w3-input" type="password" name="password"></td>
@@ -101,20 +102,22 @@
                 <th></th>
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'bolsaCambio');">
                   <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
                   <td><input class="w3-input" type="text" name="name" value="Actinver"></td>
                   <td><input class="w3-input" type="number" name="mensualidad" value="50"></td>
-                  <td><input class="w3-input" type="number" name="comision" value="Actinver"></td>
+                  <td><input class="w3-input" type="number" name="comision" value="30"></td>
                   <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                   <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
                 
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'bolsaCambio');">
                   <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
                   <td><input class="w3-input" type="text" name="name" value="Kuspit"></td>
+                  <td><input class="w3-input" type="number" name="mensualidad" value="50"></td>
+                  <td><input class="w3-input" type="number" name="comision" value="30"></td>
                   <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                   <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
@@ -123,10 +126,16 @@
             </table>
             <br>
             <br>
-            <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+            <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'nuevaBolsa');">
               <label class="w3-text-green w3-large"><b>Nombre de la casa de bolsa</b></label>
               <br>
               <input class="w3-input" type="text" name="name">
+              <label class="w3-text-green w3-large"><b>Mensualidad</b></label>
+              <br>
+              <input class="w3-input" type="number" name="mensualidad">
+              <label class="w3-text-green w3-large"><b>Comisión</b></label>
+              <br>
+              <input class="w3-input" type="number" name="comision">
               <input class="w3-btn w3-green w3-large" type="submit" name="funcion" value="Agregar">
             </form>
           </div> 
@@ -137,89 +146,73 @@
   <div id="Tutoriales" class="w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding" >
       <br>
-      <h2><b><i></i>Partidas disponibles</b></h2>
-      <div class="w3-responsive">
-        <table class="w3-table-all w3-centered">
-          <tr class="w3-green">
-            <th>Nombre</th>
-            <th>Max. Jugadores</th>
-            <th>Jugadores actuales</th>
-            <th>Meta</th>
-            <th></th>
-          </tr>
-          <tr>
-            <td>Segunda partida</td>
-            <td>5</td>
-            <td>2</td>
-            <td>10,000</td>
-            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-          </tr>
-          <tr>
-            <td>La chida</td>
-            <td>3</td>
-            <td>1</td>
-            <td>700,000</td>
-            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-          </tr>
-          <tr>
-            <td>Los grandes</td>
-            <td>5</td>
-            <td>4</td>
-            <td>35,000</td>
-            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-          </tr>
-          <tr>
-            <td>Aprendiendo</td>
-            <td>2</td>
-            <td>1</td>
-            <td>5,000</td>
-            <td><a href="./esperaJugadores.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-          </tr>
-        </table>
-      </div>
+      <h2><b><i></i>Creación de tutoriales</b></h2>
+      
+      <div class="w3-animate-right flexContainer2 ">
+          <div class="w3-responsive">
+            <form id="tutoForm">
+
+              <table class="w3-table-all" id="tutoTable">
+                <tr class="w3-green">
+                  <th>tipo</th>
+                  <th>Dato</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="sel0" onchange="verificarT(this);">
+                      <option value="texto">Texto</option>
+                      <option value="imagen">Imagen</option>
+                      <option value="video">Video</option>
+                    </select>
+                  </td>
+                  <td>
+                    <textarea rows="4" cols="50" name="text0" form="usrform"></textarea>
+                    <input type="file" name="file0" style="display:none;">
+                  </td>
+                </tr>
+              </table>
+            </form>
+            <br><br>
+            <input type="button" onclick="addT();" name="agregar" value="Agregar">
+            <input type="button" onclick="resetT();" name="reset" value="Formatear">
+            <input type="button" onclick="crearTutorial();" name="crear" value="Crear tutorial">
+          </div> 
+        </div>
     </div>
   </div>
   <!--  Nueva partida -->
-  <div id="Instituciones" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+  <div id="manejoTutoriales" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
     <div class="w3-row-padding" >
       <br><br>
-        <h1>Instituciones</h1>
+        <h1>Tutoriales</h1>
         <div class="w3-animate-right flexContainer2 ">
           <div class="w3-responsive">
             <table class="w3-table-all">
               <tr class="w3-green">
                 <th>Id</th>
-                <th>Institución</th>
+                <th>Nombre</th>
                 <th></th>
                 <th></th>
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'cambioTutorial');">
                   <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Bancomer"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Josimar"></td>
                   <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                   <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
                 
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
+                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'cambioTutorial');">
                   <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Banamex"></td>
+                  <td><input class="w3-input" type="text" name="name" value="Victor"></td>
                   <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                   <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
                 
               </tr>
             </table>
-            <br>
-            <br>
-            <form onsubmit="event.preventDefault(); handleFormSubmit2(this);">
-              <label class="w3-text-green w3-large"><b>Nombre de la institución</b></label>
-              <br>
-              <input class="w3-input" type="text" name="name">
-              <input class="w3-btn w3-green w3-large" type="submit" name="funcion" value="Agregar">
-            </form>
           </div> 
         </div>
     </div>
