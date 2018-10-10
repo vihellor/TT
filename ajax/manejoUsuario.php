@@ -45,8 +45,9 @@ if($peticion['funcion'] == "updateUsuario"){
 }
 if($peticion['funcion'] == "updateContrasena"){
 		$DAO = new usuarioDAO;
-		$usuario = new usuario($peticion['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['password']);
-		$resultado = $DAO->updateusuario($usuario);
+		$usuarioSession = json_decode($_SESSION["usuario"],true);
+		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPasword']);
+		$resultado = $DAO->updateContrasena($usuario);
 		if($resultado['_result']==1){
 			echo("updateContrasena");
 		}
