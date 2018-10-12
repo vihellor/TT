@@ -211,7 +211,7 @@ function handleFormSubmit (form,accion) {
             //console.log(i);
             //var len= y.length;
             //console.log(x.slice(0,len-9));
-            y +='<form onsubmit="event.preventDefault(); handleFormSubmit(this,\"ingresos\"");"><tr><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"></tr></form>';
+            y +='<form id=\'ingreso'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="ingreso(\'ingreso'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="ingreso(\'ingreso'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"></tr></form>';
 
           }
           y+="</tbody>";
@@ -222,7 +222,7 @@ function handleFormSubmit (form,accion) {
           var jj = JSON.parse(respuesta);
           for (i in jj){
             //console.log(i);
-            document.getElementById("tableEgresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,\'egresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>';
+            document.getElementById("tableEgresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,\'egresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td></form></tr>';
           }
         }
         else if (h.localeCompare("login")==0) {
@@ -269,7 +269,7 @@ function handleFormSubmit2 (form,accion) {
   data.funcion = accion;
   
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-    getJson('./../ajax/admin.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+    getJson('./../ajax/manejoUsuario.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
         var h = respuesta.trim();
         console.log("llegamos a la historia"+h);
       }).catch(function() {
@@ -283,6 +283,9 @@ function handleFormSubmit2 (form,accion) {
   
   // ...this is where we’d actually do something with the form data...
 };
+function updateUsr(hola){
+  handleFormSubmit2(document.getElementById(hola),'usrEdit');
+}
 
 /*
  * This is where things actually get started. We find the form element using
