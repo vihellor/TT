@@ -23,6 +23,15 @@ class usuarioDAO{
 		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "");
 	}
 
+	function getUsuario($idUser){
+		$BD = new DBPDO();
+		$sql = 'CALL getUsuario(?)';
+		$array = array($idUser);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "");
+	}
+
 	function updateUsuario(usuario $user){
 		$BD = new DBPDO();
 		$sql = 'CALL updateUsuario(?,?,?,?,?,?,?)';

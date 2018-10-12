@@ -34,19 +34,22 @@ if($peticion['funcion'] == "login"){
         echo $result;
 }
 if($peticion['funcion'] == "getUsuario"){
+	$DAO = new usuarioDAO();
+	$usuario = $DAO->readUsuario($_SESSION["usuario"]);
     $result =  ($_SESSION["usuario"]);
-    echo $result;
+    echo json_encode($result);
 }
 if($peticion['funcion'] == "updateUsuario"){
 		$DAO = new usuarioDAO;
-		$usuario = new usuario($peticion['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email']);
+		$usuarioSession = json_decode($_SESSION["usuario"],true);
+		$usuario = new usuario($usuarioSession['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],"");
 		$DAO->updateusuario($usuario);
 		echo('updateUsuario');
 }
 if($peticion['funcion'] == "updateContrasena"){
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
-		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPasword']);
+		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPassword']);
 		$resultado = $DAO->updateContrasena($usuario);
 		if($resultado['_result']==1){
 			echo("updateContrasena");
@@ -100,7 +103,8 @@ if($peticion['funcion'] == "readEgresos"){
 	echo json_encode($resultado);
 }
 if($peticion['funcion'] == "createIngreso"){
-	$DAO = new institucionDAO;
+	$DAO = new flujoDAO;
+	$ingreso = new flujo($peticion['nombreFlujo'],$peticion['fechaCorte'],$peticion['tipoFlujo'],$peticion['monto'],$peticion['periodicidad'],$peticion['idUsuario'],$peticion['nickname']);
 	$resultado = $DAO->readAllInstitucion();
 	echo json_encode($resultado);
 }
