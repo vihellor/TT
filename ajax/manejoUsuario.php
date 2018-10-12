@@ -39,6 +39,11 @@ if($peticion['funcion'] == "getUsuario"){
 	$result = $DAO->getUsuario($usuarioSession['idUsuario']);
     echo json_encode($result);
 }
+if($peticion['funcion'] == "readAllUsuario"){
+	$DAO = new usuarioDAO();
+	$result = $DAO->readAllUsuario();
+    echo json_encode($result);
+}
 if($peticion['funcion'] == "updateUsuario"){ //CHECK
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
@@ -125,7 +130,39 @@ if($peticion['funcion'] == "createIngreso"){
 	$resultado = $DAO->readAllInstitucion();
 	echo json_encode($resultado);
 }
-if($peticion['funcion'] == "createEgreso"){
+if($peticion['funcion'] == "debito" || $peticion['funcion'] == "credito"){
+	if($peticion['accion']=='delete'){
+		$DAO = new tarjetaDAO;
+		$tarjeta = new tarjeta($peticion[''], "", "", "", "", "");
+		$resultado = $DAO->deleteTarjeta($tarjeta);
+		echo json_encode($resultado);		
+	}
+	if($peticion['accion']=='edit'){
+		$DAO = new tarjetaDAO;
+		$tarjeta = new tarjeta($peticion[''], "", "", "", "", "");
+		$resultado = $DAO->deleteTarjeta($tarjeta);
+		echo json_encode($resultado);
+	}
+}
+if($peticion['funcion'] == "usrEdit"){
+	$DAO = new usuarioDAO;
+	$usuario = new usuario($peticion['id'], "", "", "", "", "", "",$peticion['password']);
+	$resultado = $DAO->changeContrasena($usuario);
+	if($resultado['_result']=1){
+		echo ('usrEdit');
+	}else{
+		echo ('usrEditFalse');
+	}
+}
+if($peticion['funcion'] == "usrDelete"){
+	$DAO = new usuarioDAO;
+	$usuario = new usuario($peticion['id'], "", "", "", "", "", "", "");
+	$resultado = $DAO->deleteUsuario($usuario);
+	if($resultado['_result']=1){
+		echo ('usrDelete');
+	}else{
+		echo ('usrDeleteFalse');
+	}	
 }
 
 ?>
