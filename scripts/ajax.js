@@ -201,16 +201,28 @@ function handleFormSubmit (form,accion) {
         }
         else if(accion.localeCompare("readIngresos")==0){
           var jj = JSON.parse(respuesta);
+          var y;
+          var x = document.getElementById("tableIngresos").innerHTML;
+          var len= x.length;
+          //console.log(x.slice(0,len-9));
+          y = x.slice(0,len-9);
+          //console.log(x.slice(0,len-9)+"así está");
           for (i in jj){
-            console.log(i);
-            document.getElementById("tableIngresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"></form></tr>';
+            //console.log(i);
+            //var len= y.length;
+            //console.log(x.slice(0,len-9));
+            y +='<form onsubmit="event.preventDefault(); handleFormSubmit(this,\"ingresos\"");"><tr><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"></tr></form>';
+
           }
+          y+="</tbody>";
+          document.getElementById("tableIngresos").innerHTML=y;
+          console.log(y+"aquí acaba");
         }
         else if(accion.localeCompare("readEgresos")==0){
           var jj = JSON.parse(respuesta);
           for (i in jj){
-            console.log(i);
-            document.getElementById("tableEgresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,\'egresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>';
+            //console.log(i);
+            document.getElementById("tableEgresos").innerHTML+='<tr><form onsubmit="event.preventDefault(); handleFormSubmit(this,\'egresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>';
           }
         }
         else if (h.localeCompare("login")==0) {
