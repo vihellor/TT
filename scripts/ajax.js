@@ -215,6 +215,14 @@ function handleFormSubmit (form,accion) {
         }
         else if (h.localeCompare("login")==0) {
           window.location = "./../pages/menu.html";
+        }else if (h.localeCompare("updateContrasena")==0) {
+          alert("Se actualizó la contraseña correctamente");
+        }else if (h.localeCompare("updateContrasenaFalse")==0) {
+          alert("Asegurate de haber introducido correctamente tu contraseña o contacta a tu administrador");
+        }else if (h.localeCompare("updateUsuario")==0) {
+          alert("Se actualizaron tus datos correctamente");
+        }else if (h.localeCompare("updateUsuarioFalse")==0) {
+          alert("Error al actualizar tus datos, intentalo de nuevo");
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
           alert("¡Usuario registrado exitosamente! Inicia sesión");
