@@ -148,7 +148,7 @@
                 <tr class="w3-green">
                   <th>Nombre</th>
                   <th>Monto</th>
-                  <th>Fecha</th>
+                  <th>Semana de corte</th>
                   <th>Periodicidad</th>
                   <th></th>
                   <th></th>
@@ -162,13 +162,11 @@
                 <tr class="w3-green">
                   <th>Nombre</th>
                   <th>Monto</th>
-                  <th>Fecha</th>
+                  <th>Semana de corte</th>
                   <th>Periodicidad</th>
                   <th></th>
                   <th></th>
                 </tr>
-                <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>
               </table>
             </div> 
            </div>
