@@ -167,6 +167,8 @@
                   <th></th>
                   <th></th>
                 </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><input class="w3-input" type="hidden" name="idIngresos" value="'+jj[i].idFlujo+'"><td><input class="w3-input" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td></form></tr>
               </table>
             </div> 
            </div>
@@ -204,8 +206,8 @@
                     <td><input class="w3-input" type="number" name="porcentajeManejoCuenta" value="0"></td>
                     <td><input class="w3-input" type="number" name="valorComisionFija" value="1"></td>
                     <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
-                    <td><input type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></input></td>
-                    <td><input type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></input></td>
+                    <td><input type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></input></td>
+                    <td><input type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></input></td>
                   </form>
                   
                 </tr>
@@ -215,8 +217,8 @@
                     <td><input class="w3-input" type="number" name="monto" value="5000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="2"></td>
                     <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
-                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                    <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                   </form>
                 </tr>
               </table>
@@ -235,8 +237,8 @@
                   <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'credito');">
                     <td><input class="w3-input" type="number" name="limiteCredito" value="10000"></td>
                     <td><input class="w3-input" type="number" name="tasaInteresAnual" value="1"></td>
-                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                    <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
                   </form>
                   
                 </tr>
@@ -246,8 +248,8 @@
                     <td><input class="w3-input" type="number" name="monto" value="5000"></td>
                     <td><input class="w3-input" type="number" name="fecha" value="2"></td>
                     <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
-                    <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                    <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
+                    <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                    <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
                   </form>
                 </tr>
               </table>
