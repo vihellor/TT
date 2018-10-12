@@ -85,7 +85,7 @@
          <div>
            <br>
            <form onsubmit="event.preventDefault(); handleFormSubmit(this,'updateUsuario');">
-             <input type="text" class="w3-input w3-xlarge" id="nickname" name="nickname" value="Mike" placeholder="Nickname" required="true"><br><br>
+             <input type="text" class="w3-input w3-xlarge" id="nickname" name="nickname" value="Mike" placeholder="Nickname" required="true" disabled="true"><br><br>
              <input type="text" class="w3-input w3-xlarge" id="name" name="name" value="Miguel" placeholder="Nombre" required="true"><br><br>
              <input type="text" class="w3-input w3-xlarge" id="app" name="app" value="Perez" placeholder="Apellidos" required="true"><br><br>
              <input type="text" class="w3-input w3-xlarge" id="apm" name="apm" value="Muñoz" placeholder="Apellidos" required="true"><br><br>
@@ -200,9 +200,9 @@
                 </tr>
                 <tr>
                   <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
-                    <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
-                    <td><input class="w3-input" type="number" name="monto" value="10000"></td>
-                    <td><input class="w3-input" type="number" name="fecha" value="1"></td>
+                    <td><input class="w3-input" type="text" name="comisionFija" value="Sueldo"></td>
+                    <td><input class="w3-input" type="number" name="porcentajeManejoCuenta" value="0"></td>
+                    <td><input class="w3-input" type="number" name="valorComisionFija" value="1"></td>
                     <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
                     <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                     <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
@@ -226,19 +226,15 @@
              <div class="w3-responsive">
               <table class="w3-table-all">
                 <tr class="w3-green">
-                  <th>Nombre</th>
-                  <th>Monto</th>
-                  <th>Fecha</th>
-                  <th>Periodicidad</th>
+                  <th>Limite de crédito</th>
+                  <th>Tasa de interés anual</th>
                   <th></th>
                   <th></th>
                 </tr>
                 <tr>
                   <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'credito');">
-                    <td><input class="w3-input" type="text" name="sueldo" value="Sueldo"></td>
-                    <td><input class="w3-input" type="number" name="monto" value="10000"></td>
-                    <td><input class="w3-input" type="number" name="fecha" value="1"></td>
-                    <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
+                    <td><input class="w3-input" type="number" name="limiteCredito" value="10000"></td>
+                    <td><input class="w3-input" type="number" name="tasaInteresAnual" value="1"></td>
                     <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
                     <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
                   </form>
