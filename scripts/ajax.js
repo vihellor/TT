@@ -201,16 +201,10 @@ function handleFormSubmit (form,accion) {
         }
         else if(accion.localeCompare("readIngresos")==0){
           var jj = JSON.parse(respuesta);
-          var y;
           var x = document.getElementById("tableIngresos").innerHTML;
           var len= x.length;
-          //console.log(x.slice(0,len-9));
-          y = x.slice(0,len-9);
-          //console.log(x.slice(0,len-9)+"así está");
+          var y = x.slice(0,len-9);
           for (i in jj){
-            //console.log(i);
-            //var len= y.length;
-            //console.log(x.slice(0,len-9));
             y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
 
           }
@@ -239,6 +233,14 @@ function handleFormSubmit (form,accion) {
           alert("Asegurate de haber introducido correctamente tu contraseña o contacta a tu administrador");
         }else if (h.localeCompare("updateUsuario")==0) {
           alert("Se actualizaron tus datos correctamente");
+        }else if (h.localeCompare("usrEdit")==0) {
+          alert("Se actualizaron los datos correctamente");
+        }else if (h.localeCompare("usrEditFalse")==0) {
+          alert("Error al actualizar tus datos, intentalo de nuevo");
+        }else if (h.localeCompare("usrDelete")==0) {
+          alert("Usuario eliminado correctamente");
+        }else if (h.localeCompare("usrDeleteFalse")==0) {
+          alert("Error al eliminar usuario, intentalo de nuevo");
         }else if (h.localeCompare("updateUsuarioFalse")==0) {
           alert("Error al actualizar tus datos, intentalo de nuevo");
         }else if(h.localeCompare("registro")==0){
