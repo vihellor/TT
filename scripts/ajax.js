@@ -226,8 +226,20 @@ function handleFormSubmit (form,accion) {
           }
           y+="</tbody>";
           document.getElementById("tableEgresos").innerHTML=y;
-        }
-        else if (h.localeCompare("login")==0) {
+        }else if(accion.localeCompare("readAllUsuario")==0){
+          var jj = JSON.parse(respuesta);
+          var y;
+          var x = document.getElementById("manageUsers").innerHTML;
+          var len= x.length;
+          //console.log(x.slice(0,len-9));
+          y = x.slice(0,len-9);
+          for (i in jj){
+            //console.log(i);
+            y +='<tr><form id="usr1" onsubmit="event.preventDefault(); handleFormSubmit(this,'usr');"><td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td><td><input class="w3-input" type="text" name="nickname" value="josi" disabled="true"></td><td><input class="w3-input" type="password" name="password"></td><td><button onclick="updateUsr('usr1');" type="button" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button onclick="deleteUsr('usr1');" type="button" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td></form></tr>';
+          }
+          y+="</tbody>";
+          document.getElementById("manageUsers").innerHTML=y;
+        }else if (h.localeCompare("login")==0) {
           window.location = "./../pages/menu.html";
         }else if (h.localeCompare("updateContrasena")==0) {
           alert("Se actualizó la contraseña correctamente");
@@ -235,6 +247,11 @@ function handleFormSubmit (form,accion) {
           alert("Asegurate de haber introducido correctamente tu contraseña o contacta a tu administrador");
         }else if (h.localeCompare("updateUsuario")==0) {
           alert("Se actualizaron tus datos correctamente");
+        }else if (h.localeCompare("flujoDelete")==0) {
+          alert("Usuario eliminado correctamente");
+          clearFlujo();
+        }else if (h.localeCompare("flujoDeleteFalse")==0) {
+          alert("Error al eliminal el flujo, vuelve a intentarlo");
         }else if (h.localeCompare("usrEdit")==0) {
           alert("Se actualizaron los datos correctamente");
         }else if (h.localeCompare("usrEditFalse")==0) {
@@ -293,11 +310,11 @@ function handleFormSubmit2 (form,accion) {
   
   // ...this is where we’d actually do something with the form data...
 };
-clearIngresos(){
-  var x='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr></tbody>';
-}
-clearIngresos(){
-  var x='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr></tbody>';
+function clearFlujo(){
+  document.getElementById("tableIngresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr></tbody>';
+  document.getElementById("tableEgresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr></tbody>';
+  handleFormSubmit(document.createElement("form"),"readIngresos");
+  handleFormSubmit(document.createElement("form"),"readEgresos");
 }
 function flujoEdit(hola){
   handleFormSubmit2(document.getElementById(hola),'flujoEdit');

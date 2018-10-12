@@ -34,3 +34,6 @@ function updateUsr(hola){
 function deleteUsr(hola){
 	handleFormSubmit2(document.getElementById(hola),'usrDelete');
 }
+function tutoWord(){
+	document.getElementById('myFormTutorial').click();
+}

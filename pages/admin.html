@@ -31,7 +31,7 @@
     <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i> Administración de usuarios</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i> Casas de bolsa</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tutoriales')"><i class="fa fa-bullseye fa-fw"></i> Nuevo tutorial</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'manejoTutoriales')"><i class="fa fa-gamepad fa-fw"></i> Admin tutoriales</button>
+    <button class="w3-bar-item w3-button tablink" onclick="tutoWord()"><i class="fa fa-gamepad fa-fw"></i> Admin tutoriales</button>
     <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i> Salir</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
@@ -52,7 +52,8 @@
         <h1>Administración de usuarios</h1>
         <div class="w3-animate-right flexContainer2 ">
           <div class="w3-responsive">
-            <table class="w3-table-all">
+            <table id="manageUsers" class="w3-table-all">
+              <tbody>
               <tr class="w3-green">
                 <th>Id</th>
                 <th>Nombre</th>
@@ -80,7 +81,7 @@
                 </form>
                 
               </tr>
-            </table>
+            </tbody></table>
           </div> 
         </div>
     </div>
@@ -182,7 +183,15 @@
   </div>
   <!--  Nueva partida -->
   <div id="manejoTutoriales" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
-    <div class="w3-row-padding" >
+    <form action="/tutoriales/wp-login.php" method="post">
+      <input type="text" name="log" value="admin">
+      <input type="text" name="pwd" value="admin">
+      <input type="text" name="redirect_to" value="http://localhost/tutoriales/wp-admin/">
+      <input type="text" name="testcookie" value="1">
+      <input type="text" name="wp-submit" value="Acceder">
+      <input id="myFormTutorial" type="submit" name="submit">
+    </form>
+    <!--<div class="w3-row-padding" >
       <br><br>
         <h1>Tutoriales</h1>
         <div class="w3-animate-right flexContainer2 ">
@@ -215,11 +224,11 @@
             </table>
           </div> 
         </div>
-    </div>
+    </div>-->
   </div>
   <!--  Tutorial -->
   <div id="tutorial" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
-    <div class="w3-row-padding" >
+    <!--<div class="w3-row-padding" >
       <br>
       <br>
       <div class="flexContainer">
@@ -285,7 +294,7 @@
         </div>
 
       </div>
-    </div>
+    </div>-->
   </div>
   <!-- End page content -->
 </div>
