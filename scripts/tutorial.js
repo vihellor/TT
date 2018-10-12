@@ -28,3 +28,9 @@ function addT(){
 function crearTutorial(){
 	handleFormSubmit2(document.getElementById('tutoForm'),'nuevoTutorial');
 }
+function updateUsr(hola){
+	handleFormSubmit2(document.getElementById(hola),'usrEdit');
+}
+function deleteUsr(hola){
+	handleFormSubmit2(document.getElementById(hola),'usrDelete');
+}

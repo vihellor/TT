@@ -61,22 +61,22 @@
                 <th></th>
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'usr');">
+                <form id="usr1" onsubmit="event.preventDefault(); handleFormSubmit2(this,'usr');">
                   <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Josimar"></td>
+                  <td><input class="w3-input" type="text" name="nickname" value="josi" disabled="true"></td>
                   <td><input class="w3-input" type="password" name="password"></td>
-                  <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                  <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                  <td><button onclick="updateUsr('usr1');" type="button" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button onclick="deleteUsr('usr1');" type="button" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
                 
               </tr>
               <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit2(this,'usr');">
+                <form id="usr2" onsubmit="event.preventDefault(); handleFormSubmit2(this,'usr');">
                   <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Victor"></td>
+                  <td><input class="w3-input" type="text" name="nickname" value="vic" disabled="true"></td>
                   <td><input class="w3-input" type="password" name="password"></td>
-                  <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                  <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                  <td><button type="button" onclick="updateUsr('usr2');" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                  <td><button type="button" onclick="deleteUsr('usr2');" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                 </form>
                 
               </tr>
