@@ -42,16 +42,16 @@ class flujoDAO {
 
 	function updateFlujo(flujo $flujo){
 		$BD = new DBPDO();
-		$sql = 'CALL updateGlosario(?,?,?)';
-		$array = array($concepto->idConcepto,$concepto->concepto,$concepto->definicion);
+		$sql = 'CALL updateFlujo(?,?,?,?,?)';
+		$array = array($flujo->idFlujo,$flujo->nombreFlujo,$flujo->fechaCorte,$flujo->monto,$flujo->periodicidad);
 		$BD->execute($sql,$array);
 		$BD->close();
 	}
 
 	function deleteFlujo(flujo $flujo){
 		$BD = new DBPDO();
-		$sql = 'CALL deleteGlosario(?)';
-		$array = array($concepto->concepto);
+		$sql = 'CALL deleteFlujo(?)';
+		$array = array($flujo->idFlujo);
 		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
 		return $resultado;

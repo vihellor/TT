@@ -118,16 +118,33 @@ if($peticion['funcion'] == "readEgresos"){
 	$resultado = $DAO->readAllFlujoEgreso($usuario['idUsuario']);
 	echo json_encode($resultado);
 }
+if($peticion['funcion'] == "flujoDelete"){
+	$DAO = new flujoDAO;
+	$usuarioSession = json_decode($_SESSION["usuario"],true);
+	$flujo = new flujo($peticion['idFlujo'],"","","","","","","");
+	$resultado = $DAO->deleteFlujo($flujo);
+	if($resultado['_result']==1){
+		echo ('flujoDelete');
+	}else{
+		echo ('flujoDeleteFalse');
+	}
+}
+if($peticion['funcion'] == "flujoEdit"){
+	$DAO = new flujoDAO;
+	$flujo = new flujo($peticion['idFlujo'],$peticion['nombreFlujo'],$peticion['fecha'],"",$peticion['monto'],$peticion['periodicidad'],"","");
+	$DAO->updateFlujo($flujo);
+		echo ('flujoEdit');
+}
+if($peticion['funcion'] == "createIngreso"){ //CHECK
+	$DAO = new flujoDAO;
+	$ingreso = new flujo($peticion['nombreFlujo'],$peticion['fechaCorte'],$peticion['tipoFlujo'],$peticion['monto'],$peticion['periodicidad'],$peticion['idUsuario'],$peticion['nickname']);
+	$resultado = $DAO->readAllInstitucion();
+	echo json_encode($resultado);
+}
 if($peticion['funcion'] == "readTarjetasDebito"){ //Check
 	$DAO = new tarjetaDAO;
 	$usuario = json_decode($_SESSION["usuario"],true);
 	$resultado = $DAO->readAllTarjetasDebito($usuario['idUsuario']);
-	echo json_encode($resultado);
-}
-if($peticion['funcion'] == "createIngreso"){
-	$DAO = new flujoDAO;
-	$ingreso = new flujo($peticion['nombreFlujo'],$peticion['fechaCorte'],$peticion['tipoFlujo'],$peticion['monto'],$peticion['periodicidad'],$peticion['idUsuario'],$peticion['nickname']);
-	$resultado = $DAO->readAllInstitucion();
 	echo json_encode($resultado);
 }
 if($peticion['funcion'] == "debito" || $peticion['funcion'] == "credito"){
