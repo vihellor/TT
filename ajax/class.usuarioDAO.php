@@ -49,6 +49,15 @@ class usuarioDAO{
 		return $resultado;
 	}
 
+	function changeContrasena(usuario $user){
+		$BD = new DBPDO();
+		$sql = 'CALL updateContrasena(?,?,?)';
+		$array = array($user->idUsuario,$user->contrasena,$user->correo);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
+	}
+
 	function deleteUsuario(usuario $user){
 		$BD = new DBPDO();
 		$sql = 'CALL deleteUsuario(?)';

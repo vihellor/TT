@@ -35,11 +35,11 @@ if($peticion['funcion'] == "login"){
 }
 if($peticion['funcion'] == "getUsuario"){
 	$DAO = new usuarioDAO();
-	$usuario = $DAO->readUsuario($_SESSION["usuario"]);
-    $result =  ($_SESSION["usuario"]);
+	$usuarioSession = json_decode($_SESSION["usuario"],true);
+	$result = $DAO->getUsuario($usuarioSession['idUsuario']);
     echo json_encode($result);
 }
-if($peticion['funcion'] == "updateUsuario"){
+if($peticion['funcion'] == "updateUsuario"){ //CHECK
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
 		$usuario = new usuario($usuarioSession['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],"");
@@ -50,6 +50,17 @@ if($peticion['funcion'] == "updateContrasena"){
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
 		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPassword']);
+		$resultado = $DAO->updateContrasena($usuario);
+		if($resultado['_result']==1){
+			echo("updateContrasena");
+		}
+		else{
+			echo ("updateContrasenaFalse");
+		}
+}
+if($peticion['funcion'] == "changeContrasena"){
+		$DAO = new usuarioDAO;
+		$usuario = new usuario($peticion['id']," "," "," "," "," "," ",$peticion['OldPassword']);
 		$resultado = $DAO->updateContrasena($usuario);
 		if($resultado['_result']==1){
 			echo("updateContrasena");
@@ -69,7 +80,7 @@ if($peticion['funcion'] == "deleteUsuario"){
 			echo ("deleteUsuarioFalse");
 		}
 }
-if($peticion['funcion'] == "createTarjeta"){
+if($peticion['funcion'] == "createTarjeta"){ //CHECK
 		$DAO = new tarjetaDAO;
 		$tarjeta = new tarjeta($peticion['idTarjeta'],$peticion['fechaCorte'],$peticion['saldo'],$peticion['tipoTarjeta'],$peticion['idInstitucion'],$peticion['idUsuario'],$peticion['nickname']);
 		$resultado = $DAO->createTarjeta($tarjeta);
@@ -100,6 +111,12 @@ if($peticion['funcion'] == "readEgresos"){
 	$DAO = new flujoDAO;
 	$usuario = json_decode($_SESSION["usuario"],true);
 	$resultado = $DAO->readAllFlujoEgreso($usuario['idUsuario']);
+	echo json_encode($resultado);
+}
+if($peticion['funcion'] == "readTarjetasDebito"){ //Check
+	$DAO = new tarjetaDAO;
+	$usuario = json_decode($_SESSION["usuario"],true);
+	$resultado = $DAO->readAllTarjetasDebito($usuario['idUsuario']);
 	echo json_encode($resultado);
 }
 if($peticion['funcion'] == "createIngreso"){
