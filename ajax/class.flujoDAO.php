@@ -4,11 +4,11 @@ include_once('./class.flujo.php');
 
 class flujoDAO {
 	
-	function createFlujo(flujo $flujo){
+	function createFlujo(flujo $newFlujo){
 		$BD = new DBPDO();
 		$sql = 'CALL createFlujo(?,?,?,?,?,?,?)';
-		$array = array($flujo->nombreFlujo, $flujo->fechaCorte, $flujo->tipoFlujo, $flujo->monto, $flujo->periodicidad, $flujo->idUsuario, $flujo->nickname);
-		$resultado = $BD->execute($sql,$array);
+		$array = array($newFlujo->fechaCorte, $newFlujo->nombreFlujo, $newFlujo->tipoFlujo, $newFlujo->monto, $newFlujo->periodicidad, $newFlujo->idUsuario, $newFlujo->nickname);
+		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
 		return $resultado;
 	}
@@ -40,18 +40,18 @@ class flujoDAO {
 		return $resultado;
 	}
 
-	function updateFlujo(flujo $flujo){
+	function updateFlujo(flujo $newFlujo){
 		$BD = new DBPDO();
 		$sql = 'CALL updateFlujo(?,?,?,?,?)';
-		$array = array($flujo->idFlujo,$flujo->nombreFlujo,$flujo->fechaCorte,$flujo->monto,$flujo->periodicidad);
+		$array = array($newFlujo->idFlujo,$newFlujo->nombreFlujo,$newFlujo->fechaCorte,$newFlujo->monto,$newFlujo->periodicidad);
 		$BD->execute($sql,$array);
 		$BD->close();
 	}
 
-	function deleteFlujo(flujo $flujo){
+	function deleteFlujo(flujo $newFlujo){
 		$BD = new DBPDO();
 		$sql = 'CALL deleteFlujo(?)';
-		$array = array($flujo->idFlujo);
+		$array = array($newFlujo->idFlujo);
 		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
 		return $resultado;

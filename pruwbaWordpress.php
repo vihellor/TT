@@ -9,7 +9,7 @@ foreach( $recent_posts as $recent_post ){
 echo "<span>".$recent_post['post_date']."</span> <br>";
 echo "<h3>".$recent_post['post_title']."</h3>";
 echo  "<p>".$recent_post['post_content']."</p><br><br>";
-}
+} 
 
 
 ?>
