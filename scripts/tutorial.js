@@ -32,7 +32,7 @@ function updateUsr(hola){
 	handleFormSubmit2(document.getElementById(hola),'usrEdit');
 }
 function deleteUsr(hola){
-	handleFormSubmit2(document.getElementById(hola),'usrDelete');
+	handleFormSubmit2(document.getElementById(hola),'deleteUsuario');
 }
 function tutoWord(){
 	document.getElementById('myFormTutorial').click();

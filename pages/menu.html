@@ -218,7 +218,13 @@
                     <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
                   </form>
                 </tr>
+                <tr>
+                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'createDebito');">
+                    <td></td><td></td><td><input type="submit" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td>
+                  </form>
+                </tr>
               </table>
+
             </div> 
           </div>
           <div id="credito" class="w3-animate-left flexContainer2" style="display:none;">
