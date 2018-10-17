@@ -221,7 +221,7 @@ function handleFormSubmit (form,accion) {
             y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
 
           }
-          y+='<tr id="trNewEgreso"></tr></tbody>';
+          y+='<tr id="trNewEgreso"><form id="newIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createIngreso");"><td></td><td></td><td><input onclick="showIngreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
           //console.log(y);
           document.getElementById("tableEgresos").innerHTML=y;
         }else if(accion.localeCompare("readAllUsuario")==0){
@@ -235,11 +235,12 @@ function handleFormSubmit (form,accion) {
             //console.log(i);
             y +='<tr><form id="usr'+jj[i].idUsuario+'" onsubmit="event.preventDefault(); handleFormSubmit(this,\'usr\');"><td><input form="usr'+jj[i].idUsuario+'" class="w3-input" type="text" name="idUsuario" value="'+jj[i].idUsuario+'" disabled="true"></td><td><input form="usr'+jj[i].idUsuario+'" class="w3-input" type="text" name="nickname" value="'+jj[i].nickname+'" disabled="true"></td><td><input form="usr'+jj[i].idUsuario+'" class="w3-input" type="password" name="password"></td><td><button onclick="updateUsr(\'usr'+jj[i].idUsuario+'\');" type="button" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button onclick="deleteUsr(\'usr'+jj[i].idUsuario+'\');" type="button" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td></form></tr>';
           }
-          y+='<tr><form id="newIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createIngreso");"><td></td><td></td><td><input onclick="showIngreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
           y+="</tbody>";
           document.getElementById("manageUsers").innerHTML=y;
         }else if (h.localeCompare("login")==0) {
           window.location = "./../pages/menu.html";
+        }else if (h.localeCompare("loginAdmin")==0) {
+          window.location = "./../pages/admin.html";
         }else if (h.localeCompare("updateContrasena")==0) {
           alert("Se actualizó la contraseña correctamente");
         }else if (h.localeCompare("updateContrasenaFalse")==0) {
@@ -260,10 +261,13 @@ function handleFormSubmit (form,accion) {
           alert("Se actualizaron los datos correctamente");
         }else if (h.localeCompare("usrEditFalse")==0) {
           alert("Error al actualizar tus datos, intentalo de nuevo");
-        }else if (h.localeCompare("usrDelete")==0) {
-          alert("Usuario eliminado correctamente");
-        }else if (h.localeCompare("usrDeleteFalse")==0) {
-          alert("Error al eliminar usuario, intentalo de nuevo");
+        }else if (h.localeCompare("deleteUsuario")==0) {
+          alert("Se eliminó el usuario correctamente");
+          window.location = "./../pages/admin.html";
+        }else if (h.localeCompare("deleteUsuarioFalse")==0) {
+          alert("Error al eliminar usuario, vuelve a intentarlo");
+        }else if (h.localeCompare("updateUsuario")==0) {
+          alert("usuario editado correctamente");
         }else if (h.localeCompare("updateUsuarioFalse")==0) {
           alert("Error al actualizar tus datos, intentalo de nuevo");
         }else if (h.localeCompare("createIngreso")==0) {

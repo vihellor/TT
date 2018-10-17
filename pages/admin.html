@@ -30,7 +30,6 @@
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
     <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i> Administración de usuarios</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i> Casas de bolsa</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Tutoriales')"><i class="fa fa-bullseye fa-fw"></i> Nuevo tutorial</button>
     <button class="w3-bar-item w3-button tablink" onclick="tutoWord()"><i class="fa fa-gamepad fa-fw"></i> Admin tutoriales</button>
     <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i> Salir</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
@@ -123,45 +122,7 @@
         </div>
     </div>
   </div>
-  <!--  Buscar partida -->
-  <div id="Tutoriales" class="w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
-    <div class="w3-row-padding" >
-      <br>
-      <h2><b><i></i>Creación de tutoriales</b></h2>
-      
-      <div class="w3-animate-right flexContainer2 ">
-          <div class="w3-responsive">
-            <form id="tutoForm">
-
-              <table class="w3-table-all" id="tutoTable">
-                <tr class="w3-green">
-                  <th>tipo</th>
-                  <th>Dato</th>
-                </tr>
-                <tr>
-                  <td>
-                    <select name="sel0" onchange="verificarT(this);">
-                      <option value="texto">Texto</option>
-                      <option value="imagen">Imagen</option>
-                      <option value="video">Video</option>
-                    </select>
-                  </td>
-                  <td>
-                    <textarea rows="4" cols="50" name="text0" form="usrform"></textarea>
-                    <input type="file" name="file0" style="display:none;">
-                  </td>
-                </tr>
-              </table>
-            </form>
-            <br><br>
-            <input type="button" onclick="addT();" name="agregar" value="Agregar">
-            <input type="button" onclick="resetT();" name="reset" value="Formatear">
-            <input type="button" onclick="crearTutorial();" name="crear" value="Crear tutorial">
-          </div> 
-        </div>
-    </div>
-  </div>
-  <!--  Nueva partida -->
+  <!--  admin tutoriales -->
   <div id="manejoTutoriales" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
     <form action="/tutoriales/wp-login.php" method="post">
       <input type="text" name="log" value="admin">
@@ -171,112 +132,7 @@
       <input type="text" name="wp-submit" value="Acceder">
       <input id="myFormTutorial" type="submit" name="submit">
     </form>
-    <!--<div class="w3-row-padding" >
-      <br><br>
-        <h1>Tutoriales</h1>
-        <div class="w3-animate-right flexContainer2 ">
-          <div class="w3-responsive">
-            <table class="w3-table-all">
-              <tr class="w3-green">
-                <th>Id</th>
-                <th>Nombre</th>
-                <th></th>
-                <th></th>
-              </tr>
-              <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit(this,'cambioTutorial');">
-                  <td><input class="w3-input" type="text" name="id" value="1" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Josimar"></td>
-                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
-                </form>
-                
-              </tr>
-              <tr>
-                <form onsubmit="event.preventDefault(); handleFormSubmit(this,'cambioTutorial');">
-                  <td><input class="w3-input" type="text" name="id" value="2" disabled="true"></td>
-                  <td><input class="w3-input" type="text" name="name" value="Victor"></td>
-                  <td><button type="submit" name="funcion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                  <td><button type="submit" name="funcion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
-                </form>
-                
-              </tr>
-            </table>
-          </div> 
-        </div>
-    </div>-->
   </div>
-  <!--  Tutorial -->
-  <div id="tutorial" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
-    <!--<div class="w3-row-padding" >
-      <br>
-      <br>
-      <div class="flexContainer">
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Mi balance general <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Ingresos, gastos, ahorro</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Conceptos básicos <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Riesgo, inflación, diversificación, perfil de inversión, rendimiento</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <a href="./tutoriales/deudaGuber.html" style="text-decoration: none">
-            <header class="w3-container w3-green">
-              <h3>Deuda gubernamental <i class="fa fa-chevron-right"></i></h3>
-            </header>
-            <div class="w3-container">
-              <p> Precio nominal, Plazo, Tasas de interés, CETES, BONDES, UDIBONOS</p>
-            </div>
-          </a>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <a href="./tutoriales/mercadoCapitales.html" style="text-decoration: none">
-            <header class="w3-container w3-green">
-              <h3>Mercado de capitales <i class="fa fa-chevron-right"></i></h3>
-            </header>
-            <div class="w3-container">
-              <p>Bolsa de valores, acción, tipos de acciones, calificaciones crediticias, dividendos, ganancia de capital, minusvalía, ganancia de capital</p>
-            </div>
-          </a>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Casas de bolsa <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Comisión, instituciones reguladoras, comisión por manejo de cuenta, comisión por compra/venta</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Análisis fundamental <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Descripción de la empresa, noticias, prospecto de inversión, ingresos, ingresos netos, margen de utilidad neta</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Otros <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>..., ..., ..., ..., ...</p>
-          </div>
-        </div>
-
-      </div>
-    </div>-->
-  </div>
-  <!-- End page content -->
 </div>
 
 <script>
