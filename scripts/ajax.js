@@ -221,7 +221,7 @@ function handleFormSubmit (form,accion) {
             y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
 
           }
-          y+='<tr id="trNewEgreso"><form id="newIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createIngreso");"><td></td><td></td><td><input onclick="showIngreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
+          y+='<tr id="trNewEgreso"><form id="newEgreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createEgreso");"><td></td><td></td><td><input onclick="showEgreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
           //console.log(y);
           document.getElementById("tableEgresos").innerHTML=y;
         }else if(accion.localeCompare("readAllUsuario")==0){
@@ -238,7 +238,7 @@ function handleFormSubmit (form,accion) {
           y+="</tbody>";
           document.getElementById("manageUsers").innerHTML=y;
         }else if (h.localeCompare("login")==0) {
-          window.location = "./../pages/menu.html";
+          window.location = "./../pages/menu.php";
         }else if (h.localeCompare("loginAdmin")==0) {
           window.location = "./../pages/admin.html";
         }else if (h.localeCompare("updateContrasena")==0) {
@@ -275,6 +275,11 @@ function handleFormSubmit (form,accion) {
           clearFlujo();
         }else if (h.localeCompare("createIngresoFalse")==0) {
           alert("Error al crear el ingreso, intentelo de nuevo");
+        }else if (h.localeCompare("createEgreso")==0) {
+          alert("Egreso agregado correctamente");
+          clearFlujo();
+        }else if (h.localeCompare("createIngresoFalse")==0) {
+          alert("Error al crear el engreso, intentelo de nuevo");
         }else if(h.localeCompare("registro")==0){
           //console.log("ejecutando registro...");
           alert("¡Usuario registrado exitosamente! Inicia sesión");
@@ -290,6 +295,27 @@ function handleFormSubmit (form,accion) {
           console.log("Fallo entonces no haré nada perro");
         }
         //console.log("llegamos a la historia"+h);
+      }).catch(function() {
+        addTextToPage("Failed to show chapter");
+      }).then(function() {
+        console.log("saca el spinner");
+        //document.querySelector('.spinner').style.display = 'none';
+      })
+
+
+  
+  // ...this is where we’d actually do something with the form data...
+};
+function handleFormSubmit2 (form,accion) {
+  
+    // Call our function to get the form data.
+    var data = formToJSON(form.elements);
+    data.funcion = accion;
+    
+    // Use `JSON.stringify()` to make the output valid, human-readable JSON.
+    getJson('./../ajax/userTutorial.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+      var h = respuesta.trim();
+      document.getElementById("tutDiv").innerHTML=h;
       }).catch(function() {
         addTextToPage("Failed to show chapter");
       }).then(function() {

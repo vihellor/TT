@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
   <script src="./../scripts/ajax.js"></script>
+  <script src="/scripts/usrTutorial.js"></script>
+  
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -39,10 +41,11 @@
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
     <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'Inicio')"><i class="fa fa-home fa-fw"></i>  Inicio</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Configuracion')"><i class="fa fa-th-list fa-fw"></i>  Configuración</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Finanzas')"><i class="fa fa-th-list fa-fw"></i>  Finanzas</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Finanzas')"><i class="fa fa-chart-line fa-fw"></i>  Finanzas</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'buscarPartida')"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'nuevaPartida')"><i class="fa fa-gamepad fa-fw"></i> Nueva partida</button>
-    <button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>
+    <!--<button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>-->
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'tutorial')"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>
     <button class="w3-bar-item w3-button tablink"><i class="fa fa-book fa-fw"></i> Glosario</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
@@ -333,74 +336,12 @@
     <div class="w3-row-padding" >
       <br>
       <br>
-      <div class="flexContainer">
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Mi balance general <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Ingresos, gastos, ahorro</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Conceptos básicos <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Riesgo, inflación, diversificación, perfil de inversión, rendimiento</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <a href="./tutoriales/deudaGuber.html" style="text-decoration: none">
-            <header class="w3-container w3-green">
-              <h3>Deuda gubernamental <i class="fa fa-chevron-right"></i></h3>
-            </header>
-            <div class="w3-container">
-              <p> Precio nominal, Plazo, Tasas de interés, CETES, BONDES, UDIBONOS</p>
-            </div>
-          </a>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <a href="./tutoriales/mercadoCapitales.html" style="text-decoration: none">
-            <header class="w3-container w3-green">
-              <h3>Mercado de capitales <i class="fa fa-chevron-right"></i></h3>
-            </header>
-            <div class="w3-container">
-              <p>Bolsa de valores, acción, tipos de acciones, calificaciones crediticias, dividendos, ganancia de capital, minusvalía, ganancia de capital</p>
-            </div>
-          </a>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Casas de bolsa <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Comisión, instituciones reguladoras, comisión por manejo de cuenta, comisión por compra/venta</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Análisis fundamental <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>Descripción de la empresa, noticias, prospecto de inversión, ingresos, ingresos netos, margen de utilidad neta</p>
-          </div>
-        </div>
-        <div class="w3-card-4 cardTam">
-          <header class="w3-container w3-green">
-            <h3>Otros <i class="fa fa-chevron-right"></i></h3>
-          </header>
-          <div class="w3-container">
-            <p>..., ..., ..., ..., ...</p>
-          </div>
-        </div>
-
+      <div id="tutDiv" class="flexContainer">
       </div>
     </div>
   </div>
   <!-- End page content -->
 </div>
-
 <script>
 
 // Get the Sidebar
@@ -502,7 +443,7 @@ function acordeon(id) {
   handleFormSubmit(document.createElement("form"),"readEgresos");
   handleFormSubmit(document.createElement("form"),"readAllTarjetaDebito");
   handleFormSubmit(document.createElement("form"),"readAllTarjetaCredito");
+  handleFormSubmit2(document.createElement("form"),"getTutorials");
 </script>
-
 </body>
 </html>
