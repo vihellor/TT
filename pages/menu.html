@@ -159,14 +159,15 @@
           <div id="egresos" class="w3-animate-left flexContainer2" style="display:none;">
              <div class="w3-responsive">
               <table id="tableEgresos" class="w3-table-all">
-                  <tbody><tr class="w3-green">
+                <tbody><tr class="w3-green">
                   <th>Nombre</th>
                   <th>Monto</th>
                   <th>Semana de corte</th>
                   <th>Periodicidad</th>
                   <th></th>
                   <th></th>
-                  </tr></tbody></table>
+                  </tr>
+                </tbody></table>
             </div> 
            </div>
           </div>
@@ -189,40 +190,37 @@
           <div id="debito" class="w3-animate-right flexContainer2">
              <div class="w3-responsive">
               <table class="w3-table-all">
-                <tr class="w3-green">
-                  <th>Nombre</th>
-                  <th>Monto</th>
-                  <th>Fecha</th>
-                  <th>Periodicidad</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-                <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
-                    <td><input class="w3-input" type="text" name="comisionFija" value="Sueldo"></td>
-                    <td><input class="w3-input" type="number" name="porcentajeManejoCuenta" value="0"></td>
-                    <td><input class="w3-input" type="number" name="valorComisionFija" value="1"></td>
-                    <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
-                    <td><input type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></input></td>
-                    <td><input type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></input></td>
-                  </form>
-                  
-                </tr>
-                <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
-                    <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
-                    <td><input class="w3-input" type="number" name="monto" value="5000"></td>
-                    <td><input class="w3-input" type="number" name="fecha" value="2"></td>
-                    <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
-                    <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
-                    <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
-                  </form>
-                </tr>
-                <tr>
-                  <form onsubmit="event.preventDefault(); handleFormSubmit(this,'createDebito');">
-                    <td></td><td></td><td><input type="submit" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td>
-                  </form>
-                </tr>
+                <tbody>
+                  <tr class="w3-green"><th>No de tarjeta</th><th>Fecha de corte</th><th>Saldo</th><th>Comisión fija</th><th>Valor de comisión fija</th><th></th><th></th>
+                  </tr>
+                  <tr>
+                    <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
+                      <td><input class="w3-input" type="text" name="comisionFija" value="Sueldo"></td>
+                      <td><input class="w3-input" type="number" name="porcentajeManejoCuenta" value="0"></td>
+                      <td><input class="w3-input" type="number" name="valorComisionFija" value="1"></td>
+                      <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
+                      <td><input class="w3-input" type="number" name="periodicidad" value="2"> semanas</td>
+                      <td><input type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></input></td>
+                      <td><input type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></input></td>
+                    </form>
+                    
+                  </tr>
+                  <tr>
+                    <form onsubmit="event.preventDefault(); handleFormSubmit(this,'debito');">
+                      <td><input class="w3-input" type="text" name="sueldo" value="Rentas"></td>
+                      <td><input class="w3-input" type="number" name="monto" value="5000"></td>
+                      <td><input class="w3-input" type="number" name="fecha" value="2"></td>
+                      <td><input class="w3-input" type="number" name="periodicidad" value="4"> semanas</td>
+                      <td><button type="submit" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td>
+                      <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td>
+                    </form>
+                  </tr>
+                  <tr>
+                    <form id="newDebito" onsubmit="event.preventDefault(); handleFormSubmit(this,'createDebito');">
+                      <td></td><td></td><td><input onclick="showDebito();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td>
+                    </form>
+                  </tr>
+                </tbody>
               </table>
 
             </div> 
@@ -255,6 +253,11 @@
                     <td><button type="submit" name="accion" value="delete"><i class="fa fa-times fa-fw"  aria-hidden="true"></i></button></td>
                   </form>
                 </tr>
+                <tr>
+                    <form id="newCredito" onsubmit="event.preventDefault(); handleFormSubmit(this,'createDebito');">
+                      <td></td><td></td><td><input onclick="showCredito();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td>
+                    </form>
+                  </tr>
               </table>
             </div> 
            </div>
@@ -497,6 +500,8 @@ function acordeon(id) {
   handleFormSubmit(document.createElement("form"),"getUsuario");
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
+  handleFormSubmit(document.createElement("form"),"readAllTarjetaDebito");
+  handleFormSubmit(document.createElement("form"),"readAllTarjetaCredito");
 </script>
 
 </body>
