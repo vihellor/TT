@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
   <script src="./../scripts/ajax.js"></script>
   <script src="/scripts/usrTutorial.js"></script>
+  <script src="/dist/Chart.min.js"></script>
   
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -172,12 +173,17 @@
                   </tr>
                 </tbody></table>
             </div> 
-           </div>
           </div>
+          
+          </div>
+
         </div>
       </div>
       <br><br>
-      <div class="flexContainer2">
+      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+          <canvas id="myChart"></canvas>
+      </div>
+      <div class="flexContainer2" style="display:none;">
       <div class="w3-card-4">
         <header class="w3-cell-row">
           <div id="l3" class="w3-half w3-container w3-light-gray w3-cell">
@@ -444,6 +450,10 @@ function acordeon(id) {
   handleFormSubmit(document.createElement("form"),"readAllTarjetaDebito");
   handleFormSubmit(document.createElement("form"),"readAllTarjetaCredito");
   handleFormSubmit2(document.createElement("form"),"getTutorials");
+  window.onload = function() {
+    crearChart();
+  };
+  
 </script>
 </body>
 </html>

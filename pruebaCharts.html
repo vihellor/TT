@@ -1,31 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="/dist/Chart.min.js"></script>
+	<script src="./../scripts/ajax.js"></script>
 	<title>hola</title>
 </head>
 <body>
 <canvas id="myChart"></canvas>
 </body>
 <script type="text/javascript">
-	var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
+		var datapoints =[5000,5500,12000,12500,17500,18000,23000,25000,30000,30500,35500,36000,42500,43000,48000,48500,53500,55500,60500,61000,66000,66500,73000,73500,78500,79000,84000,86000,91000,91500,96500,97000,103500,104000,109000,109500,114500,116500,121500,122000,127000,127500,134000,134500,139500,140000,145000,147000];
 
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
+		var datapoints1 =[500,2300,2800,3300,3800,4600,5100,5600,6100,7900,8400,8900,9400,10200,10700,11200,11700,13500,14000,14500,15000,15800,16300,16800,17300,19100,19600,20100,20600,21400,21900,22400,22900,24700,25200,25700,26200,27000,27500,28000,28500,30300,30800,31300,31800,32600,33100,33600];
 
-    // Configuration options go here
-    options: {}
-});
+		var datapoints2 =[2500,2500,6500,7500,10000,10500,13000,15500,18000,18000,20500,21500,25500,26000,28500,29500,32000,33500,36000,37000,39500,40000,44000,45000,47500,47500,50000,52500,55000,55500,58000,59000,63000,63000,65500,66500,69000,71000,73500,74500,77000,77000,81000,82000,84500,85000,87500,90000];
+		var config = {
+			type: 'line',
+			data: {
+				labels: ['enero1', 'enero2', 'enero3', 'enero4', 'febrero1', 'febrero2', 'febrero3', 'febrero4', 'marzo1', 'marzo2', 'marzo3', 'marzo4', 'abril1', 'abril2', 'abril3', 'abril4','mayo1','mayo2','mayo3','mayo4','junio1','junio2','junio3','junio4','julio1','julio2','julio3','julio4','agosto1','agosto2','agosto3','agosto4','septiembre1','septiembre2','septiembre3','septiembre4','octubre1','octubre2','octubre3','octubre4','noviembre1','noviembre2','noviembre3','noviembre4','diciembre1','diciembre2','diciembre3','diciembre4'],
+				datasets: [{
+					label: 'Cubic interpolation (monotone)',
+					data: datapoints,
+					borderColor: 'rgb( 99, 132, 255)',
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+					fill: false,
+					cubicInterpolationMode: 'monotone'
+				}, {
+					label: 'Cubic interpolation (default)',
+					data: datapoints1,
+					borderColor: 'rgb(132, 255, 99 )',
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+					fill: false,
+				}, {
+					label: 'Linear interpolation',
+					data: datapoints2,
+					borderColor: 'rgb(255, 99, 132)',
+					backgroundColor: 'rgba(0, 0, 0, 0)',
+					fill: false,
+					lineTension: 0
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart - Cubic interpolation mode'
+				},
+				tooltips: {
+					mode: 'index'
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						},
+						ticks: {
+							suggestedMin: -10,
+							suggestedMax: 200,
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			for (var i = 0, len = datapoints.length; i < len; ++i) {
+				datapoints[i] = Math.random() < 0.05 ? NaN : randomScalingFactor();
+			}
+			window.myLine.update();
+		});
 </script>
 </html>

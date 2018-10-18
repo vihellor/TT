@@ -176,6 +176,8 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
  * @param  {Event} event  the submit event triggered by the user
  * @return {void}
  */
+var ingresos = [];
+var egresos = [];
 function handleFormSubmit (form,accion) {
   
   // Call our function to get the form data.
@@ -206,10 +208,12 @@ function handleFormSubmit (form,accion) {
           var y = x.slice(0,len-9);
           for (i in jj){
             y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
-
+            var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad];
+            ingresos.push(aux);
           }
           y+='<tr id="trNewIngreso"><form id="newIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createIngreso");"><td></td><td></td><td><input onclick="showIngreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
           document.getElementById("tableIngresos").innerHTML=y;
+          console.log("ingresos\n"+ingresos);
           //console.log(y+"aquí acaba");
         }
         else if(accion.localeCompare("readEgresos")==0){
@@ -219,10 +223,12 @@ function handleFormSubmit (form,accion) {
           var y = x.slice(0,len-9);
           for (i in jj){
             y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
-
+            var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad];
+            egresos.push(aux);
           }
           y+='<tr id="trNewEgreso"><form id="newEgreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createEgreso");"><td></td><td></td><td><input onclick="showEgreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
-          //console.log(y);
+          //crearChart(); //2 5 8 11    (n-2)%3 == 0 then add monto to graph
+          console.log("egresos\n"+egresos);
           document.getElementById("tableEgresos").innerHTML=y;
         }else if(accion.localeCompare("readAllUsuario")==0){
           var jj = JSON.parse(respuesta);
@@ -238,7 +244,7 @@ function handleFormSubmit (form,accion) {
           y+="</tbody>";
           document.getElementById("manageUsers").innerHTML=y;
         }else if (h.localeCompare("login")==0) {
-          window.location = "./../pages/menu.php";
+          window.location = "./../pages/menu.html";
         }else if (h.localeCompare("loginAdmin")==0) {
           window.location = "./../pages/admin.html";
         }else if (h.localeCompare("updateContrasena")==0) {
@@ -327,39 +333,152 @@ function handleFormSubmit2 (form,accion) {
   
   // ...this is where we’d actually do something with the form data...
 };
+var myChartCanvas;
+function crearChart(){
+  console.log("tamanio ingresos = "+ingresos.length);
+  console.log("tamanio egresos = "+egresos.length);
+  var data1=[];
+  var aux=0;
+  for (var j =  0; j < 48; j++) {
+    for (var i =  0; i < ingresos.length; i++) {
+      //console.log(j+" : "+i+" : "+(j-ingresos[i][1])%ingresos[i][2]);
+      //console.log("1: "+ingresos[i][1]);
+      //console.log("2: "+ingresos[i][2]);
+      if (((j-ingresos[i][1])%ingresos[i][2])==0) {
+        aux+=parseInt(ingresos[i][0]);
+      }
+    }
+    data1.push(aux);
+  }
+  /*console.log("yeeeeeeeeeeeeeeeei");
+  console.log(data1.length);
+  for (var j =  0; j < 48; j++) {
+    //console.log(j);
+    console.log(data1[j]);
+  }*/
+  var data2=[];
+  aux=0;
+  for (var j =  0; j < 48; j++) {
+    for (var i =  0; i < egresos.length; i++) {
+      if ((j-egresos[i][1])%egresos[i][2]==0) {
+        aux+=parseInt(egresos[i][0]);
+      }
+    }
+    data2.push(aux);
+  }
+  /*console.log("yeeeeeeeeeeeeeeeei2");
+  console.log(data2.length);
+  for (var j =  0; j < 48; j++) {
+    //console.log(j);
+    console.log(data2[j]);
+  }*/
+  var data3=[];
+  aux=0;
+  for (var j =  0; j < 48; j++) {
+    data3.push(data1[j]-data2[j]);
+  }
+  /*console.log("yeeeeeeeeeeeeeeeei3");
+  console.log(data3.length);
+  for (var j =  0; j < 48; j++) {
+    //console.log(j);
+    console.log(data3[j]);
+  }*/
+  var config = {
+      type: 'line',
+      data: {
+        labels: ['enero1', 'enero2', 'enero3', 'enero4', 'febrero1', 'febrero2', 'febrero3', 'febrero4', 'marzo1', 'marzo2', 'marzo3', 'marzo4', 'abril1', 'abril2', 'abril3', 'abril4','mayo1','mayo2','mayo3','mayo4','junio1','junio2','junio3','junio4','julio1','julio2','julio3','julio4','agosto1','agosto2','agosto3','agosto4','septiembre1','septiembre2','septiembre3','septiembre4','octubre1','octubre2','octubre3','octubre4','noviembre1','noviembre2','noviembre3','noviembre4','diciembre1','diciembre2','diciembre3','diciembre4'],
+        datasets: [{
+          label: 'Ingresos',
+          data: data1,
+          borderColor: 'rgb(0, 255, 0)',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          fill: false,
+        }, {
+          label: 'Egresos',
+          data: data2,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          fill: false,
+        }, {
+          label: 'Capital disponible',
+          data: data3,
+          borderColor: 'rgb(255, 0, 255)',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Proyección a 1 año de ingresos y egresos'
+        },
+        tooltips: {
+          mode: 'index'
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            },
+            ticks: {
+              suggestedMin: -10,
+              suggestedMax: 200,
+            }
+          }]
+        }
+      }
+    };
+    console.log("yeeeeeeeeeeeeeeeei4");
+    var ctx = document.getElementById('myChart').getContext('2d');
+    if(typeof myChartCanvas !== 'undefined'){
+      myChartCanvas.destroy();
+    }
+    myChartCanvas = new Chart(ctx, config);
+        /*//2 5 8 11    (n-2)%3 == 0 then add monto to graph*/
+ };
 function clearFlujo(){
   document.getElementById("tableIngresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
   document.getElementById("tableEgresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
-}
+  setTimeout(function() { crearChart(); }, 1000);
+};
 function flujoEdit(hola){
   handleFormSubmit(document.getElementById(hola),'flujoEdit');
-}
+};
 function flujoDelete(hola){
   handleFormSubmit(document.getElementById(hola),'flujoDelete');
-}
+};
 function clearTarjeta(){
   document.getElementById("tableDebito").innerHTML='<tbody><tr class="w3-green"><th>No de tarjeta</th><th>Fecha de corte</th><th>Saldo</th><th>Comisión fija</th><th>Valor de comisión fija</th><th></th><th></th></tr>     </tbody>';
   document.getElementById("tableCredito").innerHTML='<tbody><tr class="w3-green"><th>No de tarjeta</th><th>Fecha de corte</th><th>Saldo</th><th>Límite de crédito</th><th>Tasa de interés</th><th></th><th></th></tr>     </tbody>';
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
-}
+};
 function tarjetaDelete(hola){
   handleFormSubmit(document.getElementById(hola),'deleteTarjeta');
-}
+};
 function tarjetaEdit(hola){
   handleFormSubmit(document.getElementById(hola),'editTarjeta');
-}
+};
 function showIngreso(){
   document.getElementById("trNewIngreso").innerHTML='<form id="createIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createEgreso");"></form><td><input class="w3-input" form="createIngreso" type="text" name="nombreFlujo" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="monto" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="fecha" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="periodicidad" value=""> semanas</td><td><button type="button" onclick="mandar(\'createIngreso\')" name="accion" value="crear">Crear</button></td><td></td>';
-}
+};
 function showEgreso(){
   document.getElementById("trNewEgreso").innerHTML='<form id="createEgreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createEgreso");"></form><td><input class="w3-input" form="createEgreso" type="text" name="nombreFlujo" value=""></td><td><input form="createEgreso" class="w3-input" type="number" name="monto" value=""></td><td><input form="createEgreso" class="w3-input" type="number" name="fecha" value=""></td><td><input form="createEgreso" class="w3-input" type="number" name="periodicidad" value=""> semanas</td><td><button type="button" onclick="mandar(\'createEgreso\')" name="accion" value="crear">Crear</button></td><td></td>';
-}
+};
 function mandar(hola){
   handleFormSubmit(document.getElementById(hola),hola);
-}
+};
 
 /*
  * This is where things actually get started. We find the form element using
