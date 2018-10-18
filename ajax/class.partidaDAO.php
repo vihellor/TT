@@ -6,45 +6,59 @@ include_once('./class.partida.php');
 class partidaDAO {
 	
 	function createPartida(partida $Partida){
-		$BD = $_SESSION["bd"];
-		$sql = 'CALL createPartida(?,?,?,?)';
-		$array = array($Partida->nombrePartida, $Partida->estado, $Partida->jugadores, $Partida->meta);
-		$BD->execute($sql,$array);
+		$BD = new DBPDO();
+		$sql = 'CALL createPartida(?,?,?,?,?,?)';
+		$array = array($Partida->nombrePartida, $Partida->limiteJugadores, $Partida->jugadores, $Partida->meta, $Partida->fundador, $Partida->montoInicial);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
 	}
 	/*
 	IN _idPartida INT
 	*/
 
-	function readPartida(partida $Partida){
-		$BD = $_SESSION["bd"];
+	function readPartida($idPartida){
+		$BD = new DBPDO();
 		$sql = 'CALL readPartida(?)';
-		$array = array($Partida->idPartida);
+		$array = array($idPartida);
 		$resultado = $BD->fetch($sql,$array);
-		return new partida($resultado['idPartida'], $resultado['nombrePartida'], $resultado['estado'], $resultado['jugadores'], $resultado['meta']);
+		$BD->close();
+		return $resultado;
 	}
 
 	function readAllPartida(){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL readAllPartida()';
 		$resultado = $BD->fetchAll($sql);
-		foreach ($resultado as $row){
-		echo implode (', ', $row);
-		echo '<br>';
-		}
+		$BD->close();
+		return $resultado;
 	}
 
-	function updatePartida(partida $Partida){
-		$BD = $_SESSION["bd"];
-		$sql = 'CALL updatePartida(?,?,?,?,?)';
-		$array = array($Partida->idPartida,$Partida->nombrePartida,$Partida->estado,$Partida->jugadores,$Partida->meta);
-		$BD->execute($sql,$array);
+	function agregarJugador($idUsuario,$idPartida){
+		$BD = new DBPDO();
+		$sql = 'CALL agregarJugador(?,?)';
+		$array = array($idUsuario,$idPartida);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
 	}
 
-	function deletePartida(partida $Partida){
-		$BD = $_SESSION["bd"];
-		$sql = 'CALL deletePartida(?)';
-		$array = array($Partida->idPartida);
-		$BD->execute($sql,$array);
+	function deletePartida($idUsuario,$idPartida){
+		$BD = new DBPDO();
+		$sql = 'CALL deletePartida(?,?)';
+		$array = array($idPartida, $idUsuario);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
+	}
+
+	function dejarPartida($idUsuario,$idPartida){
+		$BD = new DBPDO();
+		$sql = 'CALL dejarPartida(?,?)';
+		$array = array($idUsuario,$idPartida);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
 	}
 
 }

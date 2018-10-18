@@ -26,6 +26,15 @@ if($peticion['funcion'] == "registro"){ //CHECKED
 if($peticion['funcion'] == "login"){ //CHECKED
 		$DAO = new usuarioDAO();
         $usuario = new usuario(" ",$peticion['nickname']," "," "," "," "," ",$peticion['password']);
+        if($peticion['nickname']=='admin'){
+        	if($peticion['password']=='admin'){
+        		echo ('loginAdmin');
+        	}
+        	else{
+        		echo ('loginAdminFalse');
+        	}
+        }
+        else{
         $usuario = $DAO->readUsuario($usuario);
         if(strlen($usuario->nombre)!=0){
             $myJSON = json_encode($usuario);
@@ -35,6 +44,7 @@ if($peticion['funcion'] == "login"){ //CHECKED
         else{
             echo ("loginFalse");
         }
+    }
 }
 
 if($peticion['funcion'] == "getUsuario"){ //CHECKED
