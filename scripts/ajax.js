@@ -321,6 +321,8 @@ function handleFormSubmit2 (form,accion) {
     // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/userTutorial.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
+      console.log("response:");
+      console.log(h);
       document.getElementById("tutDiv").innerHTML=h;
       }).catch(function() {
         addTextToPage("Failed to show chapter");
@@ -446,8 +448,8 @@ function crearChart(){
         /*//2 5 8 11    (n-2)%3 == 0 then add monto to graph*/
  };
 function clearFlujo(){
-  document.getElementById("tableIngresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
-  document.getElementById("tableEgresos").innerHTML='<tbody><tr class="w3-green"><th>Nombre</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
+  document.getElementById("tableIngresos").innerHTML='<tbody><tr class="w3-green"><th>Concepto</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
+  document.getElementById("tableEgresos").innerHTML='<tbody><tr class="w3-green"><th>Concepto</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
   setTimeout(function() { crearChart(); }, 1000);
