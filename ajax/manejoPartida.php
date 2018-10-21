@@ -49,7 +49,7 @@ if($peticion['funcion'] == "agregarJugador"){ //CHECKED
             $DAO = new usuarioDAO();
             $usuarioSession = json_decode($_SESSION["usuario"],true);
             $usuario = $DAO->getUsuario($usuarioSession['idUsuario']);
-            $_SESSION["usuario"] = json_encode($result);
+            $_SESSION["usuario"] = json_encode($usuario);
             echo "agregarJugador";
         }
         else{
