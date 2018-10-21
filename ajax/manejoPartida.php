@@ -37,7 +37,7 @@ if($peticion['funcion'] == "readPartida"){ //CHECKED
         $DAO = new partidaDAO();
         $usuarioSession = json_decode($_SESSION["usuario"],true);
         $resultado = $DAO->readPartida($usuarioSession['idPartida']);
-        var_dump($resultado);
+        echo json_encode($resultado);
 }
 
 if($peticion['funcion'] == "iniciarPartida"){ //CHECKED

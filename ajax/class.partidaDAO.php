@@ -21,7 +21,7 @@ class partidaDAO {
 		$BD = new DBPDO();
 		$sql = 'CALL readPartida(?)';
 		$array = array($idPartida);
-		$resultado = $BD->fetch($sql,$array);
+		$resultado = $BD->fetchAll($sql,$array);
 		$BD->close();
 		return $resultado;
 	}
