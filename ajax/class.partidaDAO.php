@@ -26,6 +26,14 @@ class partidaDAO {
 		return $resultado;
 	}
 
+	function iniciarPartida($idPartida){
+		$BD = new DBPDO();
+		$sql = 'CALL iniciarPartida(?)';
+		$array = array($idPartida);
+		$BD->execute($sql,$array);
+		$BD->close();
+	}
+
 	function readAllPartida(){
 		$BD = new DBPDO();
 		$sql = 'CALL readAllPartida()';
