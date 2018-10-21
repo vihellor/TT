@@ -35,8 +35,8 @@ if($peticion['funcion'] == "readAllPartida"){ //CHECKED
 
 if($peticion['funcion'] == "readPartida"){ //CHECKED
         $DAO = new partidaDAO();
-        $idPartida=$_SESSION["idPartida"];
-        $resultado = $DAO->readPartida($idPartida);
+        $usuarioSession = json_decode($_SESSION["usuario"],true);
+        $resultado = $DAO->readPartida($usuarioSession['idPartida']);
         echo json_encode($resultado);
 }
 
@@ -60,6 +60,7 @@ if($peticion['funcion'] == "subirIdPartida"){ //CHECKED
         $_SESSION["idPartida"]=$peticion['idPartida'];
         echo  "subirIdPartida";
 }
+
 if($peticion['funcion'] == "dejarPartida"){ //CHECKED
         $DAO = new partidaDAO();
         $usuarioSession = json_decode($_SESSION["usuario"],true);
@@ -84,7 +85,6 @@ if($peticion['funcion'] == "dejarPartida"){ //CHECKED
             }
         }
 }
-
 
 if($peticion['funcion'] == "createCasaDeBolsa"){ //CHECK
         $DAO = new casaDeBolsaDAO();
