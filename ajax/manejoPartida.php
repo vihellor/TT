@@ -6,7 +6,7 @@ include_once('./class.casaDeBolsa.php');
 include_once('./class.casaDeBolsaDAO.php');
 include_once('./class.DBPDO.php');
 
-//$peticion = json_decode(file_get_contents('php://input'), true);
+$peticion = json_decode(file_get_contents('php://input'), true);
 
 if($peticion['funcion'] == "createPartida"){ //CHECKED
 		$DAO = new partidaDAO();
@@ -86,8 +86,8 @@ if($peticion['funcion'] == "createCasaDeBolsa"){ //CHECK
             echo  "createCasaFalse";
         }
 }
-$prueba = '{"funcion":"updateCasaDeBolsa","idCasa":3,"nombreCasa":"eTor","comision":34,"mensualidad":150}';
-$peticion = json_decode($prueba, true);
+//$prueba = '{"funcion":"updateCasaDeBolsa","idCasa":3,"nombreCasa":"eTor","comision":34,"mensualidad":150}';
+//$peticion = json_decode($prueba, true);
 if($peticion['funcion'] == "updateCasaDeBolsa"){ //CHECK
         $DAO = new casaDeBolsaDAO();
         $casa = new casaDeBolsa($peticion['idCasa'],$peticion['nombreCasa'],$peticion['comision'],$peticion['mensualidad']);
