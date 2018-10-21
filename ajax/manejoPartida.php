@@ -11,7 +11,7 @@ $peticion = json_decode(file_get_contents('php://input'), true);
 if($peticion['funcion'] == "createPartida"){ //CHECKED
 		$DAO = new partidaDAO();
         $usuarioSession = json_decode($_SESSION["usuario"],true);
-        $partida = new partida("",$peticion['nombrePartida'],"",$peticion['limite'],1,$peticion['meta'],$usuarioSession['idUsuario'],$peticion['montoIncial']);
+        $partida = new partida("",$peticion['nombrePartida'],"",$peticion['limite'],1,$peticion['meta'],$usuarioSession['idUsuario'],$peticion['montoInicial']);
         $resultado = $DAO->createPartida($partida);
         if($resultado['_result']==1){
             echo "registroPartida";
@@ -56,8 +56,9 @@ if($peticion['funcion'] == "dejarPartida"){ //CHECKED
         $partida = $DAO->readPartida($idPartida);
         $usuarioSession = json_decode($_SESSION["usuario"],true);
         if($partida['fundador']==$peticion['idUsuario']){
-            $resultado = $DAO->deletePartida($usuarioSession['idUsuario'],$idPartida);
+            $resultado = $DAO->deletePartida($idPartida);
             if($resultado['_result']==1){
+                $_SESSION["idPartida"]=0;
                 echo "dejarPartida";
             }
             else{
@@ -66,6 +67,7 @@ if($peticion['funcion'] == "dejarPartida"){ //CHECKED
         }else{
              $resultado = $DAO->dejarPartida($usuarioSession['idUsuario'],$idPartida);
             if($resultado['_result']==1){
+                $_SESSION["idPartida"]=0;
                 echo "dejarPartida";
             }
             else{

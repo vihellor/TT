@@ -45,8 +45,8 @@ class partidaDAO {
 
 	function deletePartida($idUsuario,$idPartida){
 		$BD = new DBPDO();
-		$sql = 'CALL deletePartida(?,?)';
-		$array = array($idPartida, $idUsuario);
+		$sql = 'CALL deletePartida(?)';
+		$array = array($idPartida);
 		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
 		return $resultado;
