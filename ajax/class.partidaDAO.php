@@ -43,7 +43,7 @@ class partidaDAO {
 		return $resultado;
 	}
 
-	function deletePartida($idUsuario,$idPartida){
+	function deletePartida($idPartida){
 		$BD = new DBPDO();
 		$sql = 'CALL deletePartida(?)';
 		$array = array($idPartida);
