@@ -200,6 +200,7 @@ function handleFormSubmit (form,accion) {
           document.getElementById("apm").value=jj.apellidoMaterno;
           document.getElementById("ocupacion").value=jj.ocupacion;
           document.getElementById("email").value=jj.correo;
+          document.getElementById("idFundador").value=jj.idUsuario;
         }
         else if(accion.localeCompare("readIngresos")==0){
           var jj = JSON.parse(respuesta);
@@ -334,6 +335,60 @@ function handleFormSubmit2 (form,accion) {
 
   
   // ...this is where we’d actually do something with the form data...
+};
+function handleFormSubmit3 (form,accion) {
+  
+  // Call our function to get the form data.
+  var data = formToJSON(form.elements);
+  data.funcion = accion;
+  
+  // Use `JSON.stringify()` to make the output valid, human-readable JSON.
+    getJson('./../ajax/manejoPartida.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
+      var h = respuesta.trim();
+      //console.log(accion);
+      //console.log("el resultado es:"+h.localeCompare("login"));
+        if (h.localeCompare("registroPartida")==0) {
+          window.location = "./../pages/lobby.html";
+        }else if (h.localeCompare("registroPartidaFalse")==0) {
+          alert("No se pudo crear la partida, intente de nuevo");
+        }else if (h.localeCompare("agregarJugador")==0) {
+          setCookie("idPartida",data.idPartida,.5);
+          window.location = "./../pages/lobby.html";
+        }else if (h.localeCompare("agregarJugadorFalse")==0) {
+          alert("No puedes unirte a esa partida, intenta con otra");
+        }else if (h.localeCompare("crearPartida")==0) {
+          alert("Partida creada exitosamente");
+          //pedir partidas y hacer el match
+        }else if (h.localeCompare("readAllPartida")==0){
+          var y ='<tr class="w3-green"><th>Nombre</th><th>Max. Jugadores</th><th>Jugadores actuales</th><th>Meta</th><th></th></tr>';
+          var jj = JSON.parse(respuesta);
+
+          for (i in jj){
+            if(jj[i].estado.localeCompare("1")==0 && jj[i].fundador.localeCompare(document.getElementById("idFundador").value)!=0){
+              y +='<tr><form id="partida'+jj[i].idpartida+'"></form><td>'+jj[i].nombre+'</td><td>'+jj[i].limiteJugadores+'</td><td>'+jj[i].jugadores+'</td><td>'+jj[i].meta+'</td><input form="partida'+jj[i].idpartida+'" type="number" name="idPartida" value="'+jj[i].idpartida+'" hidden><td><input type="button" class="w3-button" value="Unirse" onclick="handleFormSubmit3(\'document.getElementById("partida'+jj[i].idpartida+'"),agregarJugador\');" style="text-align: center;"></td></tr>';
+            }
+            else if (jj[i].fundador.localeCompare(document.getElementById("idFundador").value)==0){
+              window.location = "./../pages/lobby.html";
+            }
+            
+          }
+        }
+        else if (h.localeCompare("crearPartidaFalse")==0) {
+          alert("Error al crear la partida, vuelve a intentarlo");
+        }else if (h.localeCompare("dejarPartida")==0) {
+          window.location = "./../pages/menu.html";
+        }else if (h.localeCompare("dejarPartidaFalse")==0) {
+          alert("Parece que hubo un problema al dejar la partida, vuelve a intentarlo");
+        }else{
+          console.log("Fallo entonces no haré nada perro");
+        }
+        //console.log("llegamos a la historia"+h);
+      }).catch(function() {
+        addTextToPage("Failed to show chapter");
+      }).then(function() {
+        console.log("saca el spinner");
+        //document.querySelector('.spinner').style.display = 'none';
+      })// ...this is where we’d actually do something with the form data...
 };
 var myChartCanvas;
 function crearChart(){
@@ -481,6 +536,42 @@ function showEgreso(){
 function mandar(hola){
   handleFormSubmit(document.getElementById(hola),hola);
 };
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+//al monento de hacer el getAllPartida verificar si hay match
+
+function clearCookie(cname){
+  document.cookie = "";
+}
+
+function checkCookie(cname) {
+    var user = getCookie(cname);
+    if (user != "") {
+      return false;
+    } else {
+      return true;
+    }
+}
 
 /*
  * This is where things actually get started. We find the form element using
