@@ -52,8 +52,8 @@ if($peticion['funcion'] == "subirIdPartida"){ //CHECKED
 }
 if($peticion['funcion'] == "dejarPartida"){ //CHECKED
         $DAO = new partidaDAO();
-        $partida = $DAO->readPartida($peticion['idPartida']);
         $idPartida=$_SESSION["idPartida"];
+        $partida = $DAO->readPartida($idPartida);
         $usuarioSession = json_decode($_SESSION["usuario"],true);
         if($partida['fundador']==$peticion['idUsuario']){
             $resultado = $DAO->deletePartida($usuarioSession['idUsuario'],$idPartida);
