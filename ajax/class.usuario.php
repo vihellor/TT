@@ -9,8 +9,10 @@ class usuario {
 	public $ocupacion;
 	public $correo;
 	public $contrasena;
+	public $idPartida;
+	public $casaDeBolsa;
 
-	function __construct($idUsuario, $nickname, $nombre, $apellidoPaterno, $apellidoMaterno, $ocupacion, $correo, $contrasena){
+	function __construct($idUsuario, $nickname, $nombre, $apellidoPaterno, $apellidoMaterno, $ocupacion, $correo, $contrasena, $idPartida, $casaDeBolsa){
 		$this->idUsuario= $idUsuario;
 		$this->nickname = $nickname;
 		$this->nombre = $nombre;
@@ -19,6 +21,8 @@ class usuario {
 		$this->ocupacion = $ocupacion;
 		$this->correo = $correo;
 		$this->contrasena = $contrasena;
+		$this->idPartida = $idPartida;
+		$this->casaDeBolsa = $casaDeBolsa;
 	}
 }
 

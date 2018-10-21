@@ -12,7 +12,7 @@ $peticion = json_decode(file_get_contents('php://input'), true);
 
 if($peticion['funcion'] == "registro"){ //CHECKED
 		$DAO = new usuarioDAO();
-        $usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password']);
+        $usuario = new usuario("",$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],$peticion['password'],"","");
         $resultado = $DAO->createUsuario($usuario);
         if($resultado['_result']==1){
             $result = "registro";
@@ -25,7 +25,7 @@ if($peticion['funcion'] == "registro"){ //CHECKED
 
 if($peticion['funcion'] == "login"){ //CHECKED
 		$DAO = new usuarioDAO();
-        $usuario = new usuario(" ",$peticion['nickname']," "," "," "," "," ",$peticion['password']);
+        $usuario = new usuario(" ",$peticion['nickname']," "," "," "," "," ",$peticion['password'],"","");
         if($peticion['nickname']=='admin'){
         	if($peticion['password']=='admin'){
         		echo ('loginAdmin');
@@ -63,7 +63,7 @@ if($peticion['funcion'] == "readAllUsuario"){ //CHECKED
 if($peticion['funcion'] == "updateUsuario"){ //CHECKED
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
-		$usuario = new usuario($usuarioSession['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],"");
+		$usuario = new usuario($usuarioSession['idUsuario'],$peticion['nickname'],$peticion['name'],$peticion['app'],$peticion['apm'],$peticion['ocupacion'],$peticion['email'],"","","");
 		$DAO->updateusuario($usuario);
 		echo('updateUsuario');
 }
@@ -71,7 +71,7 @@ if($peticion['funcion'] == "updateUsuario"){ //CHECKED
 if($peticion['funcion'] == "updateContrasena"){ //CHECKED
 		$DAO = new usuarioDAO;
 		$usuarioSession = json_decode($_SESSION["usuario"],true);
-		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPassword']);
+		$usuario = new usuario($usuarioSession['idUsuario']," "," "," "," "," ",$peticion['newPassword'],$peticion['OldPassword'],"","");
 		$resultado = $DAO->updateContrasena($usuario);
 		if($resultado['_result']==1){
 			echo("updateContrasena");
@@ -83,7 +83,7 @@ if($peticion['funcion'] == "updateContrasena"){ //CHECKED
 
 if($peticion['funcion'] == "changeContrasena"){ //CHECKED
 		$DAO = new usuarioDAO;
-		$usuario = new usuario($peticion['id']," "," "," "," "," "," ",$peticion['OldPassword']);
+		$usuario = new usuario($peticion['id']," "," "," "," "," "," ",$peticion['OldPassword'],"","");
 		$resultado = $DAO->changeContrasena($usuario);
 		if($resultado['_result']==1){
 			echo("updateContrasena");
@@ -95,7 +95,7 @@ if($peticion['funcion'] == "changeContrasena"){ //CHECKED
 
 if($peticion['funcion'] == "deleteUsuario"){ //CHECKED
 		$DAO = new usuarioDAO;
-		$usuario = new usuario($peticion['idUsuario'],"","","","","","","");
+		$usuario = new usuario($peticion['idUsuario'],"","","","","","","","","");
 		$resultado = $DAO->deleteUsuario($usuario);
 		if($resultado['_result']==1){
 			echo("deleteUsuario");

@@ -20,7 +20,7 @@ class usuarioDAO{
 		$array = array($user->nickname, $user->contrasena);
 		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
-		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "");
+		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "", $resultado['idPartida'], $resultado['casaDeBolsa']);
 	}
 
 	function readAllUsuario(){
@@ -37,7 +37,7 @@ class usuarioDAO{
 		$array = array($idUser);
 		$resultado = $BD->fetch($sql,$array);
 		$BD->close();
-		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "");
+		return new usuario($resultado['idUsuario'], $resultado['nickname'], $resultado['nombre'], $resultado['apellidoPaterno'],$resultado['apellidoMaterno'], $resultado['ocupacion'], $resultado['correo'], "", $resultado['idPartida'], $resultado['casaDeBolsa']);
 	}
 
 	function updateUsuario(usuario $user){
