@@ -40,6 +40,13 @@ if($peticion['funcion'] == "readPartida"){ //CHECKED
         echo json_encode($resultado);
 }
 
+if($peticion['funcion'] == "getUsuario"){ //CHECKED
+    $DAO = new usuarioDAO();
+    $usuarioSession = json_decode($_SESSION["usuario"],true);
+    $result = $DAO->getUsuario($usuarioSession['idUsuario']);
+    echo json_encode($result);
+}
+
 if($peticion['funcion'] == "iniciarPartida"){ //CHECKED
         $DAO = new partidaDAO();
         $usuarioSession = json_decode($_SESSION["usuario"],true);
