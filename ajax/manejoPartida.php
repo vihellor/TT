@@ -4,6 +4,8 @@ include_once('./class.partida.php');
 include_once('./class.partidaDAO.php');
 include_once('./class.casaDeBolsa.php');
 include_once('./class.casaDeBolsaDAO.php');
+include_once('./class.usuario.php');
+include_once('./class.usuarioDAO.php');
 include_once('./class.DBPDO.php');
 
 $peticion = json_decode(file_get_contents('php://input'), true);
@@ -14,6 +16,10 @@ if($peticion['funcion'] == "createPartida"){ //CHECKED
         $partida = new partida("",$peticion['nombrePartida'],"",$peticion['limite'],1,$peticion['meta'],$usuarioSession['idUsuario'],$peticion['montoInicial']);
         $resultado = $DAO->createPartida($partida);
         if($resultado['_result']==1){
+            $DAO = new usuarioDAO();
+            $usuarioSession = json_decode($_SESSION["usuario"],true);
+            $usuario = $DAO->getUsuario($usuarioSession['idUsuario']);
+            $_SESSION["usuario"] = json_encode($result);
             echo "registroPartida";
         }
         else{
@@ -52,11 +58,10 @@ if($peticion['funcion'] == "subirIdPartida"){ //CHECKED
 }
 if($peticion['funcion'] == "dejarPartida"){ //CHECKED
         $DAO = new partidaDAO();
-        $idPartida=$_SESSION["idPartida"];
-        $partida = $DAO->readPartida($idPartida);
         $usuarioSession = json_decode($_SESSION["usuario"],true);
-        if($partida['fundador']==$peticion['idUsuario']){
-            $resultado = $DAO->deletePartida($idPartida);
+        $partida = $DAO->readPartida($usuarioSession['idPartida']);
+        if($partida['fundador']==$usuarioSession['idUsuario']){
+            $resultado = $DAO->deletePartida($usuarioSession['idPartida']);
             if($resultado['_result']==1){
                 $_SESSION["idPartida"]=0;
                 echo "dejarPartida";
@@ -65,7 +70,7 @@ if($peticion['funcion'] == "dejarPartida"){ //CHECKED
                 echo  "dejarPartidaFalse";
             }
         }else{
-             $resultado = $DAO->dejarPartida($usuarioSession['idUsuario'],$idPartida);
+             $resultado = $DAO->dejarPartida($usuarioSession['idUsuario'],$usuarioSession['idPartida']);
             if($resultado['_result']==1){
                 $_SESSION["idPartida"]=0;
                 echo "dejarPartida";
