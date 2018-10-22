@@ -328,7 +328,9 @@ function handleFormSubmit2 (form,accion) {
       //console.log("response:");
       console.log(h);
       document.getElementById("tutDiv").innerHTML=h;
-      document.getElementById("tutDiv").innerHTML=document.getElementById("tutDiv").innerHTML.replace("((<br>)+[\n\s\b]*)+","<br><br>");
+      var k = document.getElementById("tutDiv").innerHTML;
+      k = k.trim();
+      document.getElementById("tutDiv").innerHTML=k.replace("((<br>)+[\n\s\b]*)+","<br><br>");
       }).catch(function() {
         addTextToPage("Failed to show chapter");
       }).then(function() {
