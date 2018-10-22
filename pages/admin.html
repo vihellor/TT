@@ -31,6 +31,7 @@
     <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'adminUs')"><i class="fa fa-home fa-fw"></i> Administración de usuarios</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'casasBolsa')"><i class="fa fa-th-list fa-fw"></i> Casas de bolsa</button>
     <button class="w3-bar-item w3-button tablink" onclick="tutoWord()"><i class="fa fa-gamepad fa-fw"></i> Admin tutoriales</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'glosarioDiv')"><i class="fa fa-gamepad fa-fw"></i> Glosario</button>
     <button class="w3-bar-item w3-button tablink" onclick="window.location = '/'"><i class="fa fa-sort-alpha-down fa-fw"></i> Salir</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
@@ -132,6 +133,28 @@
       <input type="text" name="wp-submit" value="Acceder">
       <input id="myFormTutorial" type="submit" name="submit">
     </form>
+  </div>
+  <!--  Glosario -->
+  <div id="glosarioDiv" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+        <br><br>
+        <h1>Agregar glosario</h1>
+        <div class="w3-animate-right flexContainer2 ">
+          <form onsubmit="event.preventDefault(); handleFormSubmit3(this,'createGlosario');" >
+            <label class="w3-text-green w3-large"><b>Concepto</b></label>
+            <br>
+            <input id="glosarioForm" type="text" name="concepto">
+            <br>
+            <br>
+            <label class="w3-text-green w3-large"><b>Definición</b></label>
+            <br>
+            <textarea form="glosarioForm" name="definicion" rows="4" cols="50"></textarea> 
+            <br>
+            <br>
+            <input class="w3-btn w3-green w3-large" type="submit" name="submit" value="Registrar">
+          </form>
+        </div>
+    </div>
   </div>
 </div>
 

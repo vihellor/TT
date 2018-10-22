@@ -9,6 +9,9 @@
   <script src="./../scripts/ajax.js"></script>
   <script src="/scripts/usrTutorial.js"></script>
   <script src="/dist/Chart.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./../DataTables/datatables.min.css"/>
+  <script type="text/javascript" src="./../DataTables/jQuery.js"></script>
+  <script type="text/javascript" src="./../DataTables/jquery.dataTables.min.js"></script>
   
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -45,7 +48,7 @@
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'nuevaPartida')"><i class="fa fa-gamepad fa-fw"></i> Nueva partida</button>
     <!--<button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>-->
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'tutorial')"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>
-    <button class="w3-bar-item w3-button tablink"><i class="fa fa-book fa-fw"></i> Glosario</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'glosario')"><i class="fa fa-book fa-fw"></i> Glosario</button>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
   </div>
@@ -278,7 +281,7 @@
     <div class="w3-row-padding" >
       <br>
       <h2><b><i></i>Partidas disponibles</b></h2>
-      <button onclick="handleFormSubmit3(document.createElement('form'),'getAllPartida');"><i class="fa fa-bars"></i>Actualizar</button>
+      <button onclick="handleFormSubmit3(document.createElement('form'),'readAllPartida');"><i class="fa fa-bars"></i>Actualizar</button>
       <div class="w3-responsive">
         <table class="w3-table-all w3-centered">
           <tbody id="partidas">
@@ -288,34 +291,6 @@
               <th>Jugadores actuales</th>
               <th>Meta</th>
               <th></th>
-            </tr>
-            <tr>
-              <td>Segunda partida</td>
-              <td>5</td>
-              <td>2</td>
-              <td>10,000</td>
-              <td><a href="./lobby.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-            </tr>
-            <tr>
-              <td>La chida</td>
-              <td>3</td>
-              <td>1</td>
-              <td>700,000</td>
-              <td><a href="./lobby.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-            </tr>
-            <tr>
-              <td>Los grandes</td>
-              <td>5</td>
-              <td>4</td>
-              <td>35,000</td>
-              <td><a href="./lobby.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
-            </tr>
-            <tr>
-              <td>Aprendiendo</td>
-              <td>2</td>
-              <td>1</td>
-              <td>5,000</td>
-              <td><a href="./lobby.html"><input type="button" class="w3-button" name="unirse" value="Unirse" style="text-align: center;"></a></td>
             </tr>
           </tbody>
           
@@ -348,6 +323,29 @@
       <br>
       <br>
       <div id="tutDiv" class="flexContainer">
+      </div>
+    </div>
+  </div>
+  <!--  Glosario -->
+  <div id="glosario" class="w3-panel menuItem w3-animate-left" style="display:none; text-align: center;">
+    <div class="w3-row-padding" >
+      <br>
+      <br>
+      <div id="glosarioDiv" class="flexContainer">
+        <table id="exampleTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Concepto</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Concepto</th>
+                </tr>
+            </tfoot>
+        </table>
       </div>
     </div>
   </div>
@@ -452,9 +450,8 @@ function acordeon(id) {
   handleFormSubmit(document.createElement("form"),"getUsuario");
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
-  handleFormSubmit(document.createElement("form"),"readAllTarjetaDebito");
-  handleFormSubmit(document.createElement("form"),"readAllTarjetaCredito");
   handleFormSubmit2(document.createElement("form"),"getTutorials");
+  handleFormSubmit3(document.createElement("form"),"readAllGlosario");
   window.onload = function() {
     crearChart();
   };

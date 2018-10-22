@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  <script src="./../scripts/ajax.js"></script>
 
   <style>
   table {
@@ -50,51 +51,34 @@
         <br>
         <h3><b><i></i>Datos partida</b></h3>
         <br>
-        <p >Nombre: Hola &emsp; Meta: 10,000 &emsp; Número de jugadores: 5</p>
+        <p id="datosPartida"></p>
         <br>
         <h3><b><i></i>Jugadores en partida</b></h3>
-        <div class="w3-responsive">
-          <table class="w3-table-all w3-centered">
-            <thead>
-              <tr  class="w3-green" >
-                <th></th>
-                <th>Nombre</th>
-              </tr>
-            </thead>
-            <tr>
-              <td><div>
-                <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
-              </div></td>
-              <td>Mike</td>
-            </tr>
-            <tr>
-              <td><div>
-                <img src="./../imgs/avatar1.png" class="w3-circle w3-margin-right" style="width:46px">
-              </div></td>
-              <td>Vic</td>
-            </tr>
-            <tr>
-              <td><div>
-                <img src="./../imgs/avatar3.png" class="w3-circle w3-margin-right" style="width:46px">
-              </div></td>
-              <td>Josi</td>
-            </tr>
-            <tr>
-              <td><div>
-                <img src="./../imgs/avatar5.png" class="w3-circle w3-margin-right" style="width:46px">
-              </div></td>
-              <td>María</td>
-            </tr>
-            <tr>
-              <td colspan="3" style="text-align: center;">Esperando jugador</td>
-            </tr>
-          </table>
+        <div id="debito" class="flexContainer2 w3-third w3-mobile">
+          <div class="w3-responsive">
+            <table class="w3-table-all w3-centered">
+              <thead hidden="true">
+                <tr  class="w3-green" >
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody id="tableNombres">
+                
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="w3-row-padding" >
-          <div class="w3-quarter" ><a href="./mainMenu.html"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="salir" value="Salir"></a></div>
+          <br>
+          <div>
+            <input type="hidden" id="idUsuario">
+            <input id="botonIniciar" type="button" class="w3-third w3-btn w3-green w3-xlarge" onclick="handleFormSubmit3(document.createElement('form'),'iniciarPartida');" name="empezar" value="Empezar" style="display: none;"/>
+          </div>
+          <br>
+          <div class="flexContainer2">
+            <input id="botonSalir" type="button" class="w3-third w3-btn w3-red w3-xlarge" onclick="handleFormSubmit3(document.createElement('form'),'dejarPartida');" name="salir" value="Salir" />
+          </div>
           
-          <div class="w3-quarter" ><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="listo" value="Listo"></div>
-          <div class="w3-third" ><a href="./juego.html"><input type="button" class="w3-button w3-xlarge w3-round-xlarge w3-white w3-border w3-border-green w3-hover-green" name="empezar" value="Empezar"></a></div>
         </div>
     </div>
   </div>
@@ -129,6 +113,7 @@ function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
 }
+handleFormSubmit3(document.createElement("form"),"getUsuario");
 </script>
 
 </body>

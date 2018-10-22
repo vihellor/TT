@@ -1,3 +1,6 @@
+var iFrequency = 5000; // expressed in miliseconds
+var myInterval = 0;
+
 function post(url,objSend) {
 
   var requestPromise = new Promise(function(resolve, reject) {
@@ -322,8 +325,8 @@ function handleFormSubmit2 (form,accion) {
     // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/userTutorial.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
-      console.log("response:");
-      console.log(h);
+      //console.log("response:");
+      //console.log(h);
       document.getElementById("tutDiv").innerHTML=h;
       }).catch(function() {
         addTextToPage("Failed to show chapter");
@@ -347,7 +350,22 @@ function handleFormSubmit3 (form,accion) {
       var h = respuesta.trim();
       //console.log(accion);
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if (h.localeCompare("registroPartida")==0) {
+        if(accion.localeCompare("getUsuario")==0){
+          var jj = JSON.parse(respuesta);
+          //console.log("cargando usuario"+jj);
+          document.getElementById("idUsuario").value=jj.idUsuario;
+          leerPartidas();
+          if(myInterval > 0) clearInterval(myInterval);  // stop
+          myInterval = setInterval( "leerPartidas()", iFrequency ); 
+        }else if(accion.localeCompare("readAllGlosario")==0){
+          var dataGlosario = ['data'];
+          var jj = JSON.parse(respuesta);
+          for (i in jj){
+            var aux = [jj[i].idConcepto,jj[i].concepto,jj[i].definicion];
+            
+          }
+          
+        }else if (h.localeCompare("registroPartida")==0) {
           window.location = "./../pages/lobby.html";
         }else if (h.localeCompare("registroPartidaFalse")==0) {
           alert("No se pudo crear la partida, intente de nuevo");
@@ -359,13 +377,14 @@ function handleFormSubmit3 (form,accion) {
         }else if (h.localeCompare("crearPartida")==0) {
           alert("Partida creada exitosamente");
           //pedir partidas y hacer el match
-        }else if (h.localeCompare("readAllPartida")==0){
+        }else if (accion.localeCompare("readAllPartida")==0){
           var y ='<tr class="w3-green"><th>Nombre</th><th>Max. Jugadores</th><th>Jugadores actuales</th><th>Meta</th><th></th></tr>';
           var jj = JSON.parse(respuesta);
 
           for (i in jj){
             if(jj[i].estado.localeCompare("1")==0 && jj[i].fundador.localeCompare(document.getElementById("idFundador").value)!=0){
-              y +='<tr><form id="partida'+jj[i].idpartida+'"></form><td>'+jj[i].nombre+'</td><td>'+jj[i].limiteJugadores+'</td><td>'+jj[i].jugadores+'</td><td>'+jj[i].meta+'</td><input form="partida'+jj[i].idpartida+'" type="number" name="idPartida" value="'+jj[i].idpartida+'" hidden><td><input type="button" class="w3-button" value="Unirse" onclick="handleFormSubmit3(\'document.getElementById("partida'+jj[i].idpartida+'"),agregarJugador\');" style="text-align: center;"></td></tr>';
+              y +='<tr><form id="partida'+jj[i].idPartida+'"></form><td>'+jj[i].nombre+'</td><td>'+jj[i].limiteJugadores+'</td><td>'+jj[i].jugadores+'</td><td>'+jj[i].meta+'</td><input form="partida'+jj[i].idPartida+'" type="number" name="idPartida" value="'+jj[i].idPartida+'" hidden><td><input type="button" class="w3-button" value="Unirse" onclick="handleFormSubmit3(document.getElementById(\'partida'+jj[i].idPartida+'\'),\'agregarJugador\');"></td></tr>';  
+              document.getElementById("partidas").innerHTML=y;
             }
             else if (jj[i].fundador.localeCompare(document.getElementById("idFundador").value)==0){
               window.location = "./../pages/lobby.html";
@@ -379,6 +398,37 @@ function handleFormSubmit3 (form,accion) {
           window.location = "./../pages/menu.html";
         }else if (h.localeCompare("dejarPartidaFalse")==0) {
           alert("Parece que hubo un problema al dejar la partida, vuelve a intentarlo");
+        }else if (h.localeCompare("iniciarPartida")==0) {
+          window.location = "./../pages/juego.html";
+        }else if (h.localeCompare("iniciarPartidaFalse")==0) {
+          alert("Parece que hubo un problema al iniciar la partida, vuelve a intentarlo");
+        }else if (accion.localeCompare("readPartida")==0) {
+
+          var jj = JSON.parse(respuesta);
+          if(jj[0].estado.localeCompare("1")==0){
+            document.getElementById("datosPartida").innerHTML='Nombre: '+jj[0].nombrePartida+' &emsp; Meta: '+jj[0].meta+' &emsp; Número máximo de jugadores: '+jj[0].limiteJugadores;
+            document.getElementById("tableNombres").innerHTML="";
+            for (var i = 0; i < jj[0].jugadores; i++) {
+              document.getElementById("tableNombres").innerHTML+='<tr><td>'+jj[i].nombre+'</td></tr>'
+            }
+            for (var i = jj[0].jugadores; i < jj[0].limiteJugadores; i++) {
+              document.getElementById("tableNombres").innerHTML+='<tr><td>Esperando jugador</td></tr>'
+            }
+            if(jj[0].fundador.localeCompare(document.getElementById("idUsuario").value)==0){
+              document.getElementById("botonIniciar").style.display='block';
+            }
+          }else if(jj[0].estado.localeCompare("0")==0){
+            alert("El fundador de la partida la eliminó");
+            window.location = "./../pages/menu.html";
+          }else if(jj[0].estado.localeCompare("2")==0){
+            alert("El juego está por iniciar");
+            window.location = "./../pages/juego.html";
+          }else{
+            console.log("sabe qué vergas pasó");
+          }
+          
+        }else if (accion.localeCompare("readPartidaFalse")==0) {
+          console.log("oooh no jaló el pedir partida :O");
         }else{
           console.log("Fallo entonces no haré nada perro");
         }
@@ -526,6 +576,9 @@ function tarjetaDelete(hola){
 };
 function tarjetaEdit(hola){
   handleFormSubmit(document.getElementById(hola),'editTarjeta');
+};
+function leerPartidas(){
+  handleFormSubmit3(document.createElement("form"),"readPartida");
 };
 function showIngreso(){
   document.getElementById("trNewIngreso").innerHTML='<form id="createIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createEgreso");"></form><td><input class="w3-input" form="createIngreso" type="text" name="nombreFlujo" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="monto" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="fecha" value=""></td><td><input form="createIngreso" class="w3-input" type="number" name="periodicidad" value=""> semanas</td><td><button type="button" onclick="mandar(\'createIngreso\')" name="accion" value="crear">Crear</button></td><td></td>';

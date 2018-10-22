@@ -15,7 +15,8 @@
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span id="timer" class="w3-bar-item w3-display-middle"></span>
   <span class="w3-bar-item w3-right">TTI 1.0</span>
 </div>
 
@@ -26,22 +27,33 @@
       <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>Bienvenido, <strong>Mike</strong></span><br>    <!--Agregar JS para obtener el nombre del usuario-->
-      <a href="" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-      <a href="./configuracion.html" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+      <span>Bienvenido, <strong id="mainName"></strong></span><br>    <!--Agregar JS para obtener el nombre del usuario-->
     </div>
   </div>
   <hr>
   <div class="w3-container">
     <h5>Herramientas</h5>
   </div>
-  <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
+  <!--<div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
     <a href="./juego.html" class="w3-bar-item w3-button w3-padding w3-green"><i class="fa fa-table fa-fw"></i>  Mi Balance general</a>
-    <a href="./bolsavalores.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-fw"></i>  Mercado de capitales</a>
+    <a href="./bolsavalores.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-fw"></i>  Mercado de capitales</a>
     <a href="./deudaGubernamental.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-fw"></i>Instrumentos gubernamentales</a>
-    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper fa-fw"></i>  Hoja de noticias</a>
-    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Mis amigos </a>
+    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-newspaper fa-fw"></i>  Hoja de noticias</a>
+    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Mis amigos </a>
+  </div>-->
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
+    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'Inicio')"><i class="fa fa-home fa-fw"></i>  Inicio</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Configuracion')"><i class="fa fa-th-list fa-fw"></i>  Configuración</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Finanzas')"><i class="fa fa-chart-line fa-fw"></i>  Finanzas</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'buscarPartida')"><i class="fa fa-bullseye fa-fw"></i>  Buscar partida</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'nuevaPartida')"><i class="fa fa-gamepad fa-fw"></i> Nueva partida</button>
+    <!--<button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>-->
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'tutorial')"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'glosario')"><i class="fa fa-book fa-fw"></i> Glosario</button>
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
+    
   </div>
 </nav>
 
@@ -137,45 +149,6 @@
     </div>
     <hr>
   </div>
-  <div class="w3-panel">
-    <div class="w3-row-padding" >
-        <h5>Mis Propiedades</h5>
-        <table class="w3-table w3-striped w3-white">
-          <tr>
-            <th>Propiedad</th>
-            <th>Ubicación</th>
-            <th>Valor de compra</th>
-            <th>Valor de venta</th>
-            <th>Ingreso mensual</th>
-            <th>Pasivos generados</th>
-          </tr>
-          <tr>
-            <td>Propiedad 1</td>
-            <td>CDMX, Miguel Hidalgo</td>
-            <td><i>$150,000 </i></td>
-            <td><i>$180,000 </i></td>
-            <td><i>$4,500 </i></td>
-            <td><i>$1,500 </i></td>
-          </tr>
-          <tr>
-            <td>Propiedad 2</td>
-            <td>CDMX, Cuauthemoc</td>
-            <td><i>$340,000 </i></td>
-            <td><i>$365,000 </i></td>
-            <td><i>$15,500 </i></td>
-            <td><i>$3,500 </i></td>
-          </tr>
-          <tr>
-            <td>Propiedad 3</td>
-            <td>CDMX, Gustavo A. Madero</td>
-            <td><i>$1,500,000 </i></td>
-            <td><i>$1,550,000 </i></td>
-            <td><i>$40,500 </i></td>
-            <td><i>$12,700 </i></td>
-          </tr>
-        </table>
-    </div>
-  </div>
   <hr>
   <br>
 
@@ -185,11 +158,24 @@
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
-
 // Get the DIV with overlay effect
 var overlayBg = document.getElementById("myOverlay");
-
 // Toggle between showing and hiding the sidebar, and add overlay effect
+function openLink(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menuItem");
+  w3_close();
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-green";
+}
+
 function w3_open() {
     if (mySidebar.style.display === 'block') {
         mySidebar.style.display = 'none';
@@ -199,12 +185,32 @@ function w3_open() {
         overlayBg.style.display = "block";
     }
 }
-
 // Close the sidebar with the close button
 function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
 }
+var c=300;
+var timer_is_on=true;
+
+function displayCount() {
+  //console.log("timer: "+c);
+    document.getElementById('timer').innerHTML=Math.floor(c/60)+":"+Math.floor((c%60)/10)+Math.floor((c%60)%10);
+}
+
+function count() {
+  //console.log("contando");
+    if(timer_is_on) {
+        c=c-1;
+        if(c==0){
+          c=300;
+        }
+        displayCount();
+    }
+}
+console.log("ahí va");
+var interval = setInterval(count,1000);
+
 </script>
 
 </body>
