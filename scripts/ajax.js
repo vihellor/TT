@@ -326,10 +326,10 @@ function handleFormSubmit2 (form,accion) {
     getJson('./../ajax/userTutorial.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
       //console.log("response:");
-      console.log(h);
       document.getElementById("tutDiv").innerHTML=h;
       var k = document.getElementById("tutDiv").innerHTML;
       k = k.trim();
+      console.log(k);
       document.getElementById("tutDiv").innerHTML=k.replace("((<br>)+[\n\s\b]*)+","<br><br>");
       }).catch(function() {
         addTextToPage("Failed to show chapter");
