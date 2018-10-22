@@ -113,18 +113,20 @@ if($peticion['funcion'] == "createCasaDeBolsa"){ //CHECK
             echo  "createCasaFalse";
         }
 }
+//$prueba = '{"funcion":"readAllGlosario","idCasa":3,"nombreCasa":"eTor","comision":34,"mensualidad":150}';
+//$peticion = json_decode($prueba, true);
 if($peticion['funcion'] == "readAllGlosario"){ //CHECKED
         $DAO = new glosarioDAO();
         $resultado = $DAO->readAllGlosario();
-        echo json_encode($resultado);
+        $data = array('data' => $resultado);
+        echo json_encode($data);
 }
 if($peticion['funcion'] == "readGlosario"){ //CHECKED
         $DAO = new glosarioDAO();
         $resultado = $DAO->readAllGlosario();
         echo json_encode($resultado);
 }
-//$prueba = '{"funcion":"updateCasaDeBolsa","idCasa":3,"nombreCasa":"eTor","comision":34,"mensualidad":150}';
-//$peticion = json_decode($prueba, true);
+
 if($peticion['funcion'] == "updateCasaDeBolsa"){ //CHECK
         $DAO = new casaDeBolsaDAO();
         $casa = new casaDeBolsa($peticion['idCasa'],$peticion['nombreCasa'],$peticion['comision'],$peticion['mensualidad']);
