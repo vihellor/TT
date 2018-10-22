@@ -118,8 +118,7 @@ if($peticion['funcion'] == "createCasaDeBolsa"){ //CHECK
 if($peticion['funcion'] == "readAllGlosario"){ //CHECKED
         $DAO = new glosarioDAO();
         $resultado = $DAO->readAllGlosario();
-        $data = array('data' => $resultado);
-        echo json_encode($data);
+        echo json_encode($resultado);
 }
 if($peticion['funcion'] == "createGlosario"){ //CHECKED
         $DAO = new glosarioDAO();
