@@ -365,6 +365,10 @@ function handleFormSubmit3 (form,accion) {
             
           }
           
+        }else if(h.localeCompare("createGlosario")==0){
+          alert("Concepto agregado");
+        }else if(h.localeCompare("createGlosarioFalse")==0){
+          alert("Error al agregar el glosario");
         }else if (h.localeCompare("registroPartida")==0) {
           window.location = "./../pages/lobby.html";
         }else if (h.localeCompare("registroPartidaFalse")==0) {
