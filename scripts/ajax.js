@@ -358,13 +358,18 @@ function handleFormSubmit3 (form,accion) {
           if(myInterval > 0) clearInterval(myInterval);  // stop
           myInterval = setInterval( "leerPartidas()", iFrequency ); 
         }else if(accion.localeCompare("readAllGlosario")==0){
-          var dataGlosario = ['data'];
+          console.log("glosario recibido");
+          //var jj = JSON.parse(respuesta);
           var jj = JSON.parse(respuesta);
+          var glosarioData = [];
           for (i in jj){
-            var aux = [jj[i].idConcepto,jj[i].concepto,jj[i].definicion];
-            
+            var aux = [jj[i].concepto,jj[i].definicion];
+            console.log(jj[i].idConcepto);
+            console.log(jj[i].concepto);
+            console.log(jj[i].definicion);
+            glosarioData.push(aux);
           }
-          
+          exampleTable(glosarioData);
         }else if(h.localeCompare("createGlosario")==0){
           alert("Concepto agregado");
         }else if(h.localeCompare("createGlosarioFalse")==0){
@@ -561,7 +566,10 @@ function clearFlujo(){
   document.getElementById("tableEgresos").innerHTML='<tbody><tr class="w3-green"><th>Concepto</th><th>Monto</th><th>Semana de corte</th><th>Periodicidad</th><th></th><th></th></tr>     </tbody>';
   handleFormSubmit(document.createElement("form"),"readIngresos");
   handleFormSubmit(document.createElement("form"),"readEgresos");
-  setTimeout(function() { crearChart(); }, 1000);
+  if(typeof myChartCanvas !== 'undefined'){
+      myChartCanvas.destroy();
+    }
+  //setTimeout(function() { crearChart(); }, 1000);
 };
 function flujoEdit(hola){
   handleFormSubmit(document.getElementById(hola),'flujoEdit');
@@ -628,6 +636,57 @@ function checkCookie(cname) {
     } else {
       return true;
     }
+}
+/* Formatting function for row details - modify as you need */
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.definicion+'</td>'+
+        '</tr>'+
+    '</table>';
+}
+function exampleTable(datitos){
+  console.log("creando tabla...");
+  var dataSet = datitos
+ 
+/*$(document).ready(function() {
+    $('#exampleTable').DataTable( {
+        data: dataSet,
+        columns: [
+            { title: "Concepto" },
+            { title: "Definición" }
+        ]
+    } );
+} );*/
+  $(document).ready(function() {
+    var table = $('#exampleTable').DataTable( {
+        "data": datitos,
+        "columns": [
+            { "title": "concepto" },
+            { "title": "definicion" }
+        ],
+        //"order": [[1, 'asc']]
+    } );
+     
+    // Add event listener for opening and closing details
+    /*$('#exampleTable tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );*/
+  } );
 }
 
 /*

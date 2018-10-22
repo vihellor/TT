@@ -6,13 +6,21 @@
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
-  <script src="./../scripts/ajax.js"></script>
+
   <script src="/scripts/usrTutorial.js"></script>
   <script src="/dist/Chart.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./../DataTables/datatables.min.css"/>
-  <script type="text/javascript" src="./../DataTables/jQuery.js"></script>
-  <script type="text/javascript" src="./../DataTables/jquery.dataTables.min.js"></script>
-  
+  <script type="text/javascript" src="./../DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="./../DataTables/datatables.js"></script>
+  <script src="./../scripts/ajax.js"></script>
+  <style type="text/css">
+  td.details-control {
+    background: url('../resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+  }
+  tr.shown td.details-control {
+      background: url('../resources/details_close.png') no-repeat center center;
+  }</style>
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -181,6 +189,8 @@
         </div>
       </div>
       <br><br>
+      <button onclick="crearChart();">Ver gráfica</button>
+      <br><br>
       <div class="chart-container" style="position: relative; height:40vh; width:80vw">
           <canvas id="myChart"></canvas>
       </div>
@@ -331,21 +341,8 @@
     <div class="w3-row-padding" >
       <br>
       <br>
-      <div id="glosarioDiv" class="flexContainer">
-        <table id="exampleTable" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Concepto</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th>Concepto</th>
-                </tr>
-            </tfoot>
-        </table>
+      <div id="glosarioDiv">
+        <table id="exampleTable" class="display" style="width:100%"></table>
       </div>
     </div>
   </div>
@@ -452,9 +449,9 @@ function acordeon(id) {
   handleFormSubmit(document.createElement("form"),"readEgresos");
   handleFormSubmit2(document.createElement("form"),"getTutorials");
   handleFormSubmit3(document.createElement("form"),"readAllGlosario");
-  window.onload = function() {
-    crearChart();
-  };
+  //window.onload = function() {
+  //  crearChart();
+  //};
   
 </script>
 </body>
