@@ -330,7 +330,7 @@ function handleFormSubmit2 (form,accion) {
       var k = document.getElementById("tutDiv").innerHTML;
       k = k.trim();
       console.log(k);
-      document.getElementById("tutDiv").innerHTML=k.replace("((<br>)+[\n\s\b]*)+","<br><br>");
+      document.getElementById("tutDiv").innerHTML=k.replace("/(<br>)+/","<br><br>");
       }).catch(function() {
         addTextToPage("Failed to show chapter");
       }).then(function() {
