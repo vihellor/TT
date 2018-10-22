@@ -12,10 +12,13 @@ foreach( $recent_posts as $recent_post ){
 	// <div class="w3-container w3-border w3-large"></div> 
 	$html.="<div id='".$recent_post['post_title']."' style='display: none;' class='division'><button class=\"w3-bar-item w3-button tablink\" onclick=\"retAll('".$recent_post['post_title']."')\"><i class=\"fa fa-angle-left fa-fw\"></i>Atras</button> <br><h1>".$recent_post['post_title']."</h1><div class=\"w3-container w3-border w3-large\"><div class=\"w3-left-align\"><p>".$recent_post['post_content']."</p></div></div></div>";
 	//$html = preg_grep("/<img class=\".*\"/" ,$html);
-	$html = preg_replace("/<img class=\".*\" s/", "<br><img class=\"w3-image\" s", $html);
+	$html = preg_replace("/<img class=\".*\" src/", "<br><img class=\"w3-image\" src", $html);
 	$html = str_replace("][/video]"," type=\"video/mp4\"></video>",$html);
 	$html = str_replace("[video","<video",$html);
 	$html = str_replace("mp4="," controls><source src=",$html);
+	$html = str_replace("\n","<br>",$html);
+	$html = preg_replace("/(<br>)+/", "<br>", $html);
+	//$html = preg_replace("/([\b\s]*<[\b\s]*[bB][rR][\s]*/?[\b\s]*>){2,}/", "<br>", $html);
 	//$video = preg_grep("/\[video.*\[\/video\]/" ,$html);
 	//$video = rtrim($video,"]");
 	//$video = ltrim($video,"mp4=");
