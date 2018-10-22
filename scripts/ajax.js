@@ -325,9 +325,9 @@ function handleFormSubmit2 (form,accion) {
     // Use `JSON.stringify()` to make the output valid, human-readable JSON.
     getJson('./../ajax/userTutorial.php',JSON.stringify(data, null, "  ")).then(function(respuesta) {
       var h = respuesta.trim();
-      //console.log("response:");
+      console.log("response:");
       //console.log(h);
-      document.getElementById("tutDiv").innerHTML=h;
+      document.getElementById("tutDiv").innerHTML=respuesta;
       }).catch(function() {
         addTextToPage("Failed to show chapter");
       }).then(function() {
