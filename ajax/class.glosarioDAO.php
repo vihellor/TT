@@ -5,42 +5,46 @@ include_once('./class.glosario.php');
 class glosarioDAO {
 	
 	function createGlosario(glosario $concepto){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL createGlosario(?,?)';
 		$array = array($concepto->concepto, $concepto->definicion);
-		$BD->execute($sql,$array);
+		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
+		return $resultado;
 	}
 
 	function readGlosario(glosario $concepto){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL readGlosario(?)';
 		$array = array($concepto->idConcepto);
 		$resultado = $BD->fetch($sql,$array);
+		$BD->close();
 		return new glosario($resultado['idConcepto'], $resultado['concepto'], $resultado['definicion']);
 	}
 
 	function readAllGlosario(){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL readAllGlosario()';
 		$resultado = $BD->fetchAll($sql);
-		foreach ($resultado as $row){
-		echo implode (', ', $row);
-		echo '<br>';
-		}
+		$BD->close();
+		return $resultado;
 	}
 
 	function updateGlosario(glosario $concepto){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL updateGlosario(?,?,?)';
 		$array = array($concepto->idConcepto,$concepto->concepto,$concepto->definicion);
 		$BD->execute($sql,$array);
+		$BD->close();
 	}
 
 	function deleteGlosario(glosario $concepto){
-		$BD = $_SESSION["bd"];
+		$BD = new DBPDO();
 		$sql = 'CALL deleteGlosario(?)';
 		$array = array($concepto->concepto);
-		$BD->execute($sql,$array);
+		$resultado = $BD->execute($sql,$array);
+		$BD->close();
+		return $resultado;
 	}
 
 }

@@ -6,6 +6,8 @@ include_once('./class.casaDeBolsa.php');
 include_once('./class.casaDeBolsaDAO.php');
 include_once('./class.usuario.php');
 include_once('./class.usuarioDAO.php');
+include_once('./class.glosario.php');
+include_once('./class.glosarioDAO.php');
 include_once('./class.DBPDO.php');
 
 $peticion = json_decode(file_get_contents('php://input'), true);
@@ -110,6 +112,16 @@ if($peticion['funcion'] == "createCasaDeBolsa"){ //CHECK
         else{
             echo  "createCasaFalse";
         }
+}
+if($peticion['funcion'] == "readAllGlosario"){ //CHECKED
+        $DAO = new glosarioDAO();
+        $resultado = $DAO->readAllGlosario();
+        echo json_encode($resultado);
+}
+if($peticion['funcion'] == "readGlosario"){ //CHECKED
+        $DAO = new glosarioDAO();
+        $resultado = $DAO->readAllGlosario();
+        echo json_encode($resultado);
 }
 //$prueba = '{"funcion":"updateCasaDeBolsa","idCasa":3,"nombreCasa":"eTor","comision":34,"mensualidad":150}';
 //$peticion = json_decode($prueba, true);
