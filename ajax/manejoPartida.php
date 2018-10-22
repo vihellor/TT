@@ -121,10 +121,16 @@ if($peticion['funcion'] == "readAllGlosario"){ //CHECKED
         $data = array('data' => $resultado);
         echo json_encode($data);
 }
-if($peticion['funcion'] == "readGlosario"){ //CHECKED
+if($peticion['funcion'] == "createGlosario"){ //CHECKED
         $DAO = new glosarioDAO();
-        $resultado = $DAO->readAllGlosario();
-        echo json_encode($resultado);
+        $concepto = new glosario("",$peticion['concepto'],$peticion['definicion']);
+        $resultado = $DAO->createGlosario($concepto);
+        if($resultado['_result']==1){
+            echo "createGlosario";
+        }
+        else{
+            echo  "createGlosarioFalse";
+        }
 }
 
 if($peticion['funcion'] == "updateCasaDeBolsa"){ //CHECK
