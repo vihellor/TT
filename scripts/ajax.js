@@ -667,8 +667,8 @@ function exampleTable(datitos){
     var table = $('#exampleTable').DataTable( {
         "data": datitos,
         "columns": [
-            { "title": "concepto" },
-            { "title": "definicion" }
+            { "title": "Concepto" },
+            { "title": "Definición" }
         ],
         "language": {
         "sProcessing":    "Procesando...",

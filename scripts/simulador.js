@@ -26,14 +26,14 @@ function generate(inicio,cantidad,param1,param2){
 };
 function generarAcciones(){
 	var arr = [];
-	arr.push(generate(50,1000,.0045,.005));//1
-	arr.push(generate(63,1000,.0045,.005));//2
-	arr.push(generate(43,1000,.0045,.005));//3
-	arr.push(generate(22,1000,.0045,.005));//4
-	arr.push(generate(98,1000,.0045,.005));//5
-	arr.push(generate(71,1000,.0045,.005));//6
-	arr.push(generate(39,1000,.0045,.005));//7
-	arr.push(generate(58,1000,.0045,.005));//8
+	arr.push(generate(50,1440,.0045,.005));//1
+	arr.push(generate(63,1440,.0045,.005));//2
+	arr.push(generate(43,1440,.0045,.005));//3
+	arr.push(generate(22,1440,.0045,.005));//4
+	arr.push(generate(98,1440,.0045,.005));//5
+	arr.push(generate(71,1440,.0045,.005));//6
+	arr.push(generate(39,1440,.0045,.005));//7
+	arr.push(generate(58,1440,.0045,.005));//8
 	//console.log(arr[0]);
 	return arr;
 };
@@ -50,7 +50,7 @@ var meses = [
 		'Septiembre',
 		'Octubre',
 		'Noviembre',
-		'Deciembre'
+		'Diciembre'
 	];
 var myChart;
 var colors=[chartColors.red,chartColors.orange,chartColors.yellow,chartColors.green,chartColors.blue,chartColors.purple,chartColors.black,chartColors.grey];
@@ -59,8 +59,8 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames){
 	if (inicio<0) {
 		inicio=0;
 	}
-	var sem=0;
-	var mes=0;
+	var sem=inicio%4;
+	var mes=inicio%12;
 	var anio=2017;
 	var aux = [];
 	var labelsR = [];
@@ -134,14 +134,7 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames){
 
         scales: {
 			xAxes: [{
-				display: true,
-				scaleLabel: {
-					display: true,
-					labelString: 'Tiempo'
-				},
-				ticks: {
-					stepSize: 7
-				}
+				display: true
 			}],
 			yAxes: [{
 				display: true,

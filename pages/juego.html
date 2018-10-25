@@ -7,21 +7,33 @@
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  <script src="/dist/Chart.min.js"></script>
+  <script src="/dist/utils.js"></script>
+  <script src="./../scripts/simulador.js"></script>
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
 </head>
 <body class="w3-light-grey">
 
+<!-- !PAGE CONTENT! -->
+<div class="w3-panel w3-black w3-card-4 w3-display-middle" onclick="close_alert()" style="z-index:9; height:96%; width:100%; cursor:pointer;opacity: 0.8;display: none;" id="alertDiv">
+</div>
+<div class="w3-container w3-white w3-card-4 w3-display-middle" onclick="" style="z-index:15; height:80%; width:80%; cursor: auto;display: none;"  id="alertDiv2">
+  <div class="chart-container" style="position: relative; height:100%; width:100%">
+    <canvas id="chartAlert"></canvas>
+  </div>
+</div>
+
 <!-- Top container -->
-<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+<div id="topBar" class="w3-bar w3-top w3-black w3-large" style="z-index:4; display: none;">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span id="timer" class="w3-bar-item w3-display-middle"></span>
   <span class="w3-bar-item w3-right">TTI 1.0</span>
 </div>
 
 <!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+<nav class="w3-sidebar w3-white w3-animate-left" style="z-index:3;width:300px; display: none;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s4">
       <img src="./../imgs/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
@@ -58,8 +70,26 @@
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px; margin-top:43px">
+<div id="spinner" class="w3-main w3-display-middle">
+  <div class="sk-circle">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
+
+
+
+<div id="mainDiv" class="w3-main" style="margin-left:300px; margin-top:43px;display: none;">
   <!-- balanceGeneral -->
   <div id="balanceGeneral" class="w3-panel w3-panel menuItem w3-animate-left"  style="text-align: center;">
     <div class="w3-row-padding">
@@ -68,49 +98,48 @@
         <h2><b>Mi balance general</b></h2>
         <h5>Mis inversiones</h5>
         <table class="w3-table w3-striped w3-white">
-          <tr>
-            <th>Transacción</th>
-            <th>Instrumentos</th>
-            <th>Rendimiento</th>
-            <th>Valor invertido</th>
-            <th>Valor actual</th>
-            <th>Número de titulos</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>PETROIL</td>
-            <td><font color="red">-13.5%</font></td>
-            <td><i>$160 </i></td>
-            <td><font color="red">$140 </font></td>
-            <td><i>10 </i></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>GAEM</td>
-            <td><font color="red">-3.27%</font></td>
-            <td><i>$1530 </i></td>
-            <td><font color="red">$1480 </font></td>
-            <td><i>10 </i></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>RAQUIM</td>
-            <td><font color="green">150%</font></td>
-            <td><i>$100 </i></td>
-            <td><font color="green">$250 </font></td>
-            <td><i>50 </i></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>PETROIL</td>
-            <td><font color="red">-6.67%</font></td>
-            <td><i>$150 </i></td>
-            <td><font color="red">$140 </font></td>
-            <td><i>10 </i></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Instrumentos</th>
+              <th>Rendimiento</th>
+              <th>Valor invertido</th>
+              <th>Valor actual</th>
+              <th>Número de titulos</th>
+            </tr>
+          </thead>
+          <tbody id="misInversiones">
+            <tr>
+              <td>PETROIL</td>
+              <td><font color="red">-13.5%</font></td>
+              <td><i>$160 </i></td>
+              <td><font color="red">$140 </font></td>
+              <td><i>10 </i></td>
+            </tr>
+            <tr>
+              <td>GAEM</td>
+              <td><font color="red">-3.27%</font></td>
+              <td><i>$1530 </i></td>
+              <td><font color="red">$1480 </font></td>
+              <td><i>10 </i></td>
+            </tr>
+            <tr>
+              <td>RAQUIM</td>
+              <td><font color="green">150%</font></td>
+              <td><i>$100 </i></td>
+              <td><font color="green">$250 </font></td>
+              <td><i>50 </i></td>
+            </tr>
+            <tr>
+              <td>PETROIL</td>
+              <td><font color="red">-6.67%</font></td>
+              <td><i>$150 </i></td>
+              <td><font color="red">$140 </font></td>
+              <td><i>10 </i></td>
+            </tr>
+          </tbody>
         </table>
       </div>
-      <div class="w3-responsive">
+      <div class="w3-responsive" style="display: none;">
         <h5>Mis bonos gubernamentales</h5>
         <table class="w3-table w3-striped w3-white">
           <tr>
@@ -143,95 +172,119 @@
           </tr>
         </table>
       </div>
+      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+          <canvas id="chartBalance"></canvas>
+      </div>
     </div>
   </div>
   <div id="mercadoCapitales" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding">
         <br>
       <h2><b>Mercado de capitles</b></h2>
+      <h4><b><i></i>Comisiones de la casa de bolsa:</b></h4>
+      <br>
+      <p id="datosComision"></p>
+      <br>
       <div class="w3-responsive">
         <table class="w3-table w3-striped w3-white">
-          <tr>
-            <th>Clave</th>
-            <th>Emisora</th>
-            <th>Rendimiento (1S)</th>
-            <th>Comprar</th>
-            <th>Vender</th>
-            <th>Valor invertido</th>
-            <th>Valor actual</th>
-            <th>Número de titulos</th>
-          </tr>
-          <tr>
-            <td>PETROIL</td>
-            <td>PETROLEOS Y ENERGIA S.A.B. de C.V.</td>
-            <td><font color="red">-6.3%</font></td>
-            <td><i>$15 </i></td>
-            <td><i>$14 </i></td>
-            <td><i>$310 </i></td>
-            <td><font color="red">$280 </font></td>
-            <td><i>20 </i></td>
-          </tr>
-          <tr>
-            <td>GAEM</td>
-            <td>Grupo Aéreo Mexicano S.A.B. de C.V.</td>
-            <td><font color="red">-4.2%</font></td>
-            <td><i>$153 </i></td>
-            <td><i>$148 </i></td>
-            <td><i>$1530 </i></td>
-            <td><font color="red">$1480 </font></td>
-            <td><i>10 </i></td>
-          </tr>
-          <tr>
-            <td>PANM</td>
-            <td>Panificadora Nacional S.A.B. de C.V.</td>
-            <td><font color="green">3.5%</font></td>
-            <td><i>$8 </i></td>
-            <td><i>$7.5 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>0 </i></td>
-          </tr>
-          <tr>
-            <td>GIM</td>
-            <td>Grupo Industrial Mexicano S.A.B. de C.V.</td>
-            <td><font color="green">1.54%</font></td>
-            <td><i>$78 </i></td>
-            <td><i>$69</i></td>
-            <td><i>$0 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>0 </i></td>
-          </tr>
-          <tr>
-            <td>RAQUIM</td>
-            <td>Radio Quim S.A.B de C.V.</td>
-            <td><font color="red">-6.3%</font></td>
-            <td><i>$4 </i></td>
-            <td><i>$2.5 </i></td>
-            <td><i>$100 </i></td>
-            <td><font color="green">$250 </font></td>
-            <td><i>50 </i></td>
-          </tr>
-          <tr>
-            <td>GFINMA</td>
-            <td>Grupo Financiero Mancol S.A.B. de C.V.</td>
-            <td><font color="green">3.3%</font></td>
-            <td><i>$104 </i></td>
-            <td><i>$101.4 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>0 </i></td>
-          </tr>
-          <tr>
-            <td>GICR</td>
-            <td>Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.</td>
-            <td><font color="green">9.3%</font></td>
-            <td><i>$54 </i></td>
-            <td><i>$46 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>$0 </i></td>
-            <td><i>0 </i></td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Clave</th>
+              <th>Emisora</th>
+              <th>Rendimiento (1S)</th>
+              <th>Comprar</th>
+              <th>Vender</th>
+              <th>Valor invertido</th>
+              <th>Valor actual</th>
+              <th>Número de titulos</th>
+            </tr>
+          </thead>
+          <tbody id="tableAcciones">
+            <tr>
+              <td>PETROIL</td>
+              <td>PETROLEOS Y ENERGIA S.A.B. de C.V.</td>
+              <td><font color="red">-6.3%</font></td>
+              <td><i>$15 </i></td>
+              <td><i>$14 </i></td>
+              <td><i>$310 </i></td>
+              <td><font color="red">$280 </font></td>
+              <td><i>20 </i></td>
+            </tr>
+            <tr>
+              <td>GAEM</td>
+              <td>Grupo Aéreo Mexicano S.A.B. de C.V.</td>
+              <td><font color="red">-4.2%</font></td>
+              <td><i>$153 </i></td>
+              <td><i>$148 </i></td>
+              <td><i>$1530 </i></td>
+              <td><font color="red">$1480 </font></td>
+              <td><i>10 </i></td>
+            </tr>
+            <tr>
+              <td>PANM</td>
+              <td>Panificadora Nacional S.A.B. de C.V.</td>
+              <td><font color="green">3.5%</font></td>
+              <td><i>$8 </i></td>
+              <td><i>$7.5 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>0 </i></td>
+            </tr>
+            <tr>
+              <td>GIM</td>
+              <td>Grupo Industrial Mexicano S.A.B. de C.V.</td>
+              <td><font color="green">1.54%</font></td>
+              <td><i>$78 </i></td>
+              <td><i>$69</i></td>
+              <td><i>$0 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>0 </i></td>
+            </tr>
+            <tr>
+              <td>RAQUIM</td>
+              <td>Radio Quim S.A.B de C.V.</td>
+              <td><font color="red">-6.3%</font></td>
+              <td><i>$4 </i></td>
+              <td><i>$2.5 </i></td>
+              <td><i>$100 </i></td>
+              <td><font color="green">$250 </font></td>
+              <td><i>50 </i></td>
+            </tr>
+            <tr>
+              <td>GFINMA</td>
+              <td>Grupo Financiero Mancol S.A.B. de C.V.</td>
+              <td><font color="green">3.3%</font></td>
+              <td><i>$104 </i></td>
+              <td><i>$101.4 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>0 </i></td>
+            </tr>
+            <tr>
+              <td>GICR</td>
+              <td>Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.</td>
+              <td><font color="green">9.3%</font></td>
+              <td><i>$54 </i></td>
+              <td><i>$46 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>0 </i></td>
+            </tr>
+            <tr>
+              <td>GNLA</td>
+              <td>Grupo nacional de lacteos S.A.B. de C.V.</td>
+              <td><font color="green">9.3%</font></td>
+              <td><i>$54 </i></td>
+              <td><i>$46 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>$0 </i></td>
+              <td><i>0 </i></td>
+            </tr>
+          </tbody>
         </table>
+      </div>
+      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+          <canvas id="chartCapitales"></canvas>
       </div>
     </div>
   </div>
@@ -241,78 +294,83 @@
       <h2><b>Instrumentos de deuda gubernamental</b></h2>
       <div class="w3-responsive">
         <table class="w3-table w3-striped w3-white">
-          <tr>
-            <th>Instrumento</th>
-            <th>Serie</th>
-            <th>Precio</th>
-            <th>Tasa</th>
-            <th>Plazo</th>
-            <th>Tipo de cotización</th>
-          </tr>
-          <tr>
-            <td>CETES</td>
-            <td>BI AAMMDD</td>
-            <td>9.94</td>
-            <td>7.58</td>
-            <td>28 días</td>
-            <td>A descuento</td>
-          </tr>
-          <tr>
-            <td>CETES</td>
-            <td>BI AAMMDD</td>
-            <td>9.80</td>
-            <td>7.81</td>
-            <td>91 días</td>
-            <td>A descuento</td>
-          </tr>
-          <tr>
-            <td>CETES</td>
-            <td>BI AAMMDD</td>
-            <td>9.63</td>
-            <td>7.81</td>
-            <td>175 días</td>
-            <td>A descuento</td>
-          </tr>
-          <tr>
-            <td>CETES</td>
-            <td>BI AAMMDD</td>
-            <td>9.32</td>
-            <td>7.71</td>
-            <td>182 días</td>
-            <td>A descuento</td>
-          </tr>
-          <tr>
-            <td>BONDES</td>
-            <td>LD AAMMDD</td>
-            <td>99.33</td>
-            <td>7.68</td>
-            <td>5 años</td>
-            <td>A precio/28días</td>
-          </tr>
-          <tr>
-            <td>UDIBONOS</td>
-            <td>S AAMMDD</td>
-            <td>590.44</td>
-            <td>3.67</td>
-            <td>3 años</td>
-            <td>A precio/semestral</td>
-          </tr>
-          <tr>
-            <td>UDIBONOS</td>
-            <td>S AAMMDD</td>
-            <td>624.70</td>
-            <td>3.75</td>
-            <td>10 años</td>
-            <td>A precio/semestral</td>
-          </tr>
-          <tr>
-            <td>UDIBONOS</td>
-            <td>S AAMMDD</td>
-            <td>624.59</td>
-            <td>3.88</td>
-            <td>30 años</td>
-            <td>A precio/semestral</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Instrumento</th>
+              <th>Serie</th>
+              <th>Precio</th>
+              <th>Tasa</th>
+              <th>Plazo</th>
+              <th>Tipo de cotización</th>
+            </tr>
+          </thead>
+          <tbody id="tableInstrumentos">
+            <tr>
+              <td>CETES</td>
+              <td>BI AAMMDD</td>
+              <td>9.94</td>
+              <td>7.58</td>
+              <td>28 días</td>
+              <td>A descuento</td>
+            </tr>
+            <tr>
+              <td>CETES</td>
+              <td>BI AAMMDD</td>
+              <td>9.80</td>
+              <td>7.81</td>
+              <td>91 días</td>
+              <td>A descuento</td>
+            </tr>
+            <tr>
+              <td>CETES</td>
+              <td>BI AAMMDD</td>
+              <td>9.63</td>
+              <td>7.81</td>
+              <td>175 días</td>
+              <td>A descuento</td>
+            </tr>
+            <tr>
+              <td>CETES</td>
+              <td>BI AAMMDD</td>
+              <td>9.32</td>
+              <td>7.71</td>
+              <td>182 días</td>
+              <td>A descuento</td>
+            </tr>
+            <tr>
+              <td>BONDES</td>
+              <td>LD AAMMDD</td>
+              <td>99.33</td>
+              <td>7.68</td>
+              <td>5 años</td>
+              <td>A precio/28días</td>
+            </tr>
+            <tr>
+              <td>UDIBONOS</td>
+              <td>S AAMMDD</td>
+              <td>590.44</td>
+              <td>3.67</td>
+              <td>3 años</td>
+              <td>A precio/semestral</td>
+            </tr>
+            <tr>
+              <td>UDIBONOS</td>
+              <td>S AAMMDD</td>
+              <td>624.70</td>
+              <td>3.75</td>
+              <td>10 años</td>
+              <td>A precio/semestral</td>
+            </tr>
+            <tr>
+              <td>UDIBONOS</td>
+              <td>S AAMMDD</td>
+              <td>624.59</td>
+              <td>3.88</td>
+              <td>30 años</td>
+              <td>A precio/semestral</td>
+            </tr>
+          </tbody>
+          
         </table>
       </div>
     </div>
@@ -334,62 +392,11 @@
   <!-- End page content -->
 </div>
 
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function openLink(evt, animName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menuItem");
-  w3_close();
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-     tablinks[i].className = tablinks[i].className.replace(" w3-green", "");
-  }
-  document.getElementById(animName).style.display = "block";
-  evt.currentTarget.className += " w3-green";
-}
+<script src="./../scripts/juego.js"></script>
 
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-var c=300;
-var timer_is_on=true;
-
-function displayCount() {
-  //console.log("timer: "+c);
-    document.getElementById('timer').innerHTML=Math.floor(c/60)+":"+Math.floor((c%60)/10)+Math.floor((c%60)%10);
-}
-
-function count() {
-  //console.log("contando");
-    if(timer_is_on) {
-        c=c-1;
-        if(c==0){
-          c=300;
-        }
-        displayCount();
-    }
-}
-console.log("ahí va");
-var interval = setInterval(count,1000);
-
+<script type="text/javascript">
+  handleFormSubmit(document.createElement("form"),"getUsuario");
+  handleFormSubmit(document.createElement("form"),"readPartida");
 </script>
 
 </body>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Line Chart</title>
+  <script src="/dist/Chart.min.js"></script>
+  <script src="/dist/utils.js"></script>
+  <script src="./simulador.js"></script>
+	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+	<div style="width:90%;">
+		<canvas id="canvas"></canvas>
+	</div>
+	<script>
+		window.onload = function() {
+			var varChart;
+			var names=['PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'];
+			var compra_venta=[
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095,
+				(Math.random()*.00155)+.00095
+				];
+			var data=generarAcciones();
+			//console.log((Math.random()*.00155)+.00095);
+			//crearChart(data[0],'Panorama','canvas',varChart,200,names[0]);
+		};
+	</script>
+</body>
+
+</html>
