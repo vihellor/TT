@@ -8,6 +8,10 @@ include_once('./class.usuario.php');
 include_once('./class.usuarioDAO.php');
 include_once('./class.glosario.php');
 include_once('./class.glosarioDAO.php');
+include_once('./class.flujo.php');
+include_once('./class.flujoDAO.php');
+include_once('./class.tarjeta.php');
+include_once('./class.tarjetaDAO.php');
 include_once('./class.DBPDO.php');
 
 $peticion = json_decode(file_get_contents('php://input'), true);

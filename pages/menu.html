@@ -27,6 +27,15 @@
 </head>
 <body class="w3-light-grey">
 
+<!-- !PAGE CONTENT! -->
+<div class="w3-panel w3-black w3-card-4 w3-display-middle" onclick="close_alert()" style="z-index:9; height:96%; width:100%; cursor:pointer;opacity: 0.8;display: none;" id="alertDiv">
+</div>
+<div class="w3-container w3-white w3-card-4 w3-display-middle" onclick="" style="z-index:15; height:80%; width:80%; cursor: auto;display: none;"  id="alertDiv2">
+  <div class="chart-container" style="position: relative; height:100%; width:100%">
+    <canvas id="chartAlert"></canvas>
+  </div>
+</div>
+
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
@@ -189,7 +198,7 @@
         </div>
       </div>
       <br><br>
-      <button class="w3-btn w3-green w3-xlarge" onclick="crearChart();">Ver gráfica</button>
+      <button class="w3-btn w3-green w3-xlarge" onclick="proyectar();">Ver gráfica</button>
       <br><br>
       <div class="chart-container" style="position: relative; height:40vh; width:80vw">
           <canvas id="myChart"></canvas>

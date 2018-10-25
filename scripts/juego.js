@@ -47,7 +47,52 @@ function getJson(url,objSend) {
   //console.log("pues algo intenta correrse");
   return post(url,objSend).then();
 }
-
+function generateIngresos(){
+  console.log("tamanio ingresos = "+ingresos.length);
+  console.log("tamanio egresos = "+egresos.length);
+  var data1=[];
+  var aux=0;
+  for (var j =  0; j < 1440; j++) {
+    aux=0;
+    for (var i =  0; i < ingresos.length; i++) {
+      //console.log(j+" : "+i+" : "+(j-ingresos[i][1])%ingresos[i][2]);
+      //console.log("1: "+ingresos[i][1]);
+      //console.log("2: "+ingresos[i][2]);
+      if (((j-ingresos[i][1])%ingresos[i][2])==0) {
+        aux+=parseInt(ingresos[i][0]);
+      }
+    }
+    data1.push(aux);
+  }
+  /*console.log("yeeeeeeeeeeeeeeeei");
+  console.log(data1.length);
+  for (var j =  0; j < 48; j++) {
+    //console.log(j);
+    console.log(data1[j]);
+  }*/
+  var data2=[];
+  for (var j =  0; j < 1440; j++) {
+    aux=0;
+    for (var i =  0; i < egresos.length; i++) {
+      if ((j-egresos[i][1])%egresos[i][2]==0) {
+        aux+=parseInt(egresos[i][0]);
+      }
+    }
+    data2.push(aux);
+  }
+  /*console.log("yeeeeeeeeeeeeeeeei2");
+  console.log(data2.length);
+  for (var j =  0; j < 48; j++) {
+    //console.log(j);
+    console.log(data2[j]);
+  }*/
+  var data3=[];
+  aux=0;
+  for (var j =  0; j < 1440; j++) {
+    data3.push(data1[j]-data2[j]);
+  }
+  
+}
 
 //función para leer de un html el form deseado
 function toJSONString( form ) {
@@ -199,6 +244,38 @@ function openLink(evt, animName) {
   document.getElementById(animName).style.display = "block";
   evt.currentTarget.className += " w3-green";
 };
+function openLink2(evt, animName) {
+  var l0 =document.getElementById('l0');
+  var l1 =document.getElementById('l1');
+  var l2 =document.getElementById('l2');
+  if (animName.localeCompare("ingresos")==0) {
+    console.log("ingresos");
+    document.getElementById('inversiones').style.display = "none";
+    document.getElementById('ingresos').style.display = "block";
+    document.getElementById('egresos').style.display = "none";
+    l0.className=l0.className.replace("w3-green", "w3-light-gray");
+    l1.className=l1.className.replace("w3-light-gray","w3-green");
+    l2.className=l2.className.replace("w3-green", "w3-light-gray");
+
+  }else if (animName.localeCompare("egresos")==0) {
+    console.log("egresos");
+    document.getElementById('inversiones').style.display = "none";
+    document.getElementById('ingresos').style.display = "none";  
+    document.getElementById('egresos').style.display = "block";
+    l0.className=l0.className.replace("w3-green", "w3-light-gray");
+    l1.className=l1.className.replace("w3-green", "w3-light-gray");
+    l2.className=l2.className.replace("w3-light-gray","w3-green");
+  }
+  else{
+    console.log("inversiones");
+    document.getElementById('inversiones').style.display = "block";
+    document.getElementById('ingresos').style.display = "none";  
+    document.getElementById('egresos').style.display = "none";
+    l0.className=l0.className.replace("w3-light-gray","w3-green");
+    l1.className=l1.className.replace("w3-green", "w3-light-gray");
+    l2.className=l2.className.replace("w3-green", "w3-light-gray");
+  }
+};
 
 function w3_open() {
     if (mySidebar.style.display === 'block') {
@@ -243,6 +320,13 @@ function iniciar(){
   document.getElementById('mySidebar').className+=" w3-collapse";
   document.getElementById('spinner').style.display ="none";
   timer_is_on=true;
+};
+function actualizarPrecio(input){
+  var aux = input.value;
+  var select = document.getElementById('select-choice').value;
+  var nTit = document.getElementById('numberTitulos').value;
+  document.getElementById('costoBruto').value=(nTit*data[select][diaActual]).toFixed(2);
+  document.getElementById('costoNeto').value=(nTit*(data[select][diaActual]+data[select][diaActual]*casaBolsa.comision)).toFixed(2);
 };
 
 //window.onload = function() {
@@ -323,11 +407,11 @@ function actualizarDia(){
       else
         text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td>0%</td><td><i>$"+vAct.toFixed(4)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto+"</i></td>";
       if (gasto>titulos*vAct)
-        text2="<td><font color='red'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Proyectar</button></td></tr>";
+        text2="<td><font color='red'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       else if (gasto<titulos*vAct)
-        text2="<td><font color='green'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Proyectar</button></td></tr>";
+        text2="<td><font color='green'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       else
-        text2="<td>$"+(titulos*vAct)+"</td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Proyectar</button></td></tr>";
+        text2="<td>$"+(titulos*vAct)+"</td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       
       if ((titulos*vAct)<gasto)
         text3="<tr><td>"+names[i]+"</td><td><font color='red'>-"+((gasto/vReal)-1)+"%</font></td><td><i>$"+gasto+"</i></td><td><font color='red'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td></tr>";
@@ -350,6 +434,10 @@ var interval = setInterval(count,1000);
 var ingresos = [];
 var egresos = [];
 bandera=0;
+
+var idUsuario;
+var nameUsuario;
+var idFundador;
 function handleFormSubmit (form,accion) {
   
   // Call our function to get the form data.
@@ -361,26 +449,58 @@ function handleFormSubmit (form,accion) {
       var h = respuesta.trim();
       //console.log(accion);
       //console.log("el resultado es:"+h.localeCompare("login"));
-        if(accion.localeCompare("getFundador")==0){
+        if(accion.localeCompare("getUsuario")==0){
           var jj = JSON.parse(respuesta);
+          nameUsuario=jj.nickname;
+          idUsuario=jj.idUsuario;
+          console.log("getUsuario: "+nameUsuario);
           //console.log(JSON.parse(respuesta));
           //console.log(jj);
-          document.getElementById("mainName").innerHTML=jj.nombre;
+          document.getElementById("mainName").innerHTML=nameUsuario;
         }
-        else if(accion.localeCompare("readIngresos")==0){
+        else if(accion.localeCompare("readPartida")==0){
+          var jj = JSON.parse(respuesta);
+          console.log("readPartida: "+JSON.stringify(jj));
+          idFundador=jj[0].fundador;
+          //console.log("fundador: "+jj[0].fundador);
+          document.getElementById('datosBalance').innerHTML="Nombre de partida: "+jj[0].nombrePartida+" &emsp; Monto inicial: "+jj[0].montoInicial+"  &emsp; Meta: "+jj[0].meta;
+          document.getElementById('inputIngresos').value=idFundador;
+          document.getElementById('inputEgresos').value=idFundador;
+          document.getElementById('submitIngresos').click();
+          document.getElementById('submitEgresos').click();
+
+
+          //console.log(JSON.parse(respuesta));
+          //console.log(jj);
+        }else if(accion.localeCompare("readIngresos")==0){
           var jj = JSON.parse(respuesta);
           var x = document.getElementById("tableIngresos").innerHTML;
           var len= x.length;
           var y = x.slice(0,len-9);
           for (i in jj){
-            y +='<form id=\'flujo'+jj[i].idFlujo+'\' onsubmit="event.preventDefault(); handleFormSubmit(this,\'ingresos\');"><tr><td><input class="w3-input" form="flujo'+jj[i].idFlujo+'" type="text" name="nombreFlujo" value="'+jj[i].nombreFlujo+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="monto" value="'+jj[i].monto+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="fecha" value="'+jj[i].fechaCorte+'"></td><td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="number" name="periodicidad" value="'+jj[i].periodicidad+'"> semanas</td><td><button type="button" onclick="flujoEdit(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="edit"><i class="fa fa-edit fa-fw"></i></button></td><td><button type="button" onclick="flujoDelete(\'flujo'+jj[i].idFlujo+'\')" name="accion" value="delete"><i class="fa fa-times fa-fw"></i></button></td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr></form>';
+            y +='<tr><td>'+jj[i].nombreFlujo+'</td><td>$'+jj[i].monto+'</td><td>Semana '+jj[i].fechaCorte+'</td><td>'+jj[i].periodicidad+' semanas</td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr>';
             var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad];
             ingresos.push(aux);
           }
-          y+='<tr id="trNewIngreso"><form id="newIngreso" onsubmit="event.preventDefault(); handleFormSubmit(this,"createIngreso");"><td></td><td></td><td><input onclick="showIngreso();" type="button" class="w3-btn w3-green w3-xlarge" value="Nuevo"></td></form></tr></tbody>';
+          y+='</tbody>';
           document.getElementById("tableIngresos").innerHTML=y;
           console.log("ingresos\n"+ingresos);
           //console.log(y+"aquí acaba");
+        }
+        else if(accion.localeCompare("readEgresos")==0){
+          var jj = JSON.parse(respuesta);
+          var x = document.getElementById("tableEgresos").innerHTML;
+          var len= x.length;
+          var y = x.slice(0,len-9);
+          for (i in jj){
+            y +='<tr><td>'+jj[i].nombreFlujo+'</td><td>$'+jj[i].monto+'</td><td>Semana '+jj[i].fechaCorte+'</td><td>'+jj[i].periodicidad+' semanas</td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr>';
+            var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad];
+            egresos.push(aux);
+          }
+          y+='</tbody>';
+          //crearChart(); //2 5 8 11    (n-2)%3 == 0 then add monto to graph
+          console.log("egresos\n"+egresos);
+          document.getElementById("tableEgresos").innerHTML=y;
         }
         //console.log("llegamos a la historia"+h);
       }).catch(function() {

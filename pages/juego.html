@@ -86,59 +86,93 @@
     <div class="sk-circle12 sk-child"></div>
   </div>
 </div>
-
+<form onsubmit="event.preventDefault(); handleFormSubmit(this,'readIngresos');">
+  <input type="hidden" name="idUsuario" id="inputIngresos">
+  <input type="submit" id="submitIngresos" style="display: none;">
+</form>
+<form onsubmit="event.preventDefault(); handleFormSubmit(this,'readEgresos');">
+  <input type="hidden" name="idUsuario" id="inputEgresos">
+  <input type="submit" id="submitEgresos" style="display: none;">
+</form>
 
 
 <div id="mainDiv" class="w3-main" style="margin-left:300px; margin-top:43px;display: none;">
   <!-- balanceGeneral -->
   <div id="balanceGeneral" class="w3-panel w3-panel menuItem w3-animate-left"  style="text-align: center;">
-    <div class="w3-row-padding">
-      <div class="w3-responsive">
         <br>
         <h2><b>Mi balance general</b></h2>
-        <h5>Mis inversiones</h5>
-        <table class="w3-table w3-striped w3-white">
-          <thead>
-            <tr>
-              <th>Instrumentos</th>
-              <th>Rendimiento</th>
-              <th>Valor invertido</th>
-              <th>Valor actual</th>
-              <th>Número de titulos</th>
-            </tr>
-          </thead>
-          <tbody id="misInversiones">
-            <tr>
-              <td>PETROIL</td>
-              <td><font color="red">-13.5%</font></td>
-              <td><i>$160 </i></td>
-              <td><font color="red">$140 </font></td>
-              <td><i>10 </i></td>
-            </tr>
-            <tr>
-              <td>GAEM</td>
-              <td><font color="red">-3.27%</font></td>
-              <td><i>$1530 </i></td>
-              <td><font color="red">$1480 </font></td>
-              <td><i>10 </i></td>
-            </tr>
-            <tr>
-              <td>RAQUIM</td>
-              <td><font color="green">150%</font></td>
-              <td><i>$100 </i></td>
-              <td><font color="green">$250 </font></td>
-              <td><i>50 </i></td>
-            </tr>
-            <tr>
-              <td>PETROIL</td>
-              <td><font color="red">-6.67%</font></td>
-              <td><i>$150 </i></td>
-              <td><font color="red">$140 </font></td>
-              <td><i>10 </i></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <h4><b><i></i>Comisiones de la casa de bolsa:</b></h4>
+        <br>
+        <p id="datosBalance"></p>
+        <br>
+      <div class="flexContainer2">
+        <div class="w3-card-4">
+          <header class="w3-cell-row">
+
+            <div id="l0" class="w3-third w3-container w3-green w3-cell">
+              <a onclick="openLink2(event, 'inversiones')" style="cursor:pointer;"><h4>Mis inversiones</h4></a>
+            </div>
+
+            <div id="l1" class="w3-third w3-container w3-light-gray w3-cell">
+              <a onclick="openLink2(event, 'ingresos')" style="cursor:pointer;"><h4>Ingresos</h4></a>
+            </div>
+            
+            <div id="l2" class="w3-third w3-container w3-light-gray w3-cell">
+              <a onclick="openLink2(event, 'egresos')" style="cursor:pointer;"><h4>Egresos</h4></a>
+            </div>
+        
+          </header>
+            <div class="w3-container w3-light-gray">
+              <div id="ingresos" class="w3-animate-top flexContainer2" style="display:none;">
+                 <div class="w3-responsive">
+                  <table id="tableIngresos" class="w3-table-all">
+                    <tbody><tr class="w3-green">
+                      <th>Concepto</th>
+                      <th>Monto</th>
+                      <th>Semana de corte</th>
+                      <th>Periodicidad</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </tbody></table>
+                </div> 
+              </div>
+              <div id="egresos" class="w3-animate-top flexContainer2" style="display:none;">
+                 <div class="w3-responsive">
+                  <table id="tableEgresos" class="w3-table-all">
+                    <tbody><tr class="w3-green">
+                      <th>Concepto</th>
+                      <th>Monto</th>
+                      <th>Semana de corte</th>
+                      <th>Periodicidad</th>
+                      <th></th>
+                      <th></th>
+                      </tr>
+                    </tbody></table>
+                </div> 
+              </div>
+              <div id="inversiones" class="w3-animate-top flexContainer2">
+                 <div class="w3-responsive">
+                  <table class="w3-table w3-striped w3-white">
+                    <thead>
+                      <tr class="w3-green">
+                        <th>Instrumentos</th>
+                        <th>Rendimiento</th>
+                        <th>Valor invertido</th>
+                        <th>Valor actual</th>
+                        <th>Número de titulos</th>
+                      </tr>
+                    </thead>
+                    <tbody id="misInversiones">
+                    </tbody>
+                  </table>
+                </div> 
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      <br><br>
       <div class="w3-responsive" style="display: none;">
         <h5>Mis bonos gubernamentales</h5>
         <table class="w3-table w3-striped w3-white">
@@ -172,10 +206,6 @@
           </tr>
         </table>
       </div>
-      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-          <canvas id="chartBalance"></canvas>
-      </div>
-    </div>
   </div>
   <div id="mercadoCapitales" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding">
@@ -200,91 +230,46 @@
             </tr>
           </thead>
           <tbody id="tableAcciones">
-            <tr>
-              <td>PETROIL</td>
-              <td>PETROLEOS Y ENERGIA S.A.B. de C.V.</td>
-              <td><font color="red">-6.3%</font></td>
-              <td><i>$15 </i></td>
-              <td><i>$14 </i></td>
-              <td><i>$310 </i></td>
-              <td><font color="red">$280 </font></td>
-              <td><i>20 </i></td>
-            </tr>
-            <tr>
-              <td>GAEM</td>
-              <td>Grupo Aéreo Mexicano S.A.B. de C.V.</td>
-              <td><font color="red">-4.2%</font></td>
-              <td><i>$153 </i></td>
-              <td><i>$148 </i></td>
-              <td><i>$1530 </i></td>
-              <td><font color="red">$1480 </font></td>
-              <td><i>10 </i></td>
-            </tr>
-            <tr>
-              <td>PANM</td>
-              <td>Panificadora Nacional S.A.B. de C.V.</td>
-              <td><font color="green">3.5%</font></td>
-              <td><i>$8 </i></td>
-              <td><i>$7.5 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>0 </i></td>
-            </tr>
-            <tr>
-              <td>GIM</td>
-              <td>Grupo Industrial Mexicano S.A.B. de C.V.</td>
-              <td><font color="green">1.54%</font></td>
-              <td><i>$78 </i></td>
-              <td><i>$69</i></td>
-              <td><i>$0 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>0 </i></td>
-            </tr>
-            <tr>
-              <td>RAQUIM</td>
-              <td>Radio Quim S.A.B de C.V.</td>
-              <td><font color="red">-6.3%</font></td>
-              <td><i>$4 </i></td>
-              <td><i>$2.5 </i></td>
-              <td><i>$100 </i></td>
-              <td><font color="green">$250 </font></td>
-              <td><i>50 </i></td>
-            </tr>
-            <tr>
-              <td>GFINMA</td>
-              <td>Grupo Financiero Mancol S.A.B. de C.V.</td>
-              <td><font color="green">3.3%</font></td>
-              <td><i>$104 </i></td>
-              <td><i>$101.4 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>0 </i></td>
-            </tr>
-            <tr>
-              <td>GICR</td>
-              <td>Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.</td>
-              <td><font color="green">9.3%</font></td>
-              <td><i>$54 </i></td>
-              <td><i>$46 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>0 </i></td>
-            </tr>
-            <tr>
-              <td>GNLA</td>
-              <td>Grupo nacional de lacteos S.A.B. de C.V.</td>
-              <td><font color="green">9.3%</font></td>
-              <td><i>$54 </i></td>
-              <td><i>$46 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>$0 </i></td>
-              <td><i>0 </i></td>
-            </tr>
           </tbody>
         </table>
       </div>
-      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-          <canvas id="chartCapitales"></canvas>
+      <div>
+        <form action="#" method="post">
+        
+          <div>
+            <label for="select-choice">Clave</label>
+            <select name="select-choice" id="select-choice">
+              'PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'
+              <option value="0">PETROIL</option>
+              <option value="1">GAEM</option>
+              <option value="2">PANM</option>
+              <option value="3">GIM</option>
+              <option value="4">RAQUIM</option>
+              <option value="5">GFINMA</option>
+              <option value="6">GICR</option>
+              <option value="7">GNLA</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="numberTitulos">Número de títulos</label>
+            <input type="number" onchange="actualizarPrecio(this);" name="name" id="numberTitulos" value="" />
+          </div>
+
+          <div>
+            <label for="costoBruto">Costo bruto</label>
+            <input type="text" name="name" id="costoBruto" value="" disabled="true"/>
+          </div>
+
+          <div>
+            <label for="costoNeto">Costo neto</label>
+            <input type="text" name="name" id="costoNeto" value="" disabled="true"/>
+          </div>
+        
+          <div>
+            <input type="submit" value="Comprar" disabled="true" />
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -337,6 +322,7 @@
               <td>182 días</td>
               <td>A descuento</td>
             </tr>
+            <!--
             <tr>
               <td>BONDES</td>
               <td>LD AAMMDD</td>
@@ -368,7 +354,7 @@
               <td>3.88</td>
               <td>30 años</td>
               <td>A precio/semestral</td>
-            </tr>
+            </tr>-->
           </tbody>
           
         </table>

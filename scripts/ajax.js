@@ -557,7 +557,7 @@ function crearChart(){
       }
     };
     console.log("yeeeeeeeeeeeeeeeei4");
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('chartAlert').getContext('2d');
     if(typeof myChartCanvas !== 'undefined'){
       myChartCanvas.destroy();
     }
@@ -573,6 +573,15 @@ function clearFlujo(){
       myChartCanvas.destroy();
     }
   //setTimeout(function() { crearChart(); }, 1000);
+};
+function proyectar(){
+  crearChart();
+  document.getElementById('alertDiv').style.display="block";
+  document.getElementById('alertDiv2').style.display="block";
+};
+function close_alert(){
+  document.getElementById('alertDiv').style.display="none";
+  document.getElementById('alertDiv2').style.display="none";
 };
 function flujoEdit(hola){
   handleFormSubmit(document.getElementById(hola),'flujoEdit');
