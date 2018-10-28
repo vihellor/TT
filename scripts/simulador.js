@@ -54,7 +54,7 @@ var meses = [
 	];
 var myChart;
 var colors=[chartColors.red,chartColors.orange,chartColors.yellow,chartColors.green,chartColors.blue,chartColors.purple,chartColors.black,chartColors.grey];
-function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames){
+function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
 	var inicio = numTotal-96;
 	if (inicio<0) {
 		inicio=0;
@@ -89,7 +89,7 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames){
 		var aux = {
 			label: dataNames,
 			data: dataR.slice(inicio,numTotal),
-			borderColor: colors[1],
+			borderColor: colors[x],
 			backgroundColor: 'rgba(0, 0, 0, 0)',
 			fill: false,
 			lineTension: 0

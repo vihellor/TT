@@ -55,12 +55,12 @@
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Mis amigos </a>
   </div>-->
   <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
-    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'balanceGeneral')"><i class="fa fa-home fa-fw"></i> Mi balance general</button>
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>c=
+    <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'balanceGeneral')"><i class="fa fa-home fa-fw"></i> Flujo de capital</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'mercadoCapitales')"><i class="fa fa-chart-line fa-fw"></i> Mercado de capitales</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'instrumentosGubernamentales')"><i class="fa fa-chart-line fa-fw"></i> Instrumentos gubernamentales</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'descripcionEmpresas')"><i class="fa fa-th-list fa-fw"></i> Descripción de empresas</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'hojaNoticias')"><i class="fa fa-newspaper fa-fw"></i> Hoja de noticias</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'hojaNoticias')"><i class="fa fa-newspaper fa-fw"></i> Notificaciones</button>
     <!--<button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>-->
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
@@ -100,7 +100,7 @@
   <!-- balanceGeneral -->
   <div id="balanceGeneral" class="w3-panel w3-panel menuItem w3-animate-left"  style="text-align: center;">
         <br>
-        <h2><b>Mi balance general</b></h2>
+        <h2><b>Flujo de capital</b></h2>
         <h4><b><i></i>Comisiones de la casa de bolsa:</b></h4>
         <br>
         <p id="datosBalance"></p>
@@ -322,39 +322,14 @@
               <td>182 días</td>
               <td>A descuento</td>
             </tr>
-            <!--
             <tr>
-              <td>BONDES</td>
-              <td>LD AAMMDD</td>
-              <td>99.33</td>
-              <td>7.68</td>
-              <td>5 años</td>
-              <td>A precio/28días</td>
+              <td>CETES</td>
+              <td>BI AAMMDD</td>
+              <td>9.32</td>
+              <td>7.71</td>
+              <td>364 días</td>
+              <td>A descuento</td>
             </tr>
-            <tr>
-              <td>UDIBONOS</td>
-              <td>S AAMMDD</td>
-              <td>590.44</td>
-              <td>3.67</td>
-              <td>3 años</td>
-              <td>A precio/semestral</td>
-            </tr>
-            <tr>
-              <td>UDIBONOS</td>
-              <td>S AAMMDD</td>
-              <td>624.70</td>
-              <td>3.75</td>
-              <td>10 años</td>
-              <td>A precio/semestral</td>
-            </tr>
-            <tr>
-              <td>UDIBONOS</td>
-              <td>S AAMMDD</td>
-              <td>624.59</td>
-              <td>3.88</td>
-              <td>30 años</td>
-              <td>A precio/semestral</td>
-            </tr>-->
           </tbody>
           
         </table>
@@ -370,8 +345,22 @@
   </div>
   <div id="hojaNoticias" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding">
-      <div class="flexContainer">
-        <h2><b>Estamos trabajando en esto</b></h2>
+      <br>
+      <h2><b>Notificaciones</b></h2>
+      <div class="w3-responsive">
+        <table class="w3-table w3-striped w3-white">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tableNoticias">
+            <tr>
+              <td>CETES</td>
+            </tr>
+          </tbody>
+          
+        </table>
       </div>
     </div>
   </div>

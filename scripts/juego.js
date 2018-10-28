@@ -1,5 +1,57 @@
 var iFrequency = 5000; // expressed in miliseconds
 var myInterval = 0;
+var names=['PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'];
+var names2=[
+  "Petróleos y energía S.A.B. de C.V.",
+  "Grupo Aéreo Mexicano S.A.B. de C.V.",
+  "Panificadora Nacional S.A.B. de C.V.",
+  "Grupo Industrial Mexicano S.A.B. de C.V.",
+  "Radio Quim S.A.B de C.V.",
+  "Grupo Financiero Mancol S.A.B. de C.V.",
+  "Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.",
+  "Grupo nacional de lácteos S.A.B. de C.V."
+  ];
+var datosAccion=[ //varianza compra/venta || valor invertido || numero de titulos
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0],
+  [(Math.random()*.00155)+.00095,0,0]
+  ];
+
+var data=generarAcciones();
+var ingresos = [];
+var egresos = [];
+var noticias=[];
+for (var i = 0; i < 1440; i++) {
+  noticias.push("Noticias del día: "+i);
+}
+var dataFlujo;
+var casaBolsa={
+  nombre: "kuspit",
+  comision: 0.0025,
+  mensualidad: 50
+};
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+var interval = setInterval(count,1000);
+bandera=0;
+
+var idUsuario;
+var nameUsuario;
+var idFundador;
+var mInicial;
+
+document.getElementById('datosComision').innerHTML="Nombre: "+casaBolsa.nombre+" &emsp; Mensualidad: "+casaBolsa.mensualidad+"  &emsp; Comisión compra/venta: "+(casaBolsa.comision*100)+"%";
+var diaActual=48;
+var canvasBalance;
+var canvasCapitales;
 
 function post(url,objSend) {
 
@@ -51,9 +103,8 @@ function generateIngresos(){
   console.log("tamanio ingresos = "+ingresos.length);
   console.log("tamanio egresos = "+egresos.length);
   var data1=[];
-  var aux=0;
+  var aux=parseInt(mInicial);
   for (var j =  0; j < 1440; j++) {
-    aux=0;
     for (var i =  0; i < ingresos.length; i++) {
       //console.log(j+" : "+i+" : "+(j-ingresos[i][1])%ingresos[i][2]);
       //console.log("1: "+ingresos[i][1]);
@@ -62,7 +113,14 @@ function generateIngresos(){
         aux+=parseInt(ingresos[i][0]);
       }
     }
+    if (aux>0) {
+      noticias.splice(j, 0, "Se ha recibido un ingreso de: "+aux);
+    }
+    else{
+      noticias.splice(j, 0, "No hubo ingresos esta semana");
+    }
     data1.push(aux);
+    aux=0;
   }
   /*console.log("yeeeeeeeeeeeeeeeei");
   console.log(data1.length);
@@ -78,6 +136,9 @@ function generateIngresos(){
         aux+=parseInt(egresos[i][0]);
       }
     }
+    if (aux>0) {
+      noticias.splice(j, 0, "Se ha hecho un cargo de: "+aux);
+    }
     data2.push(aux);
   }
   /*console.log("yeeeeeeeeeeeeeeeei2");
@@ -90,8 +151,15 @@ function generateIngresos(){
   aux=0;
   for (var j =  0; j < 1440; j++) {
     data3.push(data1[j]-data2[j]);
+    //console.log(noticias[j]);
   }
-  
+  for (var j =  0; j < 20; j++) {
+    //data3.push(data1[j]-data2[j]);
+    console.log("semana "+j);
+    console.log(noticias[j]);
+  }
+  actualizarNoticia();
+  return data3;
 }
 
 //función para leer de un html el form deseado
@@ -224,11 +292,6 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
  * @param  {Event} event  the submit event triggered by the user
  * @return {void}
  */
-
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
 // Toggle between showing and hiding the sidebar, and add overlay effect
 function openLink(evt, animName) {
   var i, x, tablinks;
@@ -292,7 +355,7 @@ function w3_close() {
     overlayBg.style.display = "none";
 };
 
-var c=300;
+var c=60;
 var timer_is_on=false;
 
 function displayCount() {
@@ -305,7 +368,7 @@ function count() {
     if(timer_is_on) {
         c=c-1;
         if(c==0){
-          c=300;
+          c=60;
           diaActual+=1;
           actualizarDia();
         }
@@ -332,54 +395,35 @@ function actualizarPrecio(input){
 //window.onload = function() {
 //    iniciar();
 //  };
-var names=['PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'];
-var names2=[
-  "Petróleos y energía S.A.B. de C.V.",
-  "Grupo Aéreo Mexicano S.A.B. de C.V.",
-  "Panificadora Nacional S.A.B. de C.V.",
-  "Grupo Industrial Mexicano S.A.B. de C.V.",
-  "Radio Quim S.A.B de C.V.",
-  "Grupo Financiero Mancol S.A.B. de C.V.",
-  "Grupo Industrial de Carnes y Refrigerados S.A.B. de C.V.",
-  "Grupo nacional de lácteos S.A.B. de C.V."
-  ];
-var datosAccion=[ //varianza compra/venta || valor invertido || numero de titulos
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0],
-  [(Math.random()*.00155)+.00095,0,0]
-  ];
-
-var data=generarAcciones();
-var casaBolsa={
-  nombre: "kuspit",
-  comision: 0.0025,
-  mensualidad: 50
-};
-document.getElementById('datosComision').innerHTML="Nombre: "+casaBolsa.nombre+" &emsp; Mensualidad: "+casaBolsa.mensualidad+"  &emsp; Comisión compra/venta: "+(casaBolsa.comision*100)+"%";
-var diaActual=48;
-var canvasBalance;
-var canvasCapitales;
 //console.log((Math.random()*.00155)+.00095);
 //crearChart(data[0],'Panorama','canvas',varChart,diaActual,names[0]);
 
 function proyectar(x){
-  crearChart(data[x],'Panorama','chartAlert',canvasCapitales,diaActual,names[x]);
+  crearChart(data[x],'Panorama','chartAlert',canvasCapitales,diaActual,names[x],x);
   document.getElementById('alertDiv').style.display="block";
   document.getElementById('alertDiv2').style.display="block";
-}
+};
 function close_alert(){
+  if(typeof canvasBalance !== 'undefined'){
+    canvasBalance.destroy();
+  }
+  if(typeof canvasCapitales !== 'undefined'){
+    canvasCapitales.destroy();
+  }
+  document.getElementById('alertDiv2').innerHTML='<div class="chart-container" style="position: relative; height:100%; width:100%"><canvas id="chartAlert"></canvas></div>';
   document.getElementById('alertDiv').style.display="none";
   document.getElementById('alertDiv2').style.display="none";
-}
+};
 function keyPress (e) {
     if(e.key === "Escape") {
         console.log("hola");
     }
+};
+function actualizarNoticia(){
+  document.getElementById('tableNoticias').innerHTML="";
+  for (i in noticias[diaActual-48]){
+    document.getElementById('tableNoticias').innerHTML="<tr><td>"+i+"</td></tr>";
+  }
 }
 function actualizarDia(){
   if(typeof canvasBalance !== 'undefined'){
@@ -425,19 +469,16 @@ function actualizarDia(){
     }
     document.getElementById('tableAcciones').innerHTML=textTableAccion;
     document.getElementById('misInversiones').innerHTML=textMisInversiones;
+    setTimeout(function() {
+      console.log('first 3 secs');
+      dataFlujo=generateIngresos();
+
+    }, 3000);
 }
 window.onload = function() {
-    actualizarDia();
     iniciar();
+    actualizarDia();
   };
-var interval = setInterval(count,1000);
-var ingresos = [];
-var egresos = [];
-bandera=0;
-
-var idUsuario;
-var nameUsuario;
-var idFundador;
 function handleFormSubmit (form,accion) {
   
   // Call our function to get the form data.
@@ -460,7 +501,7 @@ function handleFormSubmit (form,accion) {
         }
         else if(accion.localeCompare("readPartida")==0){
           var jj = JSON.parse(respuesta);
-          console.log("readPartida: "+JSON.stringify(jj));
+          //console.log("readPartida: "+JSON.stringify(jj));
           idFundador=jj[0].fundador;
           //console.log("fundador: "+jj[0].fundador);
           document.getElementById('datosBalance').innerHTML="Nombre de partida: "+jj[0].nombrePartida+" &emsp; Monto inicial: "+jj[0].montoInicial+"  &emsp; Meta: "+jj[0].meta;
@@ -468,8 +509,7 @@ function handleFormSubmit (form,accion) {
           document.getElementById('inputEgresos').value=idFundador;
           document.getElementById('submitIngresos').click();
           document.getElementById('submitEgresos').click();
-
-
+          mInicial=jj[0].montoInicial;
           //console.log(JSON.parse(respuesta));
           //console.log(jj);
         }else if(accion.localeCompare("readIngresos")==0){
@@ -479,12 +519,12 @@ function handleFormSubmit (form,accion) {
           var y = x.slice(0,len-9);
           for (i in jj){
             y +='<tr><td>'+jj[i].nombreFlujo+'</td><td>$'+jj[i].monto+'</td><td>Semana '+jj[i].fechaCorte+'</td><td>'+jj[i].periodicidad+' semanas</td><input form="flujo'+jj[i].idFlujo+'" class="w3-input" type="hidden" name="idFlujo" value="'+jj[i].idFlujo+'"></tr>';
-            var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad];
+            var aux = [jj[i].monto,jj[i].fechaCorte,jj[i].periodicidad,jj[i].nombreFlujo];
             ingresos.push(aux);
           }
           y+='</tbody>';
           document.getElementById("tableIngresos").innerHTML=y;
-          console.log("ingresos\n"+ingresos);
+          //console.log("ingresos\n"+ingresos);
           //console.log(y+"aquí acaba");
         }
         else if(accion.localeCompare("readEgresos")==0){
@@ -499,7 +539,7 @@ function handleFormSubmit (form,accion) {
           }
           y+='</tbody>';
           //crearChart(); //2 5 8 11    (n-2)%3 == 0 then add monto to graph
-          console.log("egresos\n"+egresos);
+          //console.log("egresos\n"+egresos);
           document.getElementById("tableEgresos").innerHTML=y;
         }
         //console.log("llegamos a la historia"+h);
@@ -509,8 +549,5 @@ function handleFormSubmit (form,accion) {
         console.log("saca el spinner");
         //document.querySelector('.spinner').style.display = 'none';
       })
-
-
-  
   // ...this is where we’d actually do something with the form data...
 };
