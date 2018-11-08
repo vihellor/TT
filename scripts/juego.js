@@ -1459,7 +1459,7 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
     inicio=0;
   }
   var sem=inicio%4;
-  var mes=inicio%12;
+  var mes=(inicio-1)%12;
   var anio=2017;
   var aux = [];
   var labelsR = [];
@@ -1469,12 +1469,12 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
       aux+=anio.toString()+" ";
       anio+=1;
     }
-    aux+=meses[mes]+" ";
     if (i%4==0){
       mes+=1;
       if (mes==12)
         mes=0;
     }
+    aux+=meses[mes]+" ";
     aux+=(sem+1).toString();
     sem+=1;
     if (sem==4)
