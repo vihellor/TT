@@ -481,12 +481,12 @@ function compraAccion(){
   if (costo<dineroActual) {
     datosAccion[accion][1]+=Number(document.getElementById('costoNeto').value);
     datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
-    console.log("compra realizada exitosamente!");
+    alert("compra realizada exitosamente!");
     actualizarTablasAcciones();
     close_alert();
   }
   else{
-    console.log("No tienes suficiente dinero!");
+    alert("No tienes suficiente dinero!");
   }
 };
 function compraCete(){
@@ -507,12 +507,12 @@ function compraCete(){
     // datosAccion[accion][1]+=Number(document.getElementById('costoNeto').value);
     // datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
     ganancias[diaActual-48+tiempo];
-    console.log("compra realizada exitosamente!");
+    alert("compra realizada exitosamente!");
     // actualizarTablasAcciones();
     close_alert();
   }
   else{
-    console.log("No tienes suficiente dinero!");
+    alert("No tienes suficiente dinero!");
   }
 };
 function comprarCapital(){
@@ -612,24 +612,24 @@ function actualizarTablasAcciones(){
       var text2;
       var text3;
       if (vAnt>vAct)
-        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='red'>-"+((vAnt/vAct)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto+"</i></td>";
+        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='red'>-"+((vAnt/vAct)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       else if (vAnt<vAct)
-        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='green'>"+((vAct/vAnt)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+" </i></td><td><i>$"+gasto+"</i></td>";
+        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='green'>"+((vAct/vAnt)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+" </i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       else
-        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td>0%</td><td><i>$"+vAct.toFixed(4)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto+"</i></td>";
+        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td>0%</td><td><i>$"+vAct.toFixed(4)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       if (gasto>titulos*vAct)
-        text2="<td><font color='red'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
+        text2="<td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       else if (gasto<titulos*vAct)
-        text2="<td><font color='green'>$"+(titulos*vAct)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
+        text2="<td><font color='green'>$"+(titulos*vAct).toFixed(2)+"</font></td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       else
-        text2="<td>$"+(titulos*vAct)+"</td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
+        text2="<td>$"+(titulos*vAct).toFixed(2)+"</td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       
       if ((titulos*vAct)<gasto)
-        text3="<tr><td>"+names[i]+"</td><td><font color='red'>-"+((gasto/vReal)-1).toFixed(2)+"%</font></td><td>$"+gasto+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td><font color='red'>-"+((gasto/vReal)-1).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
       else if ((titulos*vAct)>gasto)
-        text3="<tr><td>"+names[i]+"</td><td><font color='green'>"+((vReal/gasto)-1).toFixed(2)+"%</font></td><td>$"+gasto+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td><font color='green'>"+((vReal/gasto)-1).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
       else
-        text3="<tr><td>"+names[i]+"</td><td>0%</td><td>$"+gasto+"</td><td>"+(titulos*vAct)+"</td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td>0%</td><td>$"+gasto.toFixed(2)+"</td><td>"+(titulos*vAct).toFixed(2)+"</td><td>"+titulos+"</td></tr>";
 
       textTableAccion+=text1+text2;
       textMisInversiones+=text3;
@@ -642,6 +642,9 @@ function actualizarCapitalDisponible(){
   dineroActual+=capitalDisponible[diaActual-48];
   dineroActual+=ganancias[diaActual-48];
   dineroJugador.push(dineroActual);
+  document.getElementById('dineroActual2').innerHTML="Capital disponible: "+dineroActual;
+  document.getElementById('dineroActual1').innerHTML="Capital disponible: "+dineroActual;
+  
   console.log("dinero actual: "+dineroActual);
 }
 window.onload = function() {
