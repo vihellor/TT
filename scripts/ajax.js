@@ -463,7 +463,7 @@ function crearChart(){
       //console.log(j+" : "+i+" : "+(j-ingresos[i][1])%ingresos[i][2]);
       //console.log("1: "+ingresos[i][1]);
       //console.log("2: "+ingresos[i][2]);
-      if (((j-ingresos[i][1])%ingresos[i][2])==0) {
+      if (((j-Math.abs(ingresos[i][1]-1))%ingresos[i][2])==0) {
         aux+=parseInt(ingresos[i][0]);
       }
     }
@@ -479,7 +479,7 @@ function crearChart(){
   aux=0;
   for (var j =  0; j < 48; j++) {
     for (var i =  0; i < egresos.length; i++) {
-      if ((j-egresos[i][1])%egresos[i][2]==0) {
+      if ((j-Math.abs(egresos[i][1]-1))%egresos[i][2]==0) {
         aux+=parseInt(egresos[i][0]);
       }
     }

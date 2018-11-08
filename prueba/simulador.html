@@ -1,44 +1,169 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<title>Line Chart</title>
-  <script src="/dist/Chart.min.js"></script>
-  <script src="/dist/utils.js"></script>
-  <script src="./simulador.js"></script>
-	<style>
-	canvas{
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Financial > Candlestick | Chart.js sample</title>
+	<link rel="stylesheet" href="./../style/w3.css">
+  <link rel="stylesheet" href="./../style/css?family=Raleway">
+  <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  	<script src="/dist/moments.js"></script>
+	<script src="/dist/Chart.min.js"></script>
+  	<script src="/dist/utils.js"></script>
+  	<script src="/dist/Chart.Financial.js"></script>
+  	<script src="./../scripts/simulador.js"></script>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="icon" href="../favicon.ico"/>
 </head>
-
 <body>
-	<div style="width:90%;">
-		<canvas id="canvas"></canvas>
-	</div>
+	<div class="flexContainer2">
+        <div class="w3-card-4">
+          <header class="w3-cell-row">
+
+            <div id="l3" class="w3-half w3-container w3-green w3-cell">
+              <a onclick="openLink3(event, 'velas')" style="cursor:pointer;"><h4>Velas</h4></a>
+            </div>
+
+            <div id="l4" class="w3-half w3-container w3-light-gray w3-cell">
+              <a onclick="openLink3(event, 'mediaMov')" style="cursor:pointer;"><h4>Media móvil</h4></a>
+            </div>
+        
+          </header>
+            <div class="w3-container w3-light-gray">
+              <div id="velas" class="w3-animate-top flexContainer2">
+                 <div class="chart-container" style="position: relative; width:80vw">
+			          <canvas id="velasChart"></canvas>
+			      </div>
+              </div>
+              <div id="mediaMov" class="w3-animate-top flexContainer2" style="display:none;">
+                 <div class="chart-container" style="position: relative; width:80vw">
+			          <canvas id="mediaChart"></canvas>
+			      </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+
 	<script>
+		function openLink3(evt, animName) {
+			var velas = document.getElementById("velas");
+			var mediaMov = document.getElementById("mediaMov");
+		  console.log(animName);
+		  if ("velas".localeCompare(animName)) {
+		  	mediaMov.style.display = "block";  
+		    velas.style.display = "none";
+		    l4.className=l4.className.replace("w3-light-gray","w3-green");
+		    l3.className=l3.className.replace("w3-green", "w3-light-gray");
+		  }else{
+		    velas.style.display = "block";
+		    mediaMov.style.display = "none";
+		    l3.className=l3.className.replace("w3-light-gray","w3-green");
+		    l4.className=l4.className.replace("w3-green", "w3-light-gray");
+		  }
+		}
+		/*var data = getRandomData('April 01 2017', 60);
+
+		// Candlestick
+		var ctx = document.getElementById("chart1").getContext("2d");
+		ctx.canvas.width = 1000;
+		ctx.canvas.height = 250;
+		var datapoints = [0, 20, 20, 60, 60, 120, NaN, 180, 120, 125, 105, 110, 170];
+		new Chart(ctx, {
+			//type: 'candlestick',
+			data: {
+				datasets: [{
+					type: 'candlestick',
+					label: "CHRT - Chart.js Corporation",
+					data: data,
+					fractionalDigitsCount: 2,
+				},{
+					type: 'line',
+					borderColor: '#000',
+					borderWidth: 2,
+					label: "CHRT - Chart.js Corporation",
+					data: datapoints
+				}]
+			},
+			options: {
+				label: '',
+
+		hover: {
+			mode: 'label'
+		},
+
+		scales: {
+			xAxes: [{
+				type: 'time',
+				distribution: 'series',
+				categoryPercentage: 0.8,
+				barPercentage: 0.9,
+				ticks: {
+					source: 'data'
+				}
+			}],
+			yAxes: [{
+				type: 'financialLinear'
+			}]
+		},
+
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					var o = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].o;
+					var h = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].h;
+					var l = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].l;
+					var c = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].c;
+
+					var fractionalDigitsCount = data.datasets[tooltipItem.datasetIndex].fractionalDigitsCount;
+					if (fractionalDigitsCount !== undefined) {
+						fractionalDigitsCount = Math.max(0, Math.min(100, fractionalDigitsCount));
+						o = o.toFixed(fractionalDigitsCount);
+						h = h.toFixed(fractionalDigitsCount);
+						l = l.toFixed(fractionalDigitsCount);
+						c = c.toFixed(fractionalDigitsCount);
+					}
+
+					return ' O: ' + o + '    H: ' + h + '    L: ' + l + '    C: ' + c;
+				}
+			}
+		}
+			},
+		});
+
+		// Custom Candlestick
+		var ctx2 = document.getElementById("chart2").getContext("2d");
+		ctx2.canvas.width = 1000;
+		ctx2.canvas.height = 250;
+		new Chart(ctx2, {
+			type: 'candlestick',
+			data: {
+				datasets: [{
+					color: {
+						up: '#11f4',
+						down: '#fb84',
+						unchanged: '#999',
+					},
+					borderColor: '#000',
+					borderWidth: 2,
+					label: "CHRT - Chart.js Corporation",
+					data: data
+				}]
+			}
+		});*/
+
+		// Longer tooltip
+
+	</script>
+	<script>
+		var data = getRandomData('April 01 2017', 60);
+		console.log(data);
 		window.onload = function() {
-			var varChart;
-			var names=['PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'];
-			var compra_venta=[
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095,
-				(Math.random()*.00155)+.00095
-				];
-			var data=generarAcciones();
+			generate2(1440);
+			//var data=generarAcciones();
 			//console.log((Math.random()*.00155)+.00095);
 			//crearChart(data[0],'Panorama','canvas',varChart,200,names[0]);
 		};
 	</script>
 </body>
-
 </html>

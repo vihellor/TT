@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="./../style/w3.css">
   <link rel="stylesheet" href="./../style/css?family=Raleway">
   <link rel="stylesheet" href="./../style/css/fontawesome-all.min.css">
+  <script src="/dist/moments.js"></script>
   <script src="/dist/Chart.min.js"></script>
+    <script src="/dist/Chart.Financial.js"></script>
   <script src="/dist/utils.js"></script>
-  <script src="./../scripts/simulador.js"></script>
+  <!-- <script src="./../scripts/simulador.js"></script> -->
   <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </style>
@@ -19,11 +21,108 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-panel w3-black w3-card-4 w3-display-middle" onclick="close_alert()" style="z-index:9; height:96%; width:100%; cursor:pointer;opacity: 0.8;display: none;" id="alertDiv">
 </div>
+<div class="w3-container w3-white w3-card-4 w3-display-middle" onclick="" style="z-index:15; cursor: auto;display: none;"  id="alertDiv2">
+  <header class="w3-cell-row">
+    <div id="l3" class="w3-half w3-container w3-green w3-cell">
+      <a onclick="openLink3(event, 'velas')" style="cursor:pointer;"><h4>Velas</h4></a>
+    </div>
+    <div id="l4" class="w3-half w3-container w3-light-gray w3-cell">
+      <a onclick="openLink3(event, 'mediaMov')" style="cursor:pointer;"><h4>Media móvil</h4></a>
+    </div>
+  </header>
+  <div class="w3-container w3-light-gray">
+    <div id="velas" class="w3-animate-top flexContainer2">
+      <div class="chart-container" style="position: relative; width:70vw">
+        <canvas id="velasChart"></canvas>
+      </div>
+    </div>
+    <div id="mediaMov" class="w3-animate-top flexContainer2" style="display:none;">
+      <div class="chart-container" style="position: relative; width:70vw">
+        <canvas id="mediaChart"></canvas>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
 <div class="w3-container w3-white w3-card-4 w3-display-middle" onclick="" style="z-index:15; height:80%; width:80%; cursor: auto;display: none;"  id="alertDiv2">
   <div class="chart-container" style="position: relative; height:100%; width:100%">
     <canvas id="chartAlert"></canvas>
   </div>
 </div>
+ <div class="w3-container w3-white w3-card-4 w3-display-middle flexContainer2" onclick="" style="z-index:15; cursor: auto;display: none;"  id="comprarAcciones">
+    <form onsubmit="event.preventDefault();">
+    
+      <div>
+        <label for="select-choice">Clave</label><br>
+        <select onchange="actualizarPrecio();" name="select-choice" id="select-choice">
+          <option value="0">PETROIL</option>
+          <option value="1">GAEM</option>
+          <option value="2">PANM</option>
+          <option value="3">GIM</option>
+          <option value="4">RAQUIM</option>
+          <option value="5">GFINMA</option>
+          <option value="6">GICR</option>
+          <option value="7">GNLA</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="numberTitulos">Número de títulos</label><br>
+        <input type="number" onchange="actualizarPrecio();" name="name" id="numberTitulos" value="0" />
+      </div>
+
+      <div>
+        <label for="costoBruto">Costo bruto</label><br>
+        <input type="text" name="name" id="costoBruto" value="" disabled="true"/>
+      </div>
+
+      <div>
+        <label for="costoNeto">Costo neto</label><br>
+        <input type="text" name="name" id="costoNeto" value="" disabled="true"/>
+      </div>
+    
+      <div>
+        <button onclick="compraAccion();">Comprar</button>
+      </div>
+    </form>
+  </div>
+  <div class="w3-container w3-white w3-card-4 w3-display-middle flexContainer2" onclick="" style="z-index:15; cursor: auto;display: none;"  id="comprarCetes">
+    <form onsubmit="event.preventDefault();">
+    
+      <div>
+        <label for="select-choice">Clave</label><br>
+        <select onchange="actualizarPrecioCete();" name="select-choice" id="select-choiceCete">
+          <option value="0">28 días</option>
+          <option value="1">182 días</option>
+          <option value="2">364 días</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="numberTitulos">Número de Títulos</label><br>
+        <input type="number" onchange="actualizarPrecioCete();" name="name" id="numberTitulosCete" value="0" min="0" />
+      </div>
+
+      <div>
+        <label for="costoBruto">Costo Neto</label><br>
+        <input type="text" name="name" id="costoCete" value="" disabled="true"/>
+      </div>
+
+      <div>
+        <label for="costoNeto">Interés Bruto</label><br>
+        <input type="text" name="name" id="retornoCete" value="" disabled="true"/>
+      </div>
+
+      <div>
+        <label for="costoNeto">Ganancia</label><br>
+        <input type="text" name="name" id="gananciaCete" value="" disabled="true"/>
+      </div>
+    
+      <div>
+        <button onclick="compraCete();">Comprar</button>
+      </div>
+    </form>
+  </div>
 
 <!-- Top container -->
 <div id="topBar" class="w3-bar w3-top w3-black w3-large" style="z-index:4; display: none;">
@@ -55,12 +154,12 @@
     <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Mis amigos </a>
   </div>-->
   <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>c=
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-times fa-fw"></i>  Close Menu</a>
     <button class="w3-bar-item w3-button tablink w3-green" onclick="openLink(event, 'balanceGeneral')"><i class="fa fa-home fa-fw"></i> Flujo de capital</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'mercadoCapitales')"><i class="fa fa-chart-line fa-fw"></i> Mercado de capitales</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'instrumentosGubernamentales')"><i class="fa fa-chart-line fa-fw"></i> Instrumentos gubernamentales</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'descripcionEmpresas')"><i class="fa fa-th-list fa-fw"></i> Descripción de empresas</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'hojaNoticias')"><i class="fa fa-newspaper fa-fw"></i> Notificaciones</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'finalizarPartida')"><i class="fa fa-th-list fa-fw"></i> Finalizar partida</button>
     <!--<button class="w3-bar-item w3-button tablink" onclick="window.location = 'http://localhost/tutoriales/index.php';"><i class="fa fa-sort-alpha-down fa-fw"></i> Tutorial</button>-->
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i> Regresar </a> -->
     
@@ -232,45 +331,10 @@
           <tbody id="tableAcciones">
           </tbody>
         </table>
+        <br><br>
+      <button class="w3-btn w3-green w3-xlarge" onclick="comprarCapital();">Comprar</button>
       </div>
-      <div>
-        <form action="#" method="post">
-        
-          <div>
-            <label for="select-choice">Clave</label>
-            <select name="select-choice" id="select-choice">
-              'PETROIL','GAEM','PANM','GIM','RAQUIM','GFINMA','GICR','GNLA'
-              <option value="0">PETROIL</option>
-              <option value="1">GAEM</option>
-              <option value="2">PANM</option>
-              <option value="3">GIM</option>
-              <option value="4">RAQUIM</option>
-              <option value="5">GFINMA</option>
-              <option value="6">GICR</option>
-              <option value="7">GNLA</option>
-            </select>
-          </div>
-          
-          <div>
-            <label for="numberTitulos">Número de títulos</label>
-            <input type="number" onchange="actualizarPrecio(this);" name="name" id="numberTitulos" value="" />
-          </div>
 
-          <div>
-            <label for="costoBruto">Costo bruto</label>
-            <input type="text" name="name" id="costoBruto" value="" disabled="true"/>
-          </div>
-
-          <div>
-            <label for="costoNeto">Costo neto</label>
-            <input type="text" name="name" id="costoNeto" value="" disabled="true"/>
-          </div>
-        
-          <div>
-            <input type="submit" value="Comprar" disabled="true" />
-          </div>
-        </form>
-      </div>
     </div>
   </div>
   <div id="instrumentosGubernamentales" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
@@ -282,61 +346,27 @@
           <thead>
             <tr>
               <th>Instrumento</th>
-              <th>Serie</th>
               <th>Precio</th>
               <th>Tasa</th>
               <th>Plazo</th>
-              <th>Tipo de cotización</th>
             </tr>
           </thead>
           <tbody id="tableInstrumentos">
-            <tr>
-              <td>CETES</td>
-              <td>BI AAMMDD</td>
-              <td>9.94</td>
-              <td>7.58</td>
-              <td>28 días</td>
-              <td>A descuento</td>
+            <tr id="cete1">
             </tr>
-            <tr>
-              <td>CETES</td>
-              <td>BI AAMMDD</td>
-              <td>9.80</td>
-              <td>7.81</td>
-              <td>91 días</td>
-              <td>A descuento</td>
+            <tr id="cete2">
             </tr>
-            <tr>
-              <td>CETES</td>
-              <td>BI AAMMDD</td>
-              <td>9.63</td>
-              <td>7.81</td>
-              <td>175 días</td>
-              <td>A descuento</td>
-            </tr>
-            <tr>
-              <td>CETES</td>
-              <td>BI AAMMDD</td>
-              <td>9.32</td>
-              <td>7.71</td>
-              <td>182 días</td>
-              <td>A descuento</td>
-            </tr>
-            <tr>
-              <td>CETES</td>
-              <td>BI AAMMDD</td>
-              <td>9.32</td>
-              <td>7.71</td>
-              <td>364 días</td>
-              <td>A descuento</td>
+            <tr id="cete3">
             </tr>
           </tbody>
           
         </table>
+        <br><br>
+        <button class="w3-btn w3-green w3-xlarge" onclick="comprarCetes();">Comprar</button>
       </div>
     </div>
   </div>
-  <div id="descripcionEmpresas" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
+  <div id="finalizarPartida" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding">
       <div class="flexContainer">
         <h2><b>Estamos trabajando en esto</b></h2>
@@ -351,7 +381,7 @@
         <table class="w3-table w3-striped w3-white">
           <thead>
             <tr>
-              <th></th>
+              <th>Notificaciones</th>
             </tr>
           </thead>
           <tbody id="tableNoticias">
@@ -368,11 +398,6 @@
 </div>
 
 <script src="./../scripts/juego.js"></script>
-
-<script type="text/javascript">
-  handleFormSubmit(document.createElement("form"),"getUsuario");
-  handleFormSubmit(document.createElement("form"),"readPartida");
-</script>
 
 </body>
 </html>
