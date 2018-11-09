@@ -86,6 +86,43 @@
       </div>
     </form>
   </div>
+  <div class="w3-container w3-white w3-card-4 w3-display-middle flexContainer2" onclick="" style="z-index:15; cursor: auto;display: none;"  id="venderAcciones">
+    <form onsubmit="event.preventDefault();">
+    
+      <div>
+        <label for="select-choice">Clave</label><br>
+        <select onchange="actualizarPrecioVenta();" name="select-choice" id="select-choiceVenta">
+          <option value="0">PANM</option>
+          <option value="1">GICR</option>
+          <option value="2">GNLA</option>
+          <option value="3">PETROIL</option>
+          <option value="4">GAEM</option>
+          <option value="5">GIM</option>
+          <option value="6">RAQUIM</option>
+          <option value="7">GFINMA</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="numberTitulos">Número de títulos</label><br>
+        <input type="number" onchange="actualizarPrecioVenta();" name="name" id="numberTitulosVenta" min="0" value="0" />
+      </div>
+
+      <div>
+        <label for="costoBruto">Ganancia bruta</label><br>
+        <input type="text" name="name" id="gananciaBruta" value="" disabled="true"/>
+      </div>
+
+      <div>
+        <label for="costoNeto">Ganancia neta</label><br>
+        <input type="text" name="name" id="gananciaNeta" value="" disabled="true"/>
+      </div>
+    
+      <div>
+        <button id="botonVenta" onclick="ventaAccion();">Vender</button>
+      </div>
+    </form>
+  </div>
   <div class="w3-container w3-white w3-card-4 w3-display-middle flexContainer2" onclick="" style="z-index:15; cursor: auto;display: none;"  id="comprarCetes">
     <form onsubmit="event.preventDefault();">
     
@@ -185,6 +222,19 @@
     <div class="sk-circle12 sk-child"></div>
   </div>
 </div>
+<div id="partidaTerminada" class="w3-main w3-panel" style="display: none;">
+  <div>
+    <button onclick="window.location = '/pages/menu.html'">Regresar al menu principal</button>
+    <h2><b>Partida finalizada</b></h2>
+        <p id="tiempoMeta"></p>
+        <br>
+  </div>
+  <div id="velas" class="flexContainer2">
+    <div class="chart-container" style="position: relative; width:85vw;">
+      <canvas id="chartFinal"></canvas>
+    </div>
+  </div>
+</div>
 <form onsubmit="event.preventDefault(); handleFormSubmit(this,'readIngresos');">
   <input type="hidden" name="idUsuario" id="inputIngresos">
   <input type="submit" id="submitIngresos" style="display: none;">
@@ -197,10 +247,10 @@
 
 <div id="mainDiv" class="w3-main" style="margin-left:300px; margin-top:43px;display: none;">
   <!-- balanceGeneral -->
-  <div id="balanceGeneral" class="w3-panel w3-panel menuItem w3-animate-left"  style="text-align: center;">
+  <div id="balanceGeneral" class="w3-panel menuItem w3-animate-left"  style="text-align: center;">
         <br>
         <h2><b>Flujo de capital</b></h2>
-        <h4><b><i></i>Comisiones de la casa de bolsa:</b></h4>
+        <p id="dineroActual3"></p>
         <br>
         <p id="datosBalance"></p>
         <br>
@@ -271,6 +321,7 @@
             </div>
           </div>
         </div>
+        <button class="w3-btn w3-green w3-xlarge" onclick="venderCapital();">Vender</button>
       <br><br>
       <div class="w3-responsive" style="display: none;">
         <h5>Mis bonos gubernamentales</h5>
@@ -371,7 +422,8 @@
   <div id="finalizarPartida" class="w3-panel w3-panel menuItem w3-animate-left"  style="display:none; text-align: center;">
     <div class="w3-row-padding">
       <div class="flexContainer">
-        <h2><b>Estamos trabajando en esto</b></h2>
+        <h2><b>¿Estás seguro de querer Terminar la partida?</b></h2>
+         <button class="w3-btn w3-red w3-xlarge" onclick="finalizarPartida();">sí</button>
       </div>
     </div>
   </div>

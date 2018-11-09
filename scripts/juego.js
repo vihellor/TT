@@ -31,19 +31,28 @@ var comprarFuera=[60,80,90,120];
 var velas=[];
 var medias=[];
 var cierres=[];
-
+var meta;
+var semanaGanadora=0;
 var data;
 var ingresos = [];
 var egresos = [];
 var cetes = [9.5,9.4,9.2];
 var tasas = [9.5,9.4,9.2];
 var dineroActual = 0;
+//ingresos menos egresos
 var capitalDisponible = [];
-var noticias=[];
+//valor agregado de los cetes
+var metaArr=[];
 var ganancias=[];
-for (var i = 0; i < 1440; i++) {
+for (var i = 0; i < 1488; i++) {
   ganancias.push(0);
 }
+//agregando caprichos
+var caprichos=[];
+for (var i = 0; i < 1488; i++) {
+  caprichos.push(0);
+}
+var noticias=[];
 for (var i = 0; i < 1488; i++) {
   noticias.push(["Notificaciones de la semana: "+(i-47)]);
 }
@@ -177,8 +186,8 @@ function generateIngresos(){
   }
   actualizarNoticia();
   capitalDisponible=data3;
-  dineroActual=capitalDisponible[diaActual-48];
-  console.log("Dinero actual: "+dineroActual);
+  //dineroActual=capitalDisponible[diaActual-48];
+  //console.log("Dinero actual: "+dineroActual);
   actualizarDia();
   mostrarJuego();
 }
@@ -432,6 +441,22 @@ function actualizarPrecio(){
   document.getElementById('costoBruto').value=(nTit*data[select][diaActual]).toFixed(2);
   document.getElementById('costoNeto').value=(nTit*(data[select][diaActual]+data[select][diaActual]*casaBolsa.comision)).toFixed(2);
 };
+function actualizarPrecioVenta(){
+  var select = document.getElementById('select-choiceVenta').value;
+  var nTit = document.getElementById('numberTitulosVenta').value;
+  var vAct=data[select][diaActual];
+  // console.log("dia actual: "+diaActual+"valor"+i+" actual:"+vAct);
+  var variacion=datosAccion[select][0];
+  var vReal=(vAct+(vAct*variacion));
+  var titulos=datosAccion[select][2];
+  document.getElementById('numberTitulosVenta').max=titulos;
+  document.getElementById('gananciaBruta').value=(nTit*vReal).toFixed(2);
+  document.getElementById('gananciaNeta').value=(nTit*(vReal-vReal*casaBolsa.comision)).toFixed(2);
+  if(titulos==0)
+    document.getElementById('botonVenta').disabled=true;
+  else
+    document.getElementById('botonVenta').disabled=false;
+};
 
 function actualizarPrecioCete(){
   var select = document.getElementById('select-choiceCete').value;
@@ -479,15 +504,28 @@ function compraAccion(){
   var accion=document.getElementById('select-choice').value;
   var costo=document.getElementById('costoNeto').value;
   if (costo<dineroActual) {
-    datosAccion[accion][1]+=Number(document.getElementById('costoNeto').value);
+    datosAccion[accion][1]+=Number(costo);
     datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
+    dineroActual-=Number(costo);
     alert("compra realizada exitosamente!");
+    verCapitalDisponible();
     actualizarTablasAcciones();
     close_alert();
   }
   else{
     alert("No tienes suficiente dinero!");
   }
+};
+function ventaAccion(){
+  var accion=document.getElementById('select-choiceVenta').value;
+  var ganancia=document.getElementById('gananciaNeta').value;
+  datosAccion[accion][1]-=Number(ganancia);
+  datosAccion[accion][2]-=Number(document.getElementById('numberTitulosVenta').value);
+  dineroActual+=Number(ganancia);
+  alert("venta realizada exitosamente!");
+  verCapitalDisponible();
+  actualizarTablasAcciones();
+  close_alert();
 };
 function compraCete(){
   var cete=document.getElementById('select-choiceCete').value;
@@ -519,6 +557,11 @@ function comprarCapital(){
   document.getElementById('alertDiv').style.display="block";
   document.getElementById('comprarAcciones').style.display="block";
 };
+function venderCapital(){
+  actualizarPrecioVenta();
+  document.getElementById('alertDiv').style.display="block";
+  document.getElementById('venderAcciones').style.display="block";
+};
 function comprarCetes(num){
   document.getElementById('alertDiv').style.display="block";
   document.getElementById('comprarCetes').style.display="block";
@@ -534,6 +577,7 @@ function close_alert(){
   document.getElementById('alertDiv').style.display="none";
   document.getElementById('alertDiv2').style.display="none";
   document.getElementById('comprarAcciones').style.display="none";
+  document.getElementById('venderAcciones').style.display="none";
   document.getElementById('comprarCetes').style.display="none";
 };
 function keyPress (e) {
@@ -639,14 +683,18 @@ function actualizarTablasAcciones(){
 };
 
 function actualizarCapitalDisponible(){
+  dineroJugador.push(dineroActual);
   dineroActual+=capitalDisponible[diaActual-48];
   dineroActual+=ganancias[diaActual-48];
-  dineroJugador.push(dineroActual);
+  verCapitalDisponible();
+  
+  // console.log("dinero actual: "+dineroActual);
+};
+function verCapitalDisponible(){
+  document.getElementById('dineroActual3').innerHTML="Capital disponible: "+dineroActual;
   document.getElementById('dineroActual2').innerHTML="Capital disponible: "+dineroActual;
   document.getElementById('dineroActual1').innerHTML="Capital disponible: "+dineroActual;
-  
-  console.log("dinero actual: "+dineroActual);
-}
+};
 window.onload = function() {
     iniciar();
   };
@@ -677,6 +725,7 @@ function handleFormSubmit (form,accion) {
           //console.log("readPartida: "+JSON.stringify(jj));
           idFundador=jj[0].fundador;
           //console.log("fundador: "+jj[0].fundador);
+          meta =jj[0].meta;
           document.getElementById('datosBalance').innerHTML="Nombre de partida: "+jj[0].nombrePartida+" &emsp; Monto inicial: "+jj[0].montoInicial+"  &emsp; Meta: "+jj[0].meta;
           document.getElementById('inputIngresos').value=idFundador;
           document.getElementById('inputEgresos').value=idFundador;
@@ -911,91 +960,91 @@ function generate2(cantidad){
     //desastreNatural = porcentaje(5); //expon(0.01)/2)
     if (porcentaje(5)) {
       desastreNatural=-0.1;
-      noticias[i].push("agregando desastre natural");
+      noticias[i].push("Agregando desastre natural");
       // console.log("agregando desastre natural");
       //10% = 0
     }
     if (porcentaje(12.5)) {
       situacionPolitica=0.15;
       if (bm()) {
-        noticias[i-1].push("agregando noticia de situación política buena");
+        noticias[i-1].push("Agregando noticia de situación política buena");
         // console.log("agregando noticia de situación política buena");
       }
       else{
         situacionPolitica*=-1;
-        noticias[i-1].push("agregando noticia de situación política mala");
+        noticias[i-1].push("Agregando noticia de situación política mala");
         // console.log("agregando noticia de situación política mala");
       }
     }
     if (porcentaje(5)) {
       industriaAlimenticia=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria alimenticia buena");
+        noticias[i-1].push("Noticia de la industria alimenticia buena");
         // console.log("noticia de la industria alimenticia buena");
       }
       else{
         industriaAlimenticia*=-1;
-        noticias[i-1].push("noticia de la industria alimenticia mala");
+        noticias[i-1].push("Noticia de la industria alimenticia mala");
         // console.log("noticia de la industria alimenticia mala");
       }
     }
     if (porcentaje(5)) {
       industria=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria industria buena");
+        noticias[i-1].push("Noticia de la industria industria buena");
         // console.log("noticia de la industria industria buena");
       }
       else{
         industria*=-1;
-        noticias[i-1].push("noticia de la industria industria mala");
+        noticias[i-1].push("Noticia de la industria industria mala");
         // console.log("noticia de la industria industria mala");
       }
     }
     if (porcentaje(5)) {
       industriaEnergia=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria energía buena");
+        noticias[i-1].push("Noticia de la industria energía buena");
         // console.log("noticia de la industria energía buena");
       }
       else{
         industriaEnergia*=-1;
-        noticias[i-1].push("noticia de la industria energía mala");
+        noticias[i-1].push("Noticia de la industria energía mala");
         // console.log("noticia de la industria energía mala");
       }
     }
     if (porcentaje(5)) {
       industriaFinanzas=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria finanzas buena");
+        noticias[i-1].push("Noticia de la industria finanzas buena");
         // console.log("noticia de la industria finanzas buena");
       }
       else{
         industriaFinanzas*=-1;
-        noticias[i-1].push("noticia de la industria finanzas mala");
+        noticias[i-1].push("Noticia de la industria finanzas mala");
         // console.log("noticia de la industria finanzas mala");
       }
     }
     if (porcentaje(5)) {
       industriaTransporte=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria transporte buena");
+        noticias[i-1].push("Noticia de la industria transporte buena");
         // console.log("noticia de la industria transporte buena");
       }
       else{
         industriaTransporte*=-1;
-        noticias[i-1].push("noticia de la industria transporte mala");
+        noticias[i-1].push("Noticia de la industria transporte mala");
         // console.log("noticia de la industria transporte mala");
       }
     }
     if (porcentaje(5)) {
       industriaEntretenimiento=0.15;
       if (bm()) {
-        noticias[i-1].push("noticia de la industria entretenimiento buena");
+        noticias[i-1].push("Noticia de la industria entretenimiento buena");
         // console.log("noticia de la industria entretenimiento buena");
       }
       else{
         industriaEntretenimiento*=-1;
-        noticias[i-1].push("noticia de la industria entretenimiento mala");
+        noticias[i-1].push("Noticia de la industria entretenimiento mala");
         // console.log("noticia de la industria entretenimiento mala");
       }
     }
@@ -1251,6 +1300,47 @@ function generate2(cantidad){
   // console.log(cierres[0]);
   return cierres;
 };
+function finalizarPartida(){
+  timer_is_on=false;
+  document.getElementById('mySidebar').className="";
+  document.getElementById('mySidebar').style.display ="none";
+  document.getElementById('topBar').style.display ="none";
+  document.getElementById('mainDiv').style.display ="none";
+  document.getElementById('spinner').style.display ="block";
+  document.getElementById('mySidebar').style.display ="none";
+  for (var i = diaActual-47; i < 1440; i++) {
+    diaActual++;
+    actualizarCapitalDisponible();
+    verificarSemana();
+  }
+  // crearChart(dataR,tableName,idChart,varChart,ini,numTotal,dataNames,x)
+  var vp;
+  var x=0;
+  // ddata.push(metaArr);
+  var n = ["meta",nameUsuario];
+  for (var i = 0; i < 1488; i++) {
+    metaArr.push(Number(meta));
+  }
+  var ddata=[metaArr,dineroJugador.splice(1)];
+  // console.log(dineroJugador.splice(1));
+  // console.log(ddata);
+  
+  document.getElementById('tiempoMeta').innerHTML="Te tomó: "+semanaGanadora+" semanas para ganar!";
+  crearChart(ddata,'Desempeño','chartFinal',vp,0,semanaGanadora+1,n,x);
+  document.getElementById('spinner').style.display ="none";
+  document.getElementById('partidaTerminada').style.display ="block";
+
+  // console.log(dineroJugador);
+  // console.log(semanaGanadora+":::"+dineroJugador[semanaGanadora]);
+
+};
+function verificarSemana(){
+  if (semanaGanadora==0)
+    if (dineroActual>=meta)
+      semanaGanadora=diaActual-47;
+};
+
+
   /*
 Productos de consumo frecuente:
 PANM
@@ -1350,8 +1440,8 @@ function mostrarMedia(){
   var n = ["cierres "+names[x],"media"+names[x]];
   crearChart2(p,'Panorama','mediaChart',canvasCapitales,diaActual+1,n,x);
 }
-function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
-  var inicio = numTotal-49;
+function crearChart(dataR,tableName,idChart,varChart,ini,numTotal,dataNames,x){
+  var inicio = ini;
   if (inicio%2==1) {
     inicio-=1;
   }
@@ -1383,7 +1473,8 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
     labelsR.push(aux);
   }
   var dataSets=[];
-  console.log(typeof dataNames === "string");
+  // console.log(dataNames);
+  // console.log(typeof dataNames === "string");
   if (typeof dataNames === "string") {
     var aux = {
       label: dataNames,
@@ -1397,6 +1488,7 @@ function crearChart(dataR,tableName,idChart,varChart,numTotal,dataNames,x){
   }
   else{
     for (var i = 0; i < dataNames.length; i++) {
+      // console.log("i:"+i);
       var aux = {
         label: dataNames[i],
         data: dataR[i].slice(inicio,numTotal),
