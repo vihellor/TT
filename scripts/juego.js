@@ -23,6 +23,7 @@ var datosAccion=[ //varianza compra/venta || valor invertido || numero de titulo
   [(Math.random()*.00155)+.00095,0,0],
   [(Math.random()*.00155)+.00095,0,0]
   ];
+var cetesComprados=[];
 var salirAlguien=[200,400,600];
 var salirVacaciones=[1300,3000,6000];
 var hacerFiesta=[500,1000,1500,2000,5000];
@@ -507,13 +508,13 @@ function compraAccion(){
     datosAccion[accion][1]+=Number(costo);
     datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
     dineroActual-=Number(costo);
-    alert("compra realizada exitosamente!");
+    alert("¡Compra realizada exitosamente!");
     verCapitalDisponible();
     actualizarTablasAcciones();
     close_alert();
   }
   else{
-    alert("No tienes suficiente dinero!");
+    alert("¡No tienes suficiente dinero!");
   }
 };
 function ventaAccion(){
@@ -522,7 +523,7 @@ function ventaAccion(){
   datosAccion[accion][1]-=Number(ganancia);
   datosAccion[accion][2]-=Number(document.getElementById('numberTitulosVenta').value);
   dineroActual+=Number(ganancia);
-  alert("venta realizada exitosamente!");
+  alert("¡Venta realizada exitosamente!");
   verCapitalDisponible();
   actualizarTablasAcciones();
   close_alert();
@@ -544,13 +545,18 @@ function compraCete(){
   if (costo<dineroActual) {
     // datosAccion[accion][1]+=Number(document.getElementById('costoNeto').value);
     // datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
-    ganancias[diaActual-48+tiempo];
-    alert("compra realizada exitosamente!");
-    // actualizarTablasAcciones();
+    ganancias[diaActual-48+tiempo]+=costo+ganancia;
+    cetesComprados.push({
+      dia: (Number(diaActual)+Number(tiempo)),
+      ganancia: (Number(costo)+Number(ganancia)),
+    });
+    dineroActual-=Number(costo);
+    alert("¡Compra realizada exitosamente!");
+    actualizarTablasAcciones();
     close_alert();
   }
   else{
-    alert("No tienes suficiente dinero!");
+    alert("¡No tienes suficiente dinero!");
   }
 };
 function comprarCapital(){
@@ -644,6 +650,12 @@ function actualizarDia(){
 function actualizarTablasAcciones(){
   var textTableAccion="";
   var textMisInversiones="";
+  var acum=[0,0,0,0];
+  var textCete="<tr>";
+  for (var i = 0; i < cetesComprados.length; i++) {
+    textCete+="<td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener "+cetesComprados[i].ganancia.toFixed(2)+"</td>"
+  }
+  textCete+="</tr>";
   for (var i = 0; i < names.length; i++) {
       var vAnt=data[i][diaActual-1];
       var vAct=data[i][diaActual];
@@ -651,6 +663,10 @@ function actualizarTablasAcciones(){
       var variacion=datosAccion[i][0];
       var vReal=(vAct+(vAct*variacion));
       var gasto=datosAccion[i][1];
+      if (gasto<0){
+        datosAccion[i][1]=0;
+        gasto=0;
+      }
       var titulos=datosAccion[i][2];
       var text1;
       var text2;
@@ -669,15 +685,29 @@ function actualizarTablasAcciones(){
         text2="<td>$"+(titulos*vAct).toFixed(2)+"</td><td><i>"+titulos+"</i></td><td><button onclick='proyectar("+i+");'>Panorama</button></td></tr>";
       
       if ((titulos*vAct)<gasto)
-        text3="<tr><td>"+names[i]+"</td><td><font color='red'>-"+((gasto/vReal)-1).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td><font color='red'>-"+Math.abs((titulos*vAct*100/gasto)-100).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
       else if ((titulos*vAct)>gasto)
-        text3="<tr><td>"+names[i]+"</td><td><font color='green'>"+((vReal/gasto)-1).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='red'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td><font color='green'>"+Math.abs((titulos*vAct*100/gasto)-100).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='green'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
       else
         text3="<tr><td>"+names[i]+"</td><td>0%</td><td>$"+gasto.toFixed(2)+"</td><td>"+(titulos*vAct).toFixed(2)+"</td><td>"+titulos+"</td></tr>";
-
+      acum[0]+=Math.abs((gasto/vReal)-1);
+      acum[1]+=Math.abs(gasto);
+      acum[2]+=Math.abs(titulos*vAct);
+      acum[3]+=Math.abs(titulos);
       textTableAccion+=text1+text2;
       textMisInversiones+=text3;
     }
+    console.log();
+    if (acum[2]<acum[1]){
+      textMisInversiones+="<tr><td></td><td><font color='red'>-"+Math.abs((acum[2]*100/acum[1])-100).toFixed(2)+"%</font></td><td>$"+acum[1].toFixed(2)+"</td><td><font color='red'>$"+acum[2].toFixed(2)+"</font></td><td>"+acum[3]+"</td></tr>";
+    }
+    else if (acum[2]>acum[1]){
+      textMisInversiones+="<tr><td></td><td><font color='green'>"+Math.abs((acum[2]*100/acum[1])-100).toFixed(2)+"%</font></td><td>$"+acum[1].toFixed(2)+"</td><td><font color='green'>$"+acum[2].toFixed(2)+"</font></td><td>"+acum[3]+"</td></tr>";
+    }
+    else{
+      textMisInversiones+="<tr><td>Total:</td><td>0%</td><td>$"+acum[1].toFixed(2)+"</td><td>"+acum[2].toFixed(2)+"</td><td>"+acum[3]+"</td></tr>";
+    }
+  document.getElementById('tableCetes').innerHTML=textCete;
   document.getElementById('tableAcciones').innerHTML=textTableAccion;
   document.getElementById('misInversiones').innerHTML=textMisInversiones;
 };
@@ -686,14 +716,15 @@ function actualizarCapitalDisponible(){
   dineroJugador.push(dineroActual);
   dineroActual+=capitalDisponible[diaActual-48];
   dineroActual+=ganancias[diaActual-48];
+  dineroActual+=caprichos[diaActual-48];
   verCapitalDisponible();
   
   // console.log("dinero actual: "+dineroActual);
 };
 function verCapitalDisponible(){
-  document.getElementById('dineroActual3').innerHTML="Capital disponible: "+dineroActual;
-  document.getElementById('dineroActual2').innerHTML="Capital disponible: "+dineroActual;
-  document.getElementById('dineroActual1').innerHTML="Capital disponible: "+dineroActual;
+  document.getElementById('dineroActual3').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
+  document.getElementById('dineroActual2').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
+  document.getElementById('dineroActual1').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
 };
 window.onload = function() {
     iniciar();
@@ -955,91 +986,92 @@ function generate2(cantidad){
   var agregado;
   var media;
   var accion;
+  var auxCapricho;;
   for (var i=1; i < j; i++) { 
     // console.log("semana "+i);
     //desastreNatural = porcentaje(5); //expon(0.01)/2)
     if (porcentaje(5)) {
       desastreNatural=-0.1;
-      noticias[i].push("Agregando desastre natural");
+      noticias[i].push("Ha ocurrido un desastre natural.");
       // console.log("agregando desastre natural");
       //10% = 0
     }
     if (porcentaje(12.5)) {
       situacionPolitica=0.15;
       if (bm()) {
-        noticias[i-1].push("Agregando noticia de situación política buena");
+        noticias[i-1].push("La situación politica del país muestra buenas expectativas en la bolsa.");
         // console.log("agregando noticia de situación política buena");
       }
       else{
         situacionPolitica*=-1;
-        noticias[i-1].push("Agregando noticia de situación política mala");
+        noticias[i-1].push("La situación politica del país muestra malas expectativas en la bolsa.");
         // console.log("agregando noticia de situación política mala");
       }
     }
     if (porcentaje(5)) {
       industriaAlimenticia=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria alimenticia buena");
+        noticias[i-1].push("La industria alimenticia tiene expectativas de crecimiento.");
         // console.log("noticia de la industria alimenticia buena");
       }
       else{
         industriaAlimenticia*=-1;
-        noticias[i-1].push("Noticia de la industria alimenticia mala");
+        noticias[i-1].push("La industria alimenticia se ha visto afectada en sus expectativas de crecimiento.");
         // console.log("noticia de la industria alimenticia mala");
       }
     }
     if (porcentaje(5)) {
       industria=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria industria buena");
+        noticias[i-1].push("Se crean expectativas de crecimiento por inovacion en la industria manufacturera.");
         // console.log("noticia de la industria industria buena");
       }
       else{
         industria*=-1;
-        noticias[i-1].push("Noticia de la industria industria mala");
+        noticias[i-1].push("Las politicas arancelarias internacionales han afectado a la industria manufacturera.");
         // console.log("noticia de la industria industria mala");
       }
     }
     if (porcentaje(5)) {
       industriaEnergia=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria energía buena");
+        noticias[i-1].push("Las politicas nacionales incentivan a la empresas de energía.");
         // console.log("noticia de la industria energía buena");
       }
       else{
         industriaEnergia*=-1;
-        noticias[i-1].push("Noticia de la industria energía mala");
+        noticias[i-1].push("Explosión de plataforma petrolera en el Golfo de México.");
         // console.log("noticia de la industria energía mala");
       }
     }
     if (porcentaje(5)) {
       industriaFinanzas=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria finanzas buena");
+        noticias[i-1].push("La ley de Fintech beneficia a todas las empresas financieras");
         // console.log("noticia de la industria finanzas buena");
       }
       else{
         industriaFinanzas*=-1;
-        noticias[i-1].push("Noticia de la industria finanzas mala");
+        noticias[i-1].push("Se emite una propuesta de recaudación severa a las Fintech");
         // console.log("noticia de la industria finanzas mala");
       }
     }
     if (porcentaje(5)) {
       industriaTransporte=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria transporte buena");
+        noticias[i-1].push("La industrias de logistica y transporte se beneficia con las uevas carreteras");
         // console.log("noticia de la industria transporte buena");
       }
       else{
         industriaTransporte*=-1;
-        noticias[i-1].push("Noticia de la industria transporte mala");
+        noticias[i-1].push("Surge un escandalo sobre las empresas de transporte y el narcotráfico.");
         // console.log("noticia de la industria transporte mala");
       }
     }
     if (porcentaje(5)) {
       industriaEntretenimiento=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria entretenimiento buena");
+        noticias[i-1].push("Noticia de la industria entretenimiento buen");
         // console.log("noticia de la industria entretenimiento buena");
       }
       else{
@@ -1050,27 +1082,37 @@ function generate2(cantidad){
     }
     if (porcentaje(25)) {
       //salir con alguien
-      noticias[i-1].push("Has decidido salir con alguien y te costó: "+salirAlguien[Math.floor(Math.random()*salirAlguien.length)]);
+      auxCapricho=salirAlguien[Math.floor(Math.random()*salirAlguien.length)];
+      caprichos[i-1]+=auxCapricho;
+      noticias[i-1].push("Has decidido salir con alguien y te costó: "+auxCapricho);
       // console.log("Has decidido salir con alguien y te costó: "+salirAlguien[Math.floor(Math.random()*salirAlguien.length)]);
     }
     if (porcentaje(2.08)) {
       //Tomar vacaciones
-      noticias[i-1].push("Has decidido tomar unas vacaciones... te costó: "+salirVacaciones[Math.floor(Math.random()*salirVacaciones.length)]);
+      auxCapricho=salirVacaciones[Math.floor(Math.random()*salirVacaciones.length)];
+      caprichos[i-1]+=auxCapricho;
+      noticias[i-1].push("Has decidido tomar unas vacaciones... te costó: "+auxCapricho);
       // console.log("Has decidido tomar unas vacaciones... te costó: "+salirVacaciones[Math.floor(Math.random()*salirVacaciones.length)]);
     }
     if (porcentaje(4.16)) {
       //Hacer una fiesta
-      noticias[i-1].push("Es momento de una fiesta y te cuesta: "+hacerFiesta[Math.floor(Math.random()*hacerFiesta.length)]);
+      auxCapricho=hacerFiesta[Math.floor(Math.random()*hacerFiesta.length)];
+      caprichos[i-1]+=auxCapricho;
+      noticias[i-1].push("Es momento de una fiesta y te cuesta: "+auxCapricho);
       // console.log("Es momento de una fiesta y te cuesta: "+hacerFiesta[Math.floor(Math.random()*hacerFiesta.length)]);
     }
     if (porcentaje(5)) {
       //Comprar ropa
-      noticias[i-1].push("Viste tu ropero muy triste, fuiste a comprar y gastaste: "+comprarRopa[Math.floor(Math.random()*comprarRopa.length)]);
+      auxCapricho=comprarRopa[Math.floor(Math.random()*comprarRopa.length)];
+      caprichos[i-1]+=auxCapricho;
+      noticias[i-1].push("Viste tu ropero muy triste, fuiste a comprar y gastaste: "+auxCapricho);
       // console.log("Viste tu ropero muy triste, fuiste a comprar y gastaste: "+comprarRopa[Math.floor(Math.random()*comprarRopa.length)]);
     }
     if (porcentaje(25)) {
       //Comer fuera
-      noticias[i-1].push("Querias comer afuera y nadie te limita entonces gastaste: "+comprarFuera[Math.floor(Math.random()*comprarFuera.length)]);
+      auxCapricho=comprarFuera[Math.floor(Math.random()*comprarFuera.length)];
+      caprichos[i-1]+=auxCapricho;
+      noticias[i-1].push("Querias comer afuera y nadie te limita entonces gastaste: "+auxCapricho);
       // console.log("Querias comer afuera y nadie te limita entonces gastaste: "+comprarFuera[Math.floor(Math.random()*comprarFuera.length)]);
     }
     //PANM
@@ -1597,7 +1639,7 @@ function crearChart(dataR,tableName,idChart,varChart,ini,numTotal,dataNames,x){
         var aux = {
           label: dataNames[i],
           data: dataR[i].slice(inicio,numTotal),
-          borderColor: colors[i],
+          borderColor: colors[0],
           backgroundColor: 'rgba(0, 0, 0, 0)',
           fill: false,
           lineTension: 0
@@ -1607,7 +1649,7 @@ function crearChart(dataR,tableName,idChart,varChart,ini,numTotal,dataNames,x){
         var aux = {
           label: dataNames[i],
           data: dataR[i].slice(inicio,numTotal),
-          borderColor: colors[i],
+          borderColor: colors[4],
           backgroundColor: 'rgba(0, 0, 0, 0)',
           fill: false,
           cubicInterpolationMode: 'monotone'
