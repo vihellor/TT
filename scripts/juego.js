@@ -563,7 +563,7 @@ function compraCete(){
   if (costo<dineroActual) {
     // datosAccion[accion][1]+=Number(document.getElementById('costoNeto').value);
     // datosAccion[accion][2]+=Number(document.getElementById('numberTitulos').value);
-    ganancias[diaActual-48+tiempo]+=costo+ganancia;
+    ganancias[diaActual-48+tiempo]+=(Number(costo)+Number(ganancia));
     cetesComprados.push({
       dia: (Number(diaActual)+Number(tiempo)),
       ganancia: (Number(costo)+Number(ganancia)),
@@ -571,6 +571,7 @@ function compraCete(){
     dineroActual-=Number(costo);
     alert("¡Compra realizada exitosamente!");
     actualizarTablasAcciones();
+    verCapitalDisponible();
     close_alert();
   }
   else{
@@ -673,11 +674,10 @@ function actualizarTablasAcciones(){
   var textTableAccion="";
   var textMisInversiones="";
   var acum=[0,0,0,0];
-  var textCete="<tr>";
+  var textCete="";
   for (var i = 0; i < cetesComprados.length; i++) {
-    textCete+="<td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener $"+cetesComprados[i].ganancia.toFixed(2)+"</td>"
+    textCete+="<tr><td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener $"+cetesComprados[i].ganancia.toFixed(2)+"</td></tr>"
   }
-  textCete+="</tr>";
   for (var i = 0; i < names.length; i++) {
       var vAnt=data[i][diaActual-1];
       var vAct=data[i][diaActual];
