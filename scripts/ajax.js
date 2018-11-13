@@ -196,6 +196,8 @@ function handleFormSubmit (form,accion) {
           var jj = JSON.parse(respuesta);
           //console.log(JSON.parse(respuesta));
           //console.log(jj);
+          bannerPrincipal
+          document.getElementById("bannerPrincipal").innerHTML="¡Bienvenido "+jj.nombre+"!";
           document.getElementById("mainName").innerHTML=jj.nombre;
           document.getElementById("nickname").value=jj.nickname;
           document.getElementById("name").value=jj.nombre;
