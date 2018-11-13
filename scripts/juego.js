@@ -143,7 +143,7 @@ function generateIngresos(){
       }
     }
     if (aux>0) {
-      noticias[j+48].push("Se ha recibido un ingreso de: "+aux);
+      noticias[j+48].push("Se ha recibido un ingreso de: $"+aux);
       //noticias.splice(j, 0, "Se ha recibido un ingreso de: "+aux);
     }
     else{
@@ -168,7 +168,7 @@ function generateIngresos(){
       }
     }
     if (aux>0) {
-      noticias[j+48].push("Se ha hecho un cargo de: "+aux);
+      noticias[j+48].push("Se ha hecho un cargo de: $"+aux);
       //noticias.splice(j, 0, "Se ha hecho un cargo de: "+aux);
     }
     data2.push(aux);
@@ -420,7 +420,7 @@ function w3_close() {
     overlayBg.style.display = "none";
 };
 
-var c=60;
+var c=300;
 var timer_is_on=false;
 
 function displayCount() {
@@ -664,6 +664,10 @@ function actualizarDia(){
   actualizarTablasAcciones();
   actualizarCetes();
   actualizarNoticia();
+  actualizarPrecio();
+  actualizarPrecioCete();
+  actualizarPrecioVenta();
+  close_alert();
 };
 function actualizarTablasAcciones(){
   var textTableAccion="";
@@ -1089,12 +1093,12 @@ function generate2(cantidad){
     if (porcentaje(5)) {
       industriaEntretenimiento=0.15;
       if (bm()) {
-        noticias[i-1].push("Noticia de la industria entretenimiento buen");
+        noticias[i-1].push("La semana del entretenimiento ha sido todo un éxito.");
         // console.log("noticia de la industria entretenimiento buena");
       }
       else{
         industriaEntretenimiento*=-1;
-        noticias[i-1].push("Noticia de la industria entretenimiento mala");
+        noticias[i-1].push("Reformas en la industria del entretenimiento han puesto en huelga a decenas de actores.");
         // console.log("noticia de la industria entretenimiento mala");
       }
     }
@@ -1102,35 +1106,35 @@ function generate2(cantidad){
       //salir con alguien
       auxCapricho=salirAlguien[Math.floor(Math.random()*salirAlguien.length)];
       caprichos[i-1]+=auxCapricho;
-      noticias[i-1].push("Has decidido salir con alguien y te costó: "+auxCapricho);
+      noticias[i-1].push("Has decidido salir con alguien y te costó: $"+auxCapricho);
       // console.log("Has decidido salir con alguien y te costó: "+salirAlguien[Math.floor(Math.random()*salirAlguien.length)]);
     }
     if (porcentaje(2.08)) {
       //Tomar vacaciones
       auxCapricho=salirVacaciones[Math.floor(Math.random()*salirVacaciones.length)];
       caprichos[i-1]+=auxCapricho;
-      noticias[i-1].push("Has decidido tomar unas vacaciones... te costó: "+auxCapricho);
+      noticias[i-1].push("Has decidido tomar unas vacaciones... te costó: $"+auxCapricho);
       // console.log("Has decidido tomar unas vacaciones... te costó: "+salirVacaciones[Math.floor(Math.random()*salirVacaciones.length)]);
     }
     if (porcentaje(4.16)) {
       //Hacer una fiesta
       auxCapricho=hacerFiesta[Math.floor(Math.random()*hacerFiesta.length)];
       caprichos[i-1]+=auxCapricho;
-      noticias[i-1].push("Es momento de una fiesta y te cuesta: "+auxCapricho);
+      noticias[i-1].push("Es momento de una fiesta y te cuesta: $"+auxCapricho);
       // console.log("Es momento de una fiesta y te cuesta: "+hacerFiesta[Math.floor(Math.random()*hacerFiesta.length)]);
     }
     if (porcentaje(5)) {
       //Comprar ropa
       auxCapricho=comprarRopa[Math.floor(Math.random()*comprarRopa.length)];
       caprichos[i-1]+=auxCapricho;
-      noticias[i-1].push("Viste tu ropero muy triste, fuiste a comprar y gastaste: "+auxCapricho);
+      noticias[i-1].push("Viste tu ropero muy triste, fuiste a comprar y gastaste: $"+auxCapricho);
       // console.log("Viste tu ropero muy triste, fuiste a comprar y gastaste: "+comprarRopa[Math.floor(Math.random()*comprarRopa.length)]);
     }
     if (porcentaje(25)) {
       //Comer fuera
       auxCapricho=comprarFuera[Math.floor(Math.random()*comprarFuera.length)];
       caprichos[i-1]+=auxCapricho;
-      noticias[i-1].push("Querias comer afuera y nadie te limita entonces gastaste: "+auxCapricho);
+      noticias[i-1].push("Querías comer afuera y nadie te limita entonces gastaste: $"+auxCapricho);
       // console.log("Querias comer afuera y nadie te limita entonces gastaste: "+comprarFuera[Math.floor(Math.random()*comprarFuera.length)]);
     }
     //PANM
