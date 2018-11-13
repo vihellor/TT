@@ -76,7 +76,7 @@ var nameUsuario;
 var idFundador;
 var mInicial;
 
-document.getElementById('datosComision').innerHTML="Nombre: "+casaBolsa.nombre+" &emsp; Mensualidad: "+casaBolsa.mensualidad+"  &emsp; Comisión compra/venta: "+(casaBolsa.comision*100)+"%";
+document.getElementById('datosComision').innerHTML="Nombre: "+casaBolsa.nombre+" &emsp; Mensualidad: $"+casaBolsa.mensualidad+"  &emsp; Comisión compra/venta: "+(casaBolsa.comision*100)+"%";
 var diaActual=48;
 var canvasBalance;
 var canvasCapitales;
@@ -342,32 +342,50 @@ function openLink2(evt, animName) {
   var l0 =document.getElementById('l0');
   var l1 =document.getElementById('l1');
   var l2 =document.getElementById('l2');
+  var lx =document.getElementById('lx');
   if (animName.localeCompare("ingresos")==0) {
     console.log("ingresos");
+    document.getElementById('cetes').style.display = "none";
     document.getElementById('inversiones').style.display = "none";
     document.getElementById('ingresos').style.display = "block";
     document.getElementById('egresos').style.display = "none";
     l0.className=l0.className.replace("w3-green", "w3-light-gray");
     l1.className=l1.className.replace("w3-light-gray","w3-green");
     l2.className=l2.className.replace("w3-green", "w3-light-gray");
+    lx.className=lx.className.replace("w3-green", "w3-light-gray");
 
   }else if (animName.localeCompare("egresos")==0) {
     console.log("egresos");
+    document.getElementById('cetes').style.display = "none";
     document.getElementById('inversiones').style.display = "none";
     document.getElementById('ingresos').style.display = "none";  
     document.getElementById('egresos').style.display = "block";
     l0.className=l0.className.replace("w3-green", "w3-light-gray");
     l1.className=l1.className.replace("w3-green", "w3-light-gray");
     l2.className=l2.className.replace("w3-light-gray","w3-green");
+    lx.className=lx.className.replace("w3-green", "w3-light-gray");
+  }
+  else if (animName.localeCompare("cetes")==0) {
+    console.log("cetes");
+    document.getElementById('cetes').style.display = "block";
+    document.getElementById('inversiones').style.display = "none";
+    document.getElementById('ingresos').style.display = "none";  
+    document.getElementById('egresos').style.display = "none";
+    l0.className=l0.className.replace("w3-green", "w3-light-gray");
+    l1.className=l1.className.replace("w3-green", "w3-light-gray");
+    l2.className=l2.className.replace("w3-green", "w3-light-gray");
+    lx.className=lx.className.replace("w3-light-gray","w3-green");
   }
   else{
     console.log("inversiones");
+    document.getElementById('cetes').style.display = "none";
     document.getElementById('inversiones').style.display = "block";
     document.getElementById('ingresos').style.display = "none";  
     document.getElementById('egresos').style.display = "none";
     l0.className=l0.className.replace("w3-light-gray","w3-green");
     l1.className=l1.className.replace("w3-green", "w3-light-gray");
     l2.className=l2.className.replace("w3-green", "w3-light-gray");
+    lx.className=lx.className.replace("w3-green", "w3-light-gray");
   }
 };
 function openLink3(evt, animName) {
@@ -653,7 +671,7 @@ function actualizarTablasAcciones(){
   var acum=[0,0,0,0];
   var textCete="<tr>";
   for (var i = 0; i < cetesComprados.length; i++) {
-    textCete+="<td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener "+cetesComprados[i].ganancia.toFixed(2)+"</td>"
+    textCete+="<td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener $"+cetesComprados[i].ganancia.toFixed(2)+"</td>"
   }
   textCete+="</tr>";
   for (var i = 0; i < names.length; i++) {
@@ -689,7 +707,7 @@ function actualizarTablasAcciones(){
       else if ((titulos*vAct)>gasto)
         text3="<tr><td>"+names[i]+"</td><td><font color='green'>"+Math.abs((titulos*vAct*100/gasto)-100).toFixed(2)+"%</font></td><td>$"+gasto.toFixed(2)+"</td><td><font color='green'>$"+(titulos*vAct).toFixed(2)+"</font></td><td>"+titulos+"</td></tr>";
       else
-        text3="<tr><td>"+names[i]+"</td><td>0%</td><td>$"+gasto.toFixed(2)+"</td><td>"+(titulos*vAct).toFixed(2)+"</td><td>"+titulos+"</td></tr>";
+        text3="<tr><td>"+names[i]+"</td><td>0%</td><td>$"+gasto.toFixed(2)+"</td><td>$"+(titulos*vAct).toFixed(2)+"</td><td>"+titulos+"</td></tr>";
       acum[0]+=Math.abs((gasto/vReal)-1);
       acum[1]+=Math.abs(gasto);
       acum[2]+=Math.abs(titulos*vAct);
@@ -705,7 +723,7 @@ function actualizarTablasAcciones(){
       textMisInversiones+="<tr><td></td><td><font color='green'>"+Math.abs((acum[2]*100/acum[1])-100).toFixed(2)+"%</font></td><td>$"+acum[1].toFixed(2)+"</td><td><font color='green'>$"+acum[2].toFixed(2)+"</font></td><td>"+acum[3]+"</td></tr>";
     }
     else{
-      textMisInversiones+="<tr><td>Total:</td><td>0%</td><td>$"+acum[1].toFixed(2)+"</td><td>"+acum[2].toFixed(2)+"</td><td>"+acum[3]+"</td></tr>";
+      textMisInversiones+="<tr><td>Total:</td><td>0%</td><td>$"+acum[1].toFixed(2)+"</td><td>$"+acum[2].toFixed(2)+"</td><td>"+acum[3]+"</td></tr>";
     }
   document.getElementById('tableCetes').innerHTML=textCete;
   document.getElementById('tableAcciones').innerHTML=textTableAccion;
@@ -722,9 +740,9 @@ function actualizarCapitalDisponible(){
   // console.log("dinero actual: "+dineroActual);
 };
 function verCapitalDisponible(){
-  document.getElementById('dineroActual3').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
-  document.getElementById('dineroActual2').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
-  document.getElementById('dineroActual1').innerHTML="Capital disponible: "+dineroActual.toFixed(2);
+  document.getElementById('dineroActual3').innerHTML="Capital disponible: $"+dineroActual;
+  document.getElementById('dineroActual2').innerHTML="Capital disponible: $"+dineroActual;
+  document.getElementById('dineroActual1').innerHTML="Capital disponible: $"+dineroActual;
 };
 window.onload = function() {
     iniciar();
@@ -757,7 +775,7 @@ function handleFormSubmit (form,accion) {
           idFundador=jj[0].fundador;
           //console.log("fundador: "+jj[0].fundador);
           meta =jj[0].meta;
-          document.getElementById('datosBalance').innerHTML="Nombre de partida: "+jj[0].nombrePartida+" &emsp; Monto inicial: "+jj[0].montoInicial+"  &emsp; Meta: "+jj[0].meta;
+          document.getElementById('datosBalance').innerHTML="Nombre de partida: "+jj[0].nombrePartida+" &emsp; Monto inicial: $"+jj[0].montoInicial+"  &emsp; Meta: $"+jj[0].meta;
           document.getElementById('inputIngresos').value=idFundador;
           document.getElementById('inputEgresos').value=idFundador;
           document.getElementById('submitIngresos').click();
