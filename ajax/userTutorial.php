@@ -2,22 +2,25 @@
 define('WP_USE_THEMES', false);
 require('./../tutoriales/wp-blog-header.php');
 
-$number_of_posts = 5;
+$number_of_posts = 20;
 $args = array( 'numberposts' => $number_of_posts );
 $recent_posts = wp_get_recent_posts( $args );
 $html="";
 foreach( $recent_posts as $recent_post ){
+	// $html.=$recent_post['post_title'];
 	$html.='<div onclick="mostrar(\''.$recent_post['post_title'].'\')" style="cursor: pointer;" class="w3-card-4 cardTam"><header class="w3-container w3-green"><h3>'.$recent_post['post_title'].'<i class="fa fa-chevron-right fa-fw"></i></h3></header></div>';
 	//<div class="w3-left-align"><p>Left aligned text.</p></div>
 	// <div class="w3-container w3-border w3-large"></div> 
-	$html.="<div id='".$recent_post['post_title']."' style='display: none;' class='division'><button class=\"w3-bar-item w3-button tablink\" onclick=\"retAll('".$recent_post['post_title']."')\"><i class=\"fa fa-angle-left fa-fw\"></i>Atras</button> <br><h1>".$recent_post['post_title']."</h1><div class=\"w3-container w3-border w3-large\"><div class=\"w3-left-align\"><p>".$recent_post['post_content']."</p></div></div></div>";
+	$html.="<div id='".$recent_post['post_title']."' style='display: none;' class='division'><button class=\"w3-bar-item w3-button tablink\" onclick=\"retAll('".$recent_post['post_title']."')\"><i class=\"fa fa-angle-left fa-fw\"></i>Atras</button> <br><h1>".$recent_post['post_title']."</h1><div class=\"w3-container w3-border w3-large\"><div style=\"text-align: justify;\">".$recent_post['post_content']."</div></div></div>";
 	//$html = preg_grep("/<img class=\".*\"/" ,$html);
-	$html = preg_replace("/<img class=\".*\" src/", "<br><img class=\"w3-image\" src", $html);
-	$html = str_replace("][/video]"," type=\"video/mp4\"></video>",$html);
-	$html = str_replace("[video","<video",$html);
-	$html = str_replace("mp4="," controls><source src=",$html);
-	$html = str_replace("\n","<br>",$html);
-	$html = preg_replace("/(<br>)+/", "<br>", $html);
+	$html = preg_replace("/<img class=\".*\" src/", "<br><br><img style=\"display: block; margin-left: auto; margin-right: auto;\" class=\"w3-image\" src", $html);
+	$html = str_replace("/\]\[\/video\]/"," type=\"video/mp4\"></video>",$html);
+	$html = str_replace("/\[video/","<video",$html);
+	$html = str_replace("/mp4=/"," controls><source src=",$html);
+	$html = str_replace("\r","<br>",$html);
+	// $html = str_replace("\r","",$html);
+	// $html = str_replace(" ","",$html);
+	# $html = preg_replace("/<br>\r<br>/", "", $html);
 	//$html = preg_replace("/([\b\s]*<[\b\s]*[bB][rR][\s]*/?[\b\s]*>){2,}/", "<br>", $html);
 	//$video = preg_grep("/\[video.*\[\/video\]/" ,$html);
 	//$video = rtrim($video,"]");

@@ -420,7 +420,7 @@ function w3_close() {
     overlayBg.style.display = "none";
 };
 
-var c=300;
+var c=180;
 var timer_is_on=false;
 
 function displayCount() {
@@ -433,7 +433,7 @@ function count() {
     if(timer_is_on) {
         c=c-1;
         if(c==0){
-          c=60;
+          c=180;
           diaActual+=1;
           actualizarDia();
         }
@@ -448,11 +448,11 @@ function iniciar(){
 };
 function mostrarJuego(){
   timer_is_on=true;
-  document.getElementById('mySidebar').style.display ="block";
+  document.getElementById('spinner').style.display ="none";
+  document.getElementById('mySidebar').className+=" w3-collapse";
+  // document.getElementById('mySidebar').style.display ="block";
   document.getElementById('topBar').style.display ="block";
   document.getElementById('mainDiv').style.display ="block";
-  document.getElementById('mySidebar').className+=" w3-collapse";
-  document.getElementById('spinner').style.display ="none";
 }
 function actualizarPrecio(){
   var select = document.getElementById('select-choice').value;
@@ -676,7 +676,7 @@ function actualizarTablasAcciones(){
   var acum=[0,0,0,0];
   var textCete="";
   for (var i = 0; i < cetesComprados.length; i++) {
-    textCete+="<tr><td>faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obetener $"+cetesComprados[i].ganancia.toFixed(2)+"</td></tr>"
+    textCete+="<tr><td>Faltan "+(cetesComprados[i].dia-diaActual)+" semanas para obtener $"+cetesComprados[i].ganancia.toFixed(2)+"</td></tr>"
   }
   for (var i = 0; i < names.length; i++) {
       var vAnt=data[i][diaActual-1];
