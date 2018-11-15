@@ -694,9 +694,9 @@ function actualizarTablasAcciones(){
       var text2;
       var text3;
       if (vAnt>vAct)
-        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='red'>-"+((vAnt/vAct)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
+        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='red'>-"+(((vAnt/vAct)-1)*100).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       else if (vAnt<vAct)
-        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='green'>"+((vAct/vAnt)-1).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+" </i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
+        text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td><font color='green'>"+(((vAct/vAnt)-1)*100).toFixed(4)+"%</font></td><td><i>$"+vAct.toFixed(2)+"</i></td><td><i>$"+vReal.toFixed(2)+" </i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       else
         text1="<tr><td>"+names[i]+"</td><td>"+names2[i]+"</td><td>0%</td><td><i>$"+vAct.toFixed(4)+"</i></td><td><i>$"+vReal.toFixed(2)+"</i></td><td><i>$"+gasto.toFixed(2)+"</i></td>";
       if (gasto>titulos*vAct)
